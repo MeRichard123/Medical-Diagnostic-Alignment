@@ -1,0 +1,7339 @@
+[
+    {
+        "id": 376,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 7.390975952148438e-05,
+            "B": 0.010986328125,
+            "C": 0.98828125,
+            "D": 0.000156402587890625
+        }
+    },
+    {
+        "id": 3703,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.00012302398681640625,
+            "B": 8.307397365570068e-07,
+            "C": 0.99609375,
+            "D": 0.002471923828125
+        }
+    },
+    {
+        "id": 856,
+        "predicted_diagnosis": "C",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.08544921875,
+            "B": 0.232421875,
+            "C": 0.3828125,
+            "D": 0.298828125
+        }
+    },
+    {
+        "id": 1573,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.06884765625,
+            "B": 0.83984375,
+            "C": 0.0034332275390625,
+            "D": 0.08837890625
+        }
+    },
+    {
+        "id": 1855,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 3.528594970703125e-05,
+            "C": 0.0001583099365234375,
+            "D": 7.867813110351562e-06
+        }
+    },
+    {
+        "id": 650,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.00180816650390625,
+            "B": 0.73046875,
+            "C": 0.00066375732421875,
+            "D": 0.267578125
+        }
+    },
+    {
+        "id": 3890,
+        "predicted_diagnosis": "B",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.00421142578125,
+            "B": 0.8046875,
+            "C": 0.1396484375,
+            "D": 0.051513671875
+        }
+    },
+    {
+        "id": 161,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 2.2649765014648438e-06,
+            "B": 8.307397365570068e-07,
+            "C": 7.867813110351562e-06,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 577,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 6.48200511932373e-07,
+            "B": 5.029141902923584e-07,
+            "C": 1.8533319234848022e-07,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 2263,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 5.817413330078125e-05,
+            "B": 1.0,
+            "C": 0.00070953369140625,
+            "D": 4.5299530029296875e-05
+        }
+    },
+    {
+        "id": 245,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.002288818359375,
+            "B": 0.71875,
+            "C": 0.01318359375,
+            "D": 0.265625
+        }
+    },
+    {
+        "id": 2145,
+        "predicted_diagnosis": "B",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.00090789794921875,
+            "B": 0.99609375,
+            "C": 0.0003337860107421875,
+            "D": 0.00150299072265625
+        }
+    },
+    {
+        "id": 2862,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.0002593994140625,
+            "B": 0.9921875,
+            "C": 0.008544921875,
+            "D": 3.6954879760742188e-06
+        }
+    },
+    {
+        "id": 863,
+        "predicted_diagnosis": "D",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.23828125,
+            "B": 0.000278472900390625,
+            "C": 0.11279296875,
+            "D": 0.6484375
+        }
+    },
+    {
+        "id": 700,
+        "predicted_diagnosis": "D",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.000911712646484375,
+            "B": 1.7583370208740234e-06,
+            "C": 1.0654330253601074e-06,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 2683,
+        "predicted_diagnosis": "A",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.7734375,
+            "B": 0.10498046875,
+            "C": 0.08154296875,
+            "D": 0.03857421875
+        }
+    },
+    {
+        "id": 1419,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 4.3655745685100555e-09,
+            "B": 4.1443854570388794e-08,
+            "C": 1.0,
+            "D": 3.4051481634378433e-09
+        }
+    },
+    {
+        "id": 3047,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 0.000431060791015625,
+            "C": 0.0001583099365234375,
+            "D": 7.867813110351562e-06
+        }
+    },
+    {
+        "id": 3599,
+        "predicted_diagnosis": "B",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.006683349609375,
+            "B": 0.98828125,
+            "C": 0.003143310546875,
+            "D": 0.00020122528076171875
+        }
+    },
+    {
+        "id": 3575,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.00024127960205078125,
+            "B": 0.07568359375,
+            "C": 0.92578125,
+            "D": 1.2040138244628906e-05
+        }
+    },
+    {
+        "id": 340,
+        "predicted_diagnosis": "D",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.00020313262939453125,
+            "B": 2.753734588623047e-05,
+            "C": 7.486343383789062e-05,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 1067,
+        "predicted_diagnosis": "B",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.00070953369140625,
+            "B": 1.0,
+            "C": 7.867813110351562e-06,
+            "D": 7.867813110351562e-06
+        }
+    },
+    {
+        "id": 301,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.001495361328125,
+            "B": 0.001922607421875,
+            "C": 3.7103891372680664e-06,
+            "D": 0.99609375
+        }
+    },
+    {
+        "id": 2803,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 3.725290298461914e-06,
+            "B": 1.0,
+            "C": 1.0654330253601074e-06,
+            "D": 3.0547380447387695e-07
+        }
+    },
+    {
+        "id": 1308,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.000553131103515625,
+            "B": 0.00020313262939453125,
+            "C": 3.528594970703125e-05,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 2285,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 1.0132789611816406e-05,
+            "B": 1.0,
+            "C": 1.3709068298339844e-06,
+            "D": 5.029141902923584e-07
+        }
+    },
+    {
+        "id": 234,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.96484375,
+            "B": 0.022705078125,
+            "C": 0.01373291015625,
+            "D": 0.00025177001953125
+        }
+    },
+    {
+        "id": 2000,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 2.905726432800293e-06,
+            "B": 1.126900315284729e-07,
+            "C": 1.0,
+            "D": 5.029141902923584e-07
+        }
+    },
+    {
+        "id": 1152,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 3.546476364135742e-06,
+            "B": 7.510185241699219e-06,
+            "C": 0.953125,
+            "D": 0.04736328125
+        }
+    },
+    {
+        "id": 696,
+        "predicted_diagnosis": "A",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 1.0,
+            "B": 2.905726432800293e-06,
+            "C": 6.139278411865234e-06,
+            "D": 4.798173904418945e-06
+        }
+    },
+    {
+        "id": 2072,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.66015625,
+            "B": 0.1474609375,
+            "C": 0.0027008056640625,
+            "D": 0.189453125
+        }
+    },
+    {
+        "id": 567,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 1.955777406692505e-08,
+            "C": 3.4051481634378433e-09,
+            "D": 3.583409124985337e-10
+        }
+    },
+    {
+        "id": 1294,
+        "predicted_diagnosis": "D",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.00144195556640625,
+            "B": 2.6464462280273438e-05,
+            "C": 0.037353515625,
+            "D": 0.9609375
+        }
+    },
+    {
+        "id": 2520,
+        "predicted_diagnosis": "B",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 2.514570951461792e-08,
+            "B": 1.0,
+            "C": 1.7583370208740234e-06,
+            "D": 8.754432201385498e-08
+        }
+    },
+    {
+        "id": 3985,
+        "predicted_diagnosis": "B",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.003143310546875,
+            "B": 0.98828125,
+            "C": 0.0004253387451171875,
+            "D": 0.008544921875
+        }
+    },
+    {
+        "id": 282,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 1.525040715932846e-08,
+            "B": 7.188646122813225e-09,
+            "C": 1.0,
+            "D": 4.1443854570388794e-08
+        }
+    },
+    {
+        "id": 504,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.0103759765625,
+            "B": 0.046630859375,
+            "C": 0.006317138671875,
+            "D": 0.9375
+        }
+    },
+    {
+        "id": 1240,
+        "predicted_diagnosis": "D",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.00180816650390625,
+            "B": 0.06005859375,
+            "C": 0.00019073486328125,
+            "D": 0.9375
+        }
+    },
+    {
+        "id": 1217,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 1.6689300537109375e-05,
+            "B": 0.00012302398681640625,
+            "C": 1.0,
+            "D": 0.000911712646484375
+        }
+    },
+    {
+        "id": 166,
+        "predicted_diagnosis": "D",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 7.188646122813225e-09,
+            "B": 3.0547380447387695e-07,
+            "C": 5.029141902923584e-07,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 664,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.2216796875,
+            "B": 0.0024566650390625,
+            "C": 0.7734375,
+            "D": 0.0031585693359375
+        }
+    },
+    {
+        "id": 461,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.9765625,
+            "B": 0.0108642578125,
+            "C": 0.0108642578125,
+            "D": 7.343292236328125e-05
+        }
+    },
+    {
+        "id": 382,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 3.725290298461914e-06,
+            "C": 1.126900315284729e-07,
+            "D": 1.1874362826347351e-08
+        }
+    },
+    {
+        "id": 1617,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.017822265625,
+            "B": 0.000690460205078125,
+            "C": 0.01080322265625,
+            "D": 0.97265625
+        }
+    },
+    {
+        "id": 584,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 1.6689300537109375e-05,
+            "B": 1.4435499906539917e-07,
+            "C": 3.0547380447387695e-07,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 1409,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 0.000553131103515625,
+            "C": 1.7583370208740234e-06,
+            "D": 3.9301812648773193e-07
+        }
+    },
+    {
+        "id": 479,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.00012302398681640625,
+            "B": 1.0,
+            "C": 7.486343383789062e-05,
+            "D": 0.000911712646484375
+        }
+    },
+    {
+        "id": 1313,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.00020313262939453125,
+            "B": 0.000911712646484375,
+            "C": 2.1457672119140625e-05,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 2255,
+        "predicted_diagnosis": "C",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 4.3655745685100555e-09,
+            "B": 1.0654330253601074e-06,
+            "C": 1.0,
+            "D": 9.255018085241318e-09
+        }
+    },
+    {
+        "id": 1840,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 3.528594970703125e-05,
+            "B": 2.2649765014648438e-06,
+            "C": 2.2649765014648438e-06,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 3745,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 5.3085386753082275e-08,
+            "B": 2.2649765014648438e-06,
+            "C": 4.1443854570388794e-08,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 59,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 8.754432201385498e-08,
+            "B": 1.0,
+            "C": 6.48200511932373e-07,
+            "D": 3.9301812648773193e-07
+        }
+    },
+    {
+        "id": 3211,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 5.029141902923584e-07,
+            "B": 8.307397365570068e-07,
+            "C": 7.867813110351562e-06,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 557,
+        "predicted_diagnosis": "C",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.0147705078125,
+            "B": 0.1796875,
+            "C": 0.8046875,
+            "D": 9.918212890625e-05
+        }
+    },
+    {
+        "id": 3505,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.9140625,
+            "B": 0.027587890625,
+            "C": 0.00011301040649414062,
+            "D": 0.058349609375
+        }
+    },
+    {
+        "id": 3466,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 1.2218952178955078e-05,
+            "B": 0.73046875,
+            "C": 2.586841583251953e-05,
+            "D": 0.26953125
+        }
+    },
+    {
+        "id": 1838,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 6.48200511932373e-07,
+            "C": 1.126900315284729e-07,
+            "D": 8.307397365570068e-07
+        }
+    },
+    {
+        "id": 2583,
+        "predicted_diagnosis": "A",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 1.0,
+            "B": 0.00020313262939453125,
+            "C": 0.0001583099365234375,
+            "D": 5.817413330078125e-05
+        }
+    },
+    {
+        "id": 3100,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.9609375,
+            "B": 0.00185394287109375,
+            "C": 0.037353515625,
+            "D": 3.3855438232421875e-05
+        }
+    },
+    {
+        "id": 1257,
+        "predicted_diagnosis": "A",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.99609375,
+            "B": 0.003173828125,
+            "C": 0.00116729736328125,
+            "D": 7.43865966796875e-05
+        }
+    },
+    {
+        "id": 1972,
+        "predicted_diagnosis": "A",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.6796875,
+            "B": 0.3203125,
+            "C": 6.532669067382812e-05,
+            "D": 8.821487426757812e-06
+        }
+    },
+    {
+        "id": 36,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 6.48200511932373e-07,
+            "B": 5.029141902923584e-07,
+            "C": 1.0,
+            "D": 1.4435499906539917e-07
+        }
+    },
+    {
+        "id": 84,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.000545501708984375,
+            "B": 0.000545501708984375,
+            "C": 0.0140380859375,
+            "D": 0.984375
+        }
+    },
+    {
+        "id": 1203,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 8.754432201385498e-08,
+            "B": 1.126900315284729e-07,
+            "C": 1.0,
+            "D": 4.1443854570388794e-08
+        }
+    },
+    {
+        "id": 1097,
+        "predicted_diagnosis": "B",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 5.459785461425781e-05,
+            "B": 0.73046875,
+            "C": 0.26953125,
+            "D": 0.000148773193359375
+        }
+    },
+    {
+        "id": 904,
+        "predicted_diagnosis": "A",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.6171875,
+            "B": 0.375,
+            "C": 0.002532958984375,
+            "D": 0.004180908203125
+        }
+    },
+    {
+        "id": 629,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 3.0547380447387695e-07,
+            "B": 5.3085386753082275e-08,
+            "C": 1.0,
+            "D": 8.307397365570068e-07
+        }
+    },
+    {
+        "id": 3644,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.00116729736328125,
+            "B": 1.0,
+            "C": 7.486343383789062e-05,
+            "D": 1.7583370208740234e-06
+        }
+    },
+    {
+        "id": 207,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 2.1457672119140625e-05,
+            "B": 1.7583370208740234e-06,
+            "C": 6.48200511932373e-07,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 964,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 6.139278411865234e-06,
+            "B": 4.5299530029296875e-05,
+            "C": 4.798173904418945e-06,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 3099,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 6.48200511932373e-07,
+            "C": 7.486343383789062e-05,
+            "D": 1.8533319234848022e-07
+        }
+    },
+    {
+        "id": 3577,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 3.0547380447387695e-07,
+            "B": 3.0547380447387695e-07,
+            "C": 2.384185791015625e-07,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 2348,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.005157470703125,
+            "B": 0.984375,
+            "C": 0.008544921875,
+            "D": 0.000698089599609375
+        }
+    },
+    {
+        "id": 2879,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.00011444091796875,
+            "B": 0.5625,
+            "C": 0.4375,
+            "D": 8.916854858398438e-05
+        }
+    },
+    {
+        "id": 929,
+        "predicted_diagnosis": "A",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.99609375,
+            "B": 0.0002613067626953125,
+            "C": 0.002471923828125,
+            "D": 1.3709068298339844e-06
+        }
+    },
+    {
+        "id": 1626,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 7.188646122813225e-09,
+            "B": 3.0547380447387695e-07,
+            "C": 1.0,
+            "D": 6.845220923423767e-08
+        }
+    },
+    {
+        "id": 2919,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 4.3655745685100555e-09,
+            "B": 1.0,
+            "C": 9.255018085241318e-09,
+            "D": 1.2514647096395493e-09
+        }
+    },
+    {
+        "id": 1445,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 3.0547380447387695e-07,
+            "B": 1.8533319234848022e-07,
+            "C": 1.0,
+            "D": 8.307397365570068e-07
+        }
+    },
+    {
+        "id": 1070,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 2.5391578674316406e-05,
+            "B": 0.921875,
+            "C": 0.07568359375,
+            "D": 0.0013885498046875
+        }
+    },
+    {
+        "id": 2332,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 4.798173904418945e-06,
+            "B": 1.0,
+            "C": 2.2649765014648438e-06,
+            "D": 2.2649765014648438e-06
+        }
+    },
+    {
+        "id": 1210,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.8671875,
+            "B": 0.01239013671875,
+            "C": 0.11767578125,
+            "D": 0.00130462646484375
+        }
+    },
+    {
+        "id": 729,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.000911712646484375,
+            "B": 7.486343383789062e-05,
+            "C": 2.753734588623047e-05,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 346,
+        "predicted_diagnosis": "A",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.99609375,
+            "B": 0.002471923828125,
+            "C": 0.002471923828125,
+            "D": 0.000705718994140625
+        }
+    },
+    {
+        "id": 38,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 2.905726432800293e-06,
+            "B": 7.486343383789062e-05,
+            "C": 1.0,
+            "D": 0.00116729736328125
+        }
+    },
+    {
+        "id": 2651,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 8.754432201385498e-08,
+            "B": 4.1443854570388794e-08,
+            "C": 8.754432201385498e-08,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 3086,
+        "predicted_diagnosis": "A",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.81640625,
+            "B": 0.00095367431640625,
+            "C": 0.181640625,
+            "D": 0.00095367431640625
+        }
+    },
+    {
+        "id": 3379,
+        "predicted_diagnosis": "C",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.00061798095703125,
+            "B": 0.1181640625,
+            "C": 0.87109375,
+            "D": 0.00970458984375
+        }
+    },
+    {
+        "id": 3512,
+        "predicted_diagnosis": "D",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.00070953369140625,
+            "B": 4.5299530029296875e-05,
+            "C": 2.753734588623047e-05,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 2658,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.9921875,
+            "B": 0.004058837890625,
+            "C": 0.000202178955078125,
+            "D": 0.00191497802734375
+        }
+    },
+    {
+        "id": 3562,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 1.126900315284729e-07,
+            "C": 5.3085386753082275e-08,
+            "D": 1.525040715932846e-08
+        }
+    },
+    {
+        "id": 1289,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 6.48200511932373e-07,
+            "B": 7.867813110351562e-06,
+            "C": 3.725290298461914e-06,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 3089,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.006683349609375,
+            "B": 0.9921875,
+            "C": 2.7298927307128906e-05,
+            "D": 2.1338462829589844e-05
+        }
+    },
+    {
+        "id": 1113,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 1.3709068298339844e-06,
+            "B": 4.798173904418945e-06,
+            "C": 1.0,
+            "D": 0.00020313262939453125
+        }
+    },
+    {
+        "id": 950,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.00070953369140625,
+            "B": 3.725290298461914e-06,
+            "C": 1.7583370208740234e-06,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 3798,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 1.126900315284729e-07,
+            "C": 7.188646122813225e-09,
+            "D": 2.514570951461792e-08
+        }
+    },
+    {
+        "id": 302,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 2.648448571562767e-09,
+            "B": 2.066371962428093e-09,
+            "C": 6.845220923423767e-08,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 2327,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 5.817413330078125e-05,
+            "B": 9.632110595703125e-05,
+            "C": 1.0,
+            "D": 2.1457672119140625e-05
+        }
+    },
+    {
+        "id": 485,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 1.8533319234848022e-07,
+            "B": 3.528594970703125e-05,
+            "C": 1.0,
+            "D": 1.126900315284729e-07
+        }
+    },
+    {
+        "id": 3231,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 1.6689300537109375e-05,
+            "C": 2.2649765014648438e-06,
+            "D": 1.6689300537109375e-05
+        }
+    },
+    {
+        "id": 60,
+        "predicted_diagnosis": "C",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.003173828125,
+            "B": 0.00116729736328125,
+            "C": 0.99609375,
+            "D": 0.0002593994140625
+        }
+    },
+    {
+        "id": 1684,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.0004825592041015625,
+            "B": 0.3203125,
+            "C": 0.00079345703125,
+            "D": 0.6796875
+        }
+    },
+    {
+        "id": 1874,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.1474609375,
+            "B": 0.8515625,
+            "C": 0.0001049041748046875,
+            "D": 0.00099945068359375
+        }
+    },
+    {
+        "id": 2780,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.00090789794921875,
+            "B": 0.00090789794921875,
+            "C": 0.001495361328125,
+            "D": 0.99609375
+        }
+    },
+    {
+        "id": 3866,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 4.798173904418945e-06,
+            "C": 1.126900315284729e-07,
+            "D": 1.6079866327345371e-09
+        }
+    },
+    {
+        "id": 20,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 2.905726432800293e-06,
+            "B": 5.029141902923584e-07,
+            "C": 1.0,
+            "D": 1.0654330253601074e-06
+        }
+    },
+    {
+        "id": 796,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 6.139278411865234e-06,
+            "B": 7.486343383789062e-05,
+            "C": 0.0001583099365234375,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 925,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 1.3709068298339844e-06,
+            "B": 2.753734588623047e-05,
+            "C": 5.029141902923584e-07,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 1377,
+        "predicted_diagnosis": "D",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.3203125,
+            "B": 0.0004825592041015625,
+            "C": 0.00013828277587890625,
+            "D": 0.6796875
+        }
+    },
+    {
+        "id": 349,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 0.000335693359375,
+            "C": 2.753734588623047e-05,
+            "D": 1.7583370208740234e-06
+        }
+    },
+    {
+        "id": 1736,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.99609375,
+            "B": 0.00193023681640625,
+            "C": 2.250075340270996e-06,
+            "D": 5.817413330078125e-05
+        }
+    },
+    {
+        "id": 2355,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 4.5299530029296875e-05,
+            "B": 3.725290298461914e-06,
+            "C": 1.0,
+            "D": 8.307397365570068e-07
+        }
+    },
+    {
+        "id": 502,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.037353515625,
+            "B": 0.000152587890625,
+            "C": 0.9609375,
+            "D": 6.705522537231445e-06
+        }
+    },
+    {
+        "id": 2003,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 1.3709068298339844e-06,
+            "B": 3.0547380447387695e-07,
+            "C": 2.384185791015625e-07,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 2247,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 9.632110595703125e-05,
+            "B": 3.528594970703125e-05,
+            "C": 7.486343383789062e-05,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 812,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 1.3709068298339844e-06,
+            "B": 5.029141902923584e-07,
+            "C": 1.0,
+            "D": 7.867813110351562e-06
+        }
+    },
+    {
+        "id": 3816,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 6.48200511932373e-07,
+            "B": 1.3709068298339844e-06,
+            "C": 7.486343383789062e-05,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 1770,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 1.0132789611816406e-05,
+            "B": 7.486343383789062e-05,
+            "C": 1.0,
+            "D": 1.3709068298339844e-06
+        }
+    },
+    {
+        "id": 617,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 0.0002613067626953125,
+            "C": 7.867813110351562e-06,
+            "D": 1.6689300537109375e-05
+        }
+    },
+    {
+        "id": 2296,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 7.188646122813225e-09,
+            "B": 1.0,
+            "C": 3.9301812648773193e-07,
+            "D": 3.0547380447387695e-07
+        }
+    },
+    {
+        "id": 3063,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 1.7583370208740234e-06,
+            "C": 2.384185791015625e-07,
+            "D": 1.0654330253601074e-06
+        }
+    },
+    {
+        "id": 2763,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 1.525040715932846e-08,
+            "B": 5.3085386753082275e-08,
+            "C": 1.0,
+            "D": 1.126900315284729e-07
+        }
+    },
+    {
+        "id": 2136,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.00022792816162109375,
+            "B": 0.3203125,
+            "C": 0.6796875,
+            "D": 0.00079345703125
+        }
+    },
+    {
+        "id": 3422,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.037353515625,
+            "B": 0.000530242919921875,
+            "C": 0.0004138946533203125,
+            "D": 0.9609375
+        }
+    },
+    {
+        "id": 3155,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 2.2649765014648438e-06,
+            "C": 1.8533319234848022e-07,
+            "D": 3.9301812648773193e-07
+        }
+    },
+    {
+        "id": 202,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 9.632110595703125e-05,
+            "B": 1.2993812561035156e-05,
+            "C": 1.0,
+            "D": 2.2649765014648438e-06
+        }
+    },
+    {
+        "id": 390,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 1.2993812561035156e-05,
+            "B": 2.753734588623047e-05,
+            "C": 1.2993812561035156e-05,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 95,
+        "predicted_diagnosis": "A",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.984375,
+            "B": 0.005157470703125,
+            "C": 0.01092529296875,
+            "D": 2.110004425048828e-05
+        }
+    },
+    {
+        "id": 3659,
+        "predicted_diagnosis": "C",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.00090789794921875,
+            "B": 0.00150299072265625,
+            "C": 0.99609375,
+            "D": 2.1338462829589844e-05
+        }
+    },
+    {
+        "id": 2740,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 2.648448571562767e-09,
+            "B": 1.0,
+            "C": 1.0132789611816406e-05,
+            "D": 5.029141902923584e-07
+        }
+    },
+    {
+        "id": 108,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.94140625,
+            "B": 9.012222290039062e-05,
+            "C": 0.06005859375,
+            "D": 5.4836273193359375e-05
+        }
+    },
+    {
+        "id": 2248,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.029296875,
+            "B": 0.0003261566162109375,
+            "C": 0.000537872314453125,
+            "D": 0.96875
+        }
+    },
+    {
+        "id": 837,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.9140625,
+            "B": 0.0101318359375,
+            "C": 0.00023937225341796875,
+            "D": 0.0751953125
+        }
+    },
+    {
+        "id": 1880,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 1.3709068298339844e-06,
+            "B": 1.0,
+            "C": 1.7583370208740234e-06,
+            "D": 8.754432201385498e-08
+        }
+    },
+    {
+        "id": 2662,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.98046875,
+            "B": 0.000698089599609375,
+            "C": 0.000423431396484375,
+            "D": 0.0179443359375
+        }
+    },
+    {
+        "id": 2842,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.98046875,
+            "B": 0.0179443359375,
+            "C": 5.7220458984375e-05,
+            "D": 0.000698089599609375
+        }
+    },
+    {
+        "id": 2220,
+        "predicted_diagnosis": "B",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.00054931640625,
+            "B": 0.99609375,
+            "C": 0.003173828125,
+            "D": 5.817413330078125e-05
+        }
+    },
+    {
+        "id": 511,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 6.48200511932373e-07,
+            "C": 5.029141902923584e-07,
+            "D": 1.4435499906539917e-07
+        }
+    },
+    {
+        "id": 2291,
+        "predicted_diagnosis": "D",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.00848388671875,
+            "B": 0.00311279296875,
+            "C": 0.0108642578125,
+            "D": 0.9765625
+        }
+    },
+    {
+        "id": 367,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 5.029141902923584e-07,
+            "B": 1.0,
+            "C": 0.0002613067626953125,
+            "D": 0.0001583099365234375
+        }
+    },
+    {
+        "id": 3393,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 6.139278411865234e-06,
+            "B": 6.48200511932373e-07,
+            "C": 1.0,
+            "D": 1.7583370208740234e-06
+        }
+    },
+    {
+        "id": 1339,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.146484375,
+            "B": 0.011962890625,
+            "C": 0.0012664794921875,
+            "D": 0.83984375
+        }
+    },
+    {
+        "id": 1492,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 2.2649765014648438e-06,
+            "B": 9.632110595703125e-05,
+            "C": 1.0,
+            "D": 1.6689300537109375e-05
+        }
+    },
+    {
+        "id": 3676,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 8.754432201385498e-08,
+            "B": 2.2649765014648438e-06,
+            "C": 6.845220923423767e-08,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 3855,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 5.029141902923584e-07,
+            "C": 4.1443854570388794e-08,
+            "D": 7.188646122813225e-09
+        }
+    },
+    {
+        "id": 3808,
+        "predicted_diagnosis": "C",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.01019287109375,
+            "B": 0.00138092041015625,
+            "C": 0.5546875,
+            "D": 0.43359375
+        }
+    },
+    {
+        "id": 999,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 5.817413330078125e-05,
+            "B": 1.6689300537109375e-05,
+            "C": 1.0,
+            "D": 1.7583370208740234e-06
+        }
+    },
+    {
+        "id": 2184,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.8984375,
+            "B": 0.004730224609375,
+            "C": 0.0947265625,
+            "D": 0.00023555755615234375
+        }
+    },
+    {
+        "id": 3206,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.059814453125,
+            "B": 0.004913330078125,
+            "C": 0.000244140625,
+            "D": 0.93359375
+        }
+    },
+    {
+        "id": 2805,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 1.525040715932846e-08,
+            "B": 9.74978320300579e-10,
+            "C": 2.648448571562767e-09,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 1288,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.000553131103515625,
+            "B": 5.817413330078125e-05,
+            "C": 1.0,
+            "D": 2.1457672119140625e-05
+        }
+    },
+    {
+        "id": 2758,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 4.5299530029296875e-05,
+            "C": 3.725290298461914e-06,
+            "D": 1.0132789611816406e-05
+        }
+    },
+    {
+        "id": 3804,
+        "predicted_diagnosis": "B",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.0003147125244140625,
+            "B": 0.9375,
+            "C": 0.06005859375,
+            "D": 0.000667572021484375
+        }
+    },
+    {
+        "id": 2410,
+        "predicted_diagnosis": "B",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.0001049041748046875,
+            "B": 0.8515625,
+            "C": 8.20159912109375e-05,
+            "D": 0.1484375
+        }
+    },
+    {
+        "id": 3144,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 3.725290298461914e-06,
+            "B": 1.0,
+            "C": 5.817413330078125e-05,
+            "D": 0.00150299072265625
+        }
+    },
+    {
+        "id": 220,
+        "predicted_diagnosis": "B",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 8.754432201385498e-08,
+            "B": 1.0,
+            "C": 1.3709068298339844e-06,
+            "D": 3.9301812648773193e-07
+        }
+    },
+    {
+        "id": 957,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 7.867813110351562e-06,
+            "B": 0.0002613067626953125,
+            "C": 4.5299530029296875e-05,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 3544,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 3.725290298461914e-06,
+            "B": 1.0,
+            "C": 5.817413330078125e-05,
+            "D": 4.798173904418945e-06
+        }
+    },
+    {
+        "id": 350,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 3.6954879760742188e-06,
+            "B": 0.006683349609375,
+            "C": 0.9921875,
+            "D": 0.00191497802734375
+        }
+    },
+    {
+        "id": 3156,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 4.798173904418945e-06,
+            "B": 4.798173904418945e-06,
+            "C": 1.0,
+            "D": 2.753734588623047e-05
+        }
+    },
+    {
+        "id": 661,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 3.725290298461914e-06,
+            "C": 1.0654330253601074e-06,
+            "D": 4.5299530029296875e-05
+        }
+    },
+    {
+        "id": 844,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.5625,
+            "B": 0.0006561279296875,
+            "C": 0.4375,
+            "D": 0.00051116943359375
+        }
+    },
+    {
+        "id": 3548,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 2.2649765014648438e-06,
+            "C": 6.48200511932373e-07,
+            "D": 8.754432201385498e-08
+        }
+    },
+    {
+        "id": 3546,
+        "predicted_diagnosis": "D",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.010986328125,
+            "B": 3.504753112792969e-05,
+            "C": 2.7179718017578125e-05,
+            "D": 0.98828125
+        }
+    },
+    {
+        "id": 637,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.99609375,
+            "B": 0.00090789794921875,
+            "C": 0.0004291534423828125,
+            "D": 0.001922607421875
+        }
+    },
+    {
+        "id": 2334,
+        "predicted_diagnosis": "A",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 1.0,
+            "B": 0.00150299072265625,
+            "C": 7.486343383789062e-05,
+            "D": 7.486343383789062e-05
+        }
+    },
+    {
+        "id": 2605,
+        "predicted_diagnosis": "D",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.0024566650390625,
+            "B": 0.00191497802734375,
+            "C": 0.004058837890625,
+            "D": 0.9921875
+        }
+    },
+    {
+        "id": 120,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.0001583099365234375,
+            "B": 1.0,
+            "C": 0.0002613067626953125,
+            "D": 0.00070953369140625
+        }
+    },
+    {
+        "id": 3083,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 4.798173904418945e-06,
+            "B": 1.0,
+            "C": 2.753734588623047e-05,
+            "D": 0.00020313262939453125
+        }
+    },
+    {
+        "id": 3221,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 1.7583370208740234e-06,
+            "B": 1.0,
+            "C": 1.6689300537109375e-05,
+            "D": 3.725290298461914e-06
+        }
+    },
+    {
+        "id": 1767,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 2.648448571562767e-09,
+            "B": 5.617039278149605e-09,
+            "C": 1.4435499906539917e-07,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 283,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 1.0654330253601074e-06,
+            "B": 2.905726432800293e-06,
+            "C": 1.0654330253601074e-06,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 272,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 1.1082738637924194e-07,
+            "B": 0.984375,
+            "C": 0.0140380859375,
+            "D": 3.4809112548828125e-05
+        }
+    },
+    {
+        "id": 1398,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 2.066371962428093e-09,
+            "B": 1.0,
+            "C": 1.6079866327345371e-09,
+            "D": 3.4051481634378433e-09
+        }
+    },
+    {
+        "id": 2689,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.000431060791015625,
+            "B": 1.2993812561035156e-05,
+            "C": 1.0,
+            "D": 1.6689300537109375e-05
+        }
+    },
+    {
+        "id": 3996,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 4.3655745685100555e-09,
+            "B": 1.4435499906539917e-07,
+            "C": 1.0,
+            "D": 3.4051481634378433e-09
+        }
+    },
+    {
+        "id": 1032,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 3.213062882423401e-08,
+            "B": 1.4435499906539917e-07,
+            "C": 1.0,
+            "D": 0.0001583099365234375
+        }
+    },
+    {
+        "id": 3243,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.005218505859375,
+            "B": 1.1175870895385742e-07,
+            "C": 0.99609375,
+            "D": 5.587935447692871e-09
+        }
+    },
+    {
+        "id": 2235,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 1.2993812561035156e-05,
+            "B": 6.139278411865234e-06,
+            "C": 1.0,
+            "D": 1.6689300537109375e-05
+        }
+    },
+    {
+        "id": 52,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 1.0132789611816406e-05,
+            "B": 8.307397365570068e-07,
+            "C": 2.905726432800293e-06,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 281,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 1.2993812561035156e-05,
+            "B": 1.0,
+            "C": 1.0132789611816406e-05,
+            "D": 7.867813110351562e-06
+        }
+    },
+    {
+        "id": 2877,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 1.0132789611816406e-05,
+            "B": 1.0132789611816406e-05,
+            "C": 1.0,
+            "D": 6.48200511932373e-07
+        }
+    },
+    {
+        "id": 90,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 3.9301812648773193e-07,
+            "C": 8.307397365570068e-07,
+            "D": 1.3709068298339844e-06
+        }
+    },
+    {
+        "id": 2317,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.2314453125,
+            "B": 0.62890625,
+            "C": 0.140625,
+            "D": 0.00057220458984375
+        }
+    },
+    {
+        "id": 3363,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 2.2649765014648438e-06,
+            "B": 3.725290298461914e-06,
+            "C": 1.0,
+            "D": 0.000335693359375
+        }
+    },
+    {
+        "id": 1876,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 1.4435499906539917e-07,
+            "C": 1.4435499906539917e-07,
+            "D": 8.754432201385498e-08
+        }
+    },
+    {
+        "id": 785,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 5.817413330078125e-05,
+            "B": 5.029141902923584e-07,
+            "C": 1.0,
+            "D": 7.867813110351562e-06
+        }
+    },
+    {
+        "id": 1883,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 4.5299530029296875e-05,
+            "C": 1.2993812561035156e-05,
+            "D": 0.000911712646484375
+        }
+    },
+    {
+        "id": 2889,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 1.126900315284729e-07,
+            "B": 1.0,
+            "C": 1.6689300537109375e-05,
+            "D": 1.3709068298339844e-06
+        }
+    },
+    {
+        "id": 3908,
+        "predicted_diagnosis": "C",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.0027008056640625,
+            "B": 0.1474609375,
+            "C": 0.84765625,
+            "D": 0.00017261505126953125
+        }
+    },
+    {
+        "id": 197,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 7.486343383789062e-05,
+            "B": 1.0,
+            "C": 7.867813110351562e-06,
+            "D": 5.817413330078125e-05
+        }
+    },
+    {
+        "id": 1647,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.498046875,
+            "B": 0.004302978515625,
+            "C": 3.719329833984375e-05,
+            "D": 0.498046875
+        }
+    },
+    {
+        "id": 1468,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.99609375,
+            "B": 0.004058837890625,
+            "C": 4.5299530029296875e-05,
+            "D": 2.8908252716064453e-06
+        }
+    },
+    {
+        "id": 361,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 1.0132789611816406e-05,
+            "B": 1.8533319234848022e-07,
+            "C": 1.0,
+            "D": 9.255018085241318e-09
+        }
+    },
+    {
+        "id": 2236,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 3.528594970703125e-05,
+            "C": 1.0132789611816406e-05,
+            "D": 3.0547380447387695e-07
+        }
+    },
+    {
+        "id": 2961,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.0286865234375,
+            "B": 0.0135498046875,
+            "C": 0.00640869140625,
+            "D": 0.953125
+        }
+    },
+    {
+        "id": 414,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 6.139278411865234e-06,
+            "B": 1.0,
+            "C": 0.00020313262939453125,
+            "D": 7.486343383789062e-05
+        }
+    },
+    {
+        "id": 2106,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.00017547607421875,
+            "B": 0.671875,
+            "C": 0.318359375,
+            "D": 0.00958251953125
+        }
+    },
+    {
+        "id": 2047,
+        "predicted_diagnosis": "B",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 8.916854858398438e-05,
+            "B": 0.5625,
+            "C": 0.4375,
+            "D": 8.916854858398438e-05
+        }
+    },
+    {
+        "id": 1717,
+        "predicted_diagnosis": "A",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.859375,
+            "B": 0.1162109375,
+            "C": 0.02587890625,
+            "D": 0.0006103515625
+        }
+    },
+    {
+        "id": 2481,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 5.3085386753082275e-08,
+            "B": 2.384185791015625e-07,
+            "C": 1.0,
+            "D": 1.8533319234848022e-07
+        }
+    },
+    {
+        "id": 3060,
+        "predicted_diagnosis": "A",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.98046875,
+            "B": 0.0179443359375,
+            "C": 0.00311279296875,
+            "D": 0.00019931793212890625
+        }
+    },
+    {
+        "id": 2240,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 2.905726432800293e-06,
+            "B": 1.7583370208740234e-06,
+            "C": 1.0,
+            "D": 7.486343383789062e-05
+        }
+    },
+    {
+        "id": 538,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 2.753734588623047e-05,
+            "B": 3.528594970703125e-05,
+            "C": 1.0,
+            "D": 1.3709068298339844e-06
+        }
+    },
+    {
+        "id": 828,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 5.029141902923584e-07,
+            "B": 1.126900315284729e-07,
+            "C": 0.00012302398681640625,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 540,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 2.905726432800293e-06,
+            "C": 1.126900315284729e-07,
+            "D": 1.955777406692505e-08
+        }
+    },
+    {
+        "id": 1763,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 5.817413330078125e-05,
+            "B": 3.725290298461914e-06,
+            "C": 2.753734588623047e-05,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 3069,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.010986328125,
+            "B": 2.3562461137771606e-07,
+            "C": 0.98828125,
+            "D": 2.6193447411060333e-09
+        }
+    },
+    {
+        "id": 1591,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 1.7583370208740234e-06,
+            "B": 1.0,
+            "C": 7.867813110351562e-06,
+            "D": 2.2649765014648438e-06
+        }
+    },
+    {
+        "id": 2639,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 4.798173904418945e-06,
+            "B": 2.2649765014648438e-06,
+            "C": 1.0,
+            "D": 4.5299530029296875e-05
+        }
+    },
+    {
+        "id": 2444,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 6.139278411865234e-06,
+            "B": 1.3709068298339844e-06,
+            "C": 6.139278411865234e-06,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 2454,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.00020313262939453125,
+            "B": 9.584426879882812e-05,
+            "C": 0.0002613067626953125,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 903,
+        "predicted_diagnosis": "B",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.0013580322265625,
+            "B": 0.90234375,
+            "C": 0.00038909912109375,
+            "D": 0.09521484375
+        }
+    },
+    {
+        "id": 741,
+        "predicted_diagnosis": "D",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.07470703125,
+            "B": 0.01300048828125,
+            "C": 0.00083160400390625,
+            "D": 0.91015625
+        }
+    },
+    {
+        "id": 3391,
+        "predicted_diagnosis": "C",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.0002613067626953125,
+            "B": 0.00116729736328125,
+            "C": 0.99609375,
+            "D": 0.00070953369140625
+        }
+    },
+    {
+        "id": 3357,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 9.1552734375e-05,
+            "B": 0.04736328125,
+            "C": 0.953125,
+            "D": 5.555152893066406e-05
+        }
+    },
+    {
+        "id": 990,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.02587890625,
+            "B": 0.1162109375,
+            "C": 0.0006103515625,
+            "D": 0.859375
+        }
+    },
+    {
+        "id": 1212,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.00188446044921875,
+            "B": 0.9765625,
+            "C": 0.005126953125,
+            "D": 0.017822265625
+        }
+    },
+    {
+        "id": 1901,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 2.384185791015625e-07,
+            "B": 2.2649765014648438e-06,
+            "C": 1.0,
+            "D": 1.3709068298339844e-06
+        }
+    },
+    {
+        "id": 715,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 2.2649765014648438e-06,
+            "C": 2.905726432800293e-06,
+            "D": 6.845220923423767e-08
+        }
+    },
+    {
+        "id": 1169,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 7.486343383789062e-05,
+            "B": 2.2649765014648438e-06,
+            "C": 2.1457672119140625e-05,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 1592,
+        "predicted_diagnosis": "A",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.62890625,
+            "B": 0.2314453125,
+            "C": 0.1396484375,
+            "D": 0.000942230224609375
+        }
+    },
+    {
+        "id": 2659,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 3.0547380447387695e-07,
+            "B": 1.4435499906539917e-07,
+            "C": 1.0,
+            "D": 5.617039278149605e-09
+        }
+    },
+    {
+        "id": 3059,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 6.48200511932373e-07,
+            "B": 3.9301812648773193e-07,
+            "C": 8.307397365570068e-07,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 956,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.02880859375,
+            "B": 0.953125,
+            "C": 0.00823974609375,
+            "D": 0.00823974609375
+        }
+    },
+    {
+        "id": 1233,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 8.307397365570068e-07,
+            "B": 2.384185791015625e-07,
+            "C": 2.384185791015625e-07,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 2777,
+        "predicted_diagnosis": "C",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.0001583099365234375,
+            "B": 5.817413330078125e-05,
+            "C": 1.0,
+            "D": 4.5299530029296875e-05
+        }
+    },
+    {
+        "id": 2022,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.004974365234375,
+            "B": 0.047119140625,
+            "C": 0.9453125,
+            "D": 0.00067138671875
+        }
+    },
+    {
+        "id": 2522,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 1.3709068298339844e-06,
+            "B": 0.0002613067626953125,
+            "C": 3.528594970703125e-05,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 1345,
+        "predicted_diagnosis": "B",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 1.6689300537109375e-05,
+            "B": 1.0,
+            "C": 3.528594970703125e-05,
+            "D": 1.2993812561035156e-05
+        }
+    },
+    {
+        "id": 2832,
+        "predicted_diagnosis": "D",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 1.955777406692505e-08,
+            "B": 9.255018085241318e-09,
+            "C": 2.384185791015625e-07,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 2017,
+        "predicted_diagnosis": "D",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.119140625,
+            "B": 0.00102996826171875,
+            "C": 6.580352783203125e-05,
+            "D": 0.87890625
+        }
+    },
+    {
+        "id": 221,
+        "predicted_diagnosis": "A",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.765625,
+            "B": 0.00848388671875,
+            "C": 0.00848388671875,
+            "D": 0.21875
+        }
+    },
+    {
+        "id": 229,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 1.1265277862548828e-05,
+            "B": 0.67578125,
+            "C": 0.004547119140625,
+            "D": 0.3203125
+        }
+    },
+    {
+        "id": 1454,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 9.632110595703125e-05,
+            "B": 2.905726432800293e-06,
+            "C": 6.139278411865234e-06,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 2039,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.005157470703125,
+            "B": 0.98046875,
+            "C": 0.01397705078125,
+            "D": 0.000255584716796875
+        }
+    },
+    {
+        "id": 1900,
+        "predicted_diagnosis": "D",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 1.0654330253601074e-06,
+            "B": 4.798173904418945e-06,
+            "C": 2.753734588623047e-05,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 858,
+        "predicted_diagnosis": "B",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.00994873046875,
+            "B": 0.89453125,
+            "C": 0.09423828125,
+            "D": 0.00081634521484375
+        }
+    },
+    {
+        "id": 32,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 1.8533319234848022e-07,
+            "B": 1.0654330253601074e-06,
+            "C": 1.4435499906539917e-07,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 3858,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 9.632110595703125e-05,
+            "C": 9.632110595703125e-05,
+            "D": 2.2649765014648438e-06
+        }
+    },
+    {
+        "id": 429,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 3.725290298461914e-06,
+            "C": 4.798173904418945e-06,
+            "D": 5.3085386753082275e-08
+        }
+    },
+    {
+        "id": 1334,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.059814453125,
+            "B": 0.9375,
+            "C": 0.0029754638671875,
+            "D": 0.000244140625
+        }
+    },
+    {
+        "id": 2289,
+        "predicted_diagnosis": "C",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.02294921875,
+            "B": 0.00012063980102539062,
+            "C": 0.9765625,
+            "D": 1.633167266845703e-05
+        }
+    },
+    {
+        "id": 173,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 1.2993812561035156e-05,
+            "B": 0.00116729736328125,
+            "C": 1.0,
+            "D": 8.307397365570068e-07
+        }
+    },
+    {
+        "id": 717,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 2.905726432800293e-06,
+            "B": 3.725290298461914e-06,
+            "C": 1.0,
+            "D": 7.486343383789062e-05
+        }
+    },
+    {
+        "id": 182,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 0.0002613067626953125,
+            "C": 5.029141902923584e-07,
+            "D": 1.7583370208740234e-06
+        }
+    },
+    {
+        "id": 1324,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 3.9301812648773193e-07,
+            "C": 3.0547380447387695e-07,
+            "D": 5.3085386753082275e-08
+        }
+    },
+    {
+        "id": 2902,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 5.817413330078125e-05,
+            "B": 1.7583370208740234e-06,
+            "C": 0.0002613067626953125,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 1878,
+        "predicted_diagnosis": "A",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.90234375,
+            "B": 0.0028839111328125,
+            "C": 0.057861328125,
+            "D": 0.03515625
+        }
+    },
+    {
+        "id": 2926,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.0002422332763671875,
+            "B": 0.5625,
+            "C": 1.990795135498047e-05,
+            "D": 0.4375
+        }
+    },
+    {
+        "id": 3569,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 2.1457672119140625e-05,
+            "C": 3.528594970703125e-05,
+            "D": 6.139278411865234e-06
+        }
+    },
+    {
+        "id": 1246,
+        "predicted_diagnosis": "D",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.03857421875,
+            "B": 0.22265625,
+            "C": 0.134765625,
+            "D": 0.60546875
+        }
+    },
+    {
+        "id": 2710,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 7.486343383789062e-05,
+            "B": 1.6689300537109375e-05,
+            "C": 0.000911712646484375,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 2959,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.99609375,
+            "B": 0.002471923828125,
+            "C": 7.867813110351562e-06,
+            "D": 3.91155481338501e-07
+        }
+    },
+    {
+        "id": 2762,
+        "predicted_diagnosis": "D",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.0179443359375,
+            "B": 0.00015544891357421875,
+            "C": 0.000255584716796875,
+            "D": 0.98046875
+        }
+    },
+    {
+        "id": 2271,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 4.798173904418945e-06,
+            "C": 6.139278411865234e-06,
+            "D": 6.48200511932373e-07
+        }
+    },
+    {
+        "id": 328,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 2.1457672119140625e-05,
+            "C": 2.905726432800293e-06,
+            "D": 3.0547380447387695e-07
+        }
+    },
+    {
+        "id": 2568,
+        "predicted_diagnosis": "C",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.002471923828125,
+            "B": 0.001495361328125,
+            "C": 0.99609375,
+            "D": 0.00012302398681640625
+        }
+    },
+    {
+        "id": 2860,
+        "predicted_diagnosis": "B",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 3.725290298461914e-06,
+            "B": 0.99609375,
+            "C": 0.0003337860107421875,
+            "D": 0.001922607421875
+        }
+    },
+    {
+        "id": 2744,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 2.2649765014648438e-06,
+            "C": 2.905726432800293e-06,
+            "D": 2.2649765014648438e-06
+        }
+    },
+    {
+        "id": 3168,
+        "predicted_diagnosis": "A",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.6796875,
+            "B": 0.3203125,
+            "C": 3.075599670410156e-05,
+            "D": 0.0010223388671875
+        }
+    },
+    {
+        "id": 1402,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 1.4435499906539917e-07,
+            "B": 1.3709068298339844e-06,
+            "C": 2.1457672119140625e-05,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 212,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.00150299072265625,
+            "B": 3.725290298461914e-06,
+            "C": 1.0,
+            "D": 0.000335693359375
+        }
+    },
+    {
+        "id": 1973,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 1.0132789611816406e-05,
+            "B": 1.0132789611816406e-05,
+            "C": 1.8533319234848022e-07,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 2360,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 7.486343383789062e-05,
+            "C": 0.00150299072265625,
+            "D": 2.753734588623047e-05
+        }
+    },
+    {
+        "id": 3896,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 2.753734588623047e-05,
+            "B": 1.6689300537109375e-05,
+            "C": 1.0,
+            "D": 1.0132789611816406e-05
+        }
+    },
+    {
+        "id": 1019,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 7.867813110351562e-06,
+            "B": 1.0,
+            "C": 1.0132789611816406e-05,
+            "D": 1.7583370208740234e-06
+        }
+    },
+    {
+        "id": 1745,
+        "predicted_diagnosis": "C",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.00119781494140625,
+            "B": 0.00119781494140625,
+            "C": 0.62109375,
+            "D": 0.376953125
+        }
+    },
+    {
+        "id": 2885,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 5.3085386753082275e-08,
+            "B": 2.514570951461792e-08,
+            "C": 1.0,
+            "D": 1.0654330253601074e-06
+        }
+    },
+    {
+        "id": 2462,
+        "predicted_diagnosis": "D",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.287109375,
+            "B": 0.0011749267578125,
+            "C": 0.10546875,
+            "D": 0.60546875
+        }
+    },
+    {
+        "id": 17,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 7.867813110351562e-06,
+            "B": 0.005218505859375,
+            "C": 0.99609375,
+            "D": 1.0073184967041016e-05
+        }
+    },
+    {
+        "id": 3794,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 7.486343383789062e-05,
+            "C": 6.139278411865234e-06,
+            "D": 3.9301812648773193e-07
+        }
+    },
+    {
+        "id": 206,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.99609375,
+            "B": 0.00116729736328125,
+            "C": 0.004058837890625,
+            "D": 5.793571472167969e-05
+        }
+    },
+    {
+        "id": 3456,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 0.000553131103515625,
+            "C": 5.817413330078125e-05,
+            "D": 1.6689300537109375e-05
+        }
+    },
+    {
+        "id": 1431,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 3.213062882423401e-08,
+            "B": 1.0,
+            "C": 3.9301812648773193e-07,
+            "D": 8.754432201385498e-08
+        }
+    },
+    {
+        "id": 2185,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 3.0547380447387695e-07,
+            "B": 1.525040715932846e-08,
+            "C": 1.0,
+            "D": 1.1874362826347351e-08
+        }
+    },
+    {
+        "id": 477,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.000606536865234375,
+            "B": 0.0546875,
+            "C": 0.85546875,
+            "D": 0.08984375
+        }
+    },
+    {
+        "id": 3167,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 2.2649765014648438e-06,
+            "B": 1.126900315284729e-07,
+            "C": 6.48200511932373e-07,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 377,
+        "predicted_diagnosis": "B",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.00836181640625,
+            "B": 0.96484375,
+            "C": 0.0177001953125,
+            "D": 0.01068115234375
+        }
+    },
+    {
+        "id": 1943,
+        "predicted_diagnosis": "C",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 2.1457672119140625e-05,
+            "B": 1.6689300537109375e-05,
+            "C": 1.0,
+            "D": 2.753734588623047e-05
+        }
+    },
+    {
+        "id": 3769,
+        "predicted_diagnosis": "A",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.77734375,
+            "B": 0.22265625,
+            "C": 5.817413330078125e-05,
+            "D": 2.1457672119140625e-05
+        }
+    },
+    {
+        "id": 1391,
+        "predicted_diagnosis": "A",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.984375,
+            "B": 0.0003299713134765625,
+            "C": 0.0140380859375,
+            "D": 0.000896453857421875
+        }
+    },
+    {
+        "id": 342,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 9.74978320300579e-10,
+            "B": 9.74978320300579e-10,
+            "C": 8.754432201385498e-08,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 2275,
+        "predicted_diagnosis": "B",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 2.7418136596679688e-05,
+            "B": 0.99609375,
+            "C": 0.002471923828125,
+            "D": 1.6689300537109375e-05
+        }
+    },
+    {
+        "id": 74,
+        "predicted_diagnosis": "C",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.000904083251953125,
+            "B": 0.006683349609375,
+            "C": 0.9921875,
+            "D": 0.000904083251953125
+        }
+    },
+    {
+        "id": 1681,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 1.0132789611816406e-05,
+            "C": 7.867813110351562e-06,
+            "D": 2.753734588623047e-05
+        }
+    },
+    {
+        "id": 3352,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 1.6689300537109375e-05,
+            "B": 2.2649765014648438e-06,
+            "C": 2.2649765014648438e-06,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 1023,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.984375,
+            "B": 0.0014801025390625,
+            "C": 0.0140380859375,
+            "D": 2.110004425048828e-05
+        }
+    },
+    {
+        "id": 514,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 1.6570091247558594e-05,
+            "B": 0.005218505859375,
+            "C": 0.9921875,
+            "D": 0.00191497802734375
+        }
+    },
+    {
+        "id": 2224,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.004058837890625,
+            "B": 0.00054931640625,
+            "C": 3.528594970703125e-05,
+            "D": 0.99609375
+        }
+    },
+    {
+        "id": 3768,
+        "predicted_diagnosis": "B",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 2.753734588623047e-05,
+            "B": 1.0,
+            "C": 0.000553131103515625,
+            "D": 1.6689300537109375e-05
+        }
+    },
+    {
+        "id": 2524,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.0026397705078125,
+            "B": 0.6484375,
+            "C": 0.23828125,
+            "D": 0.1123046875
+        }
+    },
+    {
+        "id": 299,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 3.213062882423401e-08,
+            "B": 2.514570951461792e-08,
+            "C": 1.0,
+            "D": 5.029141902923584e-07
+        }
+    },
+    {
+        "id": 3725,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 6.845220923423767e-08,
+            "B": 4.1443854570388794e-08,
+            "C": 1.126900315284729e-07,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 3387,
+        "predicted_diagnosis": "B",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.1826171875,
+            "B": 0.81640625,
+            "C": 3.039836883544922e-06,
+            "D": 1.0609626770019531e-05
+        }
+    },
+    {
+        "id": 1558,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 2.753734588623047e-05,
+            "B": 2.905726432800293e-06,
+            "C": 1.0,
+            "D": 3.725290298461914e-06
+        }
+    },
+    {
+        "id": 558,
+        "predicted_diagnosis": "B",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.375,
+            "B": 0.6171875,
+            "C": 0.0032501220703125,
+            "D": 0.002532958984375
+        }
+    },
+    {
+        "id": 147,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.98828125,
+            "B": 0.00665283203125,
+            "C": 0.00518798828125,
+            "D": 0.0004253387451171875
+        }
+    },
+    {
+        "id": 1452,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 2.7418136596679688e-05,
+            "B": 0.99609375,
+            "C": 1.0073184967041016e-05,
+            "D": 0.005218505859375
+        }
+    },
+    {
+        "id": 308,
+        "predicted_diagnosis": "C",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.0289306640625,
+            "B": 0.0003223419189453125,
+            "C": 0.9609375,
+            "D": 0.01068115234375
+        }
+    },
+    {
+        "id": 1909,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 2.753734588623047e-05,
+            "C": 1.0654330253601074e-06,
+            "D": 3.0547380447387695e-07
+        }
+    },
+    {
+        "id": 3540,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 7.867813110351562e-06,
+            "C": 2.905726432800293e-06,
+            "D": 3.725290298461914e-06
+        }
+    },
+    {
+        "id": 2569,
+        "predicted_diagnosis": "D",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.056884765625,
+            "B": 0.09375,
+            "C": 0.1552734375,
+            "D": 0.6953125
+        }
+    },
+    {
+        "id": 1463,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 1.1874362826347351e-08,
+            "B": 3.4051481634378433e-09,
+            "C": 1.0,
+            "D": 2.648448571562767e-09
+        }
+    },
+    {
+        "id": 3172,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 6.845220923423767e-08,
+            "B": 6.845220923423767e-08,
+            "C": 1.0,
+            "D": 6.139278411865234e-06
+        }
+    },
+    {
+        "id": 3177,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 8.307397365570068e-07,
+            "B": 0.003173828125,
+            "C": 0.99609375,
+            "D": 2.250075340270996e-06
+        }
+    },
+    {
+        "id": 2320,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 6.139278411865234e-06,
+            "B": 2.2649765014648438e-06,
+            "C": 4.798173904418945e-06,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 1630,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 2.1457672119140625e-05,
+            "B": 6.48200511932373e-07,
+            "C": 3.725290298461914e-06,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 1102,
+        "predicted_diagnosis": "A",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.8125,
+            "B": 0.1806640625,
+            "C": 0.00701904296875,
+            "D": 2.2411346435546875e-05
+        }
+    },
+    {
+        "id": 653,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.001922607421875,
+            "B": 0.000553131103515625,
+            "C": 0.0002613067626953125,
+            "D": 0.99609375
+        }
+    },
+    {
+        "id": 1390,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.000675201416015625,
+            "B": 0.000675201416015625,
+            "C": 0.953125,
+            "D": 0.04736328125
+        }
+    },
+    {
+        "id": 797,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 1.8533319234848022e-07,
+            "C": 8.754432201385498e-08,
+            "D": 1.955777406692505e-08
+        }
+    },
+    {
+        "id": 3050,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 1.8533319234848022e-07,
+            "B": 1.0,
+            "C": 6.845220923423767e-08,
+            "D": 1.7583370208740234e-06
+        }
+    },
+    {
+        "id": 1320,
+        "predicted_diagnosis": "B",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.00116729736328125,
+            "B": 1.0,
+            "C": 0.000553131103515625,
+            "D": 5.817413330078125e-05
+        }
+    },
+    {
+        "id": 1569,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 2.753734588623047e-05,
+            "B": 1.0,
+            "C": 0.00116729736328125,
+            "D": 2.1457672119140625e-05
+        }
+    },
+    {
+        "id": 142,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 1.7583370208740234e-06,
+            "C": 1.126900315284729e-07,
+            "D": 4.1443854570388794e-08
+        }
+    },
+    {
+        "id": 890,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 2.384185791015625e-07,
+            "B": 8.307397365570068e-07,
+            "C": 1.0,
+            "D": 3.9301812648773193e-07
+        }
+    },
+    {
+        "id": 1092,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 1.3709068298339844e-06,
+            "B": 3.0547380447387695e-07,
+            "C": 1.6689300537109375e-05,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 1264,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 5.817413330078125e-05,
+            "B": 4.798173904418945e-06,
+            "C": 3.725290298461914e-06,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 679,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 1.7583370208740234e-06,
+            "C": 3.9301812648773193e-07,
+            "D": 5.617039278149605e-09
+        }
+    },
+    {
+        "id": 1903,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.263671875,
+            "B": 0.01312255859375,
+            "C": 0.71484375,
+            "D": 0.0079345703125
+        }
+    },
+    {
+        "id": 2337,
+        "predicted_diagnosis": "A",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.90234375,
+            "B": 0.0013580322265625,
+            "C": 0.09521484375,
+            "D": 0.000640869140625
+        }
+    },
+    {
+        "id": 1058,
+        "predicted_diagnosis": "B",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 4.798173904418945e-06,
+            "B": 1.0,
+            "C": 0.00020313262939453125,
+            "D": 7.867813110351562e-06
+        }
+    },
+    {
+        "id": 1460,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 7.188646122813225e-09,
+            "B": 7.188646122813225e-09,
+            "C": 2.648448571562767e-09,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 2208,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.76171875,
+            "B": 0.005126953125,
+            "C": 0.10302734375,
+            "D": 0.1318359375
+        }
+    },
+    {
+        "id": 129,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 8.307397365570068e-07,
+            "B": 2.384185791015625e-07,
+            "C": 1.0,
+            "D": 1.126900315284729e-07
+        }
+    },
+    {
+        "id": 3528,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.0004291534423828125,
+            "B": 0.00150299072265625,
+            "C": 0.99609375,
+            "D": 0.0003337860107421875
+        }
+    },
+    {
+        "id": 455,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 2.384185791015625e-07,
+            "B": 1.0,
+            "C": 4.798173904418945e-06,
+            "D": 3.0547380447387695e-07
+        }
+    },
+    {
+        "id": 256,
+        "predicted_diagnosis": "D",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.267578125,
+            "B": 0.003814697265625,
+            "C": 0.00140380859375,
+            "D": 0.7265625
+        }
+    },
+    {
+        "id": 3384,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 2.905726432800293e-06,
+            "B": 6.845220923423767e-08,
+            "C": 1.0,
+            "D": 4.5299530029296875e-05
+        }
+    },
+    {
+        "id": 494,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 2.2649765014648438e-06,
+            "C": 1.3709068298339844e-06,
+            "D": 1.955777406692505e-08
+        }
+    },
+    {
+        "id": 978,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 0.00070953369140625,
+            "C": 3.528594970703125e-05,
+            "D": 7.486343383789062e-05
+        }
+    },
+    {
+        "id": 590,
+        "predicted_diagnosis": "B",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 1.6450881958007812e-05,
+            "B": 0.984375,
+            "C": 0.0140380859375,
+            "D": 0.000545501708984375
+        }
+    },
+    {
+        "id": 1952,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 2.514570951461792e-08,
+            "C": 1.955777406692505e-08,
+            "D": 1.2514647096395493e-09
+        }
+    },
+    {
+        "id": 865,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.047119140625,
+            "B": 0.00086212158203125,
+            "C": 0.004974365234375,
+            "D": 0.9453125
+        }
+    },
+    {
+        "id": 3479,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 7.867813110351562e-06,
+            "B": 1.0,
+            "C": 2.905726432800293e-06,
+            "D": 3.213062882423401e-08
+        }
+    },
+    {
+        "id": 3820,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.99609375,
+            "B": 0.005218505859375,
+            "C": 9.5367431640625e-05,
+            "D": 4.76837158203125e-06
+        }
+    },
+    {
+        "id": 1451,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 4.1443854570388794e-08,
+            "B": 1.0,
+            "C": 3.9301812648773193e-07,
+            "D": 3.213062882423401e-08
+        }
+    },
+    {
+        "id": 1508,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 6.48200511932373e-07,
+            "B": 8.754432201385498e-08,
+            "C": 1.0,
+            "D": 6.139278411865234e-06
+        }
+    },
+    {
+        "id": 1699,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.99609375,
+            "B": 0.004058837890625,
+            "C": 1.8440186977386475e-07,
+            "D": 1.9441358745098114e-08
+        }
+    },
+    {
+        "id": 2715,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 1.0132789611816406e-05,
+            "B": 1.0,
+            "C": 4.5299530029296875e-05,
+            "D": 1.2993812561035156e-05
+        }
+    },
+    {
+        "id": 795,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.0001430511474609375,
+            "B": 9.179115295410156e-06,
+            "C": 0.90625,
+            "D": 0.09521484375
+        }
+    },
+    {
+        "id": 53,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 2.753734588623047e-05,
+            "B": 1.6689300537109375e-05,
+            "C": 1.0,
+            "D": 0.00012302398681640625
+        }
+    },
+    {
+        "id": 3774,
+        "predicted_diagnosis": "D",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 6.48200511932373e-07,
+            "B": 5.029141902923584e-07,
+            "C": 2.384185791015625e-07,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 260,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.00180816650390625,
+            "B": 0.000667572021484375,
+            "C": 0.06005859375,
+            "D": 0.9375
+        }
+    },
+    {
+        "id": 3945,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.9765625,
+            "B": 0.02294921875,
+            "C": 7.295608520507812e-05,
+            "D": 2.6941299438476562e-05
+        }
+    },
+    {
+        "id": 3267,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.000652313232421875,
+            "B": 0.006195068359375,
+            "C": 0.91796875,
+            "D": 0.0751953125
+        }
+    },
+    {
+        "id": 1993,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 1.126900315284729e-07,
+            "B": 6.48200511932373e-07,
+            "C": 1.0,
+            "D": 1.1874362826347351e-08
+        }
+    },
+    {
+        "id": 3956,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 1.0654330253601074e-06,
+            "B": 1.0132789611816406e-05,
+            "C": 1.0,
+            "D": 0.00116729736328125
+        }
+    },
+    {
+        "id": 565,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 3.528594970703125e-05,
+            "C": 2.1457672119140625e-05,
+            "D": 0.00116729736328125
+        }
+    },
+    {
+        "id": 3809,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 2.514570951461792e-08,
+            "B": 1.0,
+            "C": 3.9301812648773193e-07,
+            "D": 8.754432201385498e-08
+        }
+    },
+    {
+        "id": 391,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 2.384185791015625e-07,
+            "B": 5.617039278149605e-09,
+            "C": 4.1443854570388794e-08,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 295,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.0003337860107421875,
+            "B": 0.002471923828125,
+            "C": 0.99609375,
+            "D": 1.6689300537109375e-05
+        }
+    },
+    {
+        "id": 1176,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 1.8533319234848022e-07,
+            "B": 8.307397365570068e-07,
+            "C": 1.7583370208740234e-06,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 3695,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 4.506111145019531e-05,
+            "B": 0.9921875,
+            "C": 9.5367431640625e-05,
+            "D": 0.00860595703125
+        }
+    },
+    {
+        "id": 523,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.99609375,
+            "B": 0.001922607421875,
+            "C": 9.584426879882812e-05,
+            "D": 0.000553131103515625
+        }
+    },
+    {
+        "id": 963,
+        "predicted_diagnosis": "B",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.1787109375,
+            "B": 0.8046875,
+            "C": 0.0089111328125,
+            "D": 0.0089111328125
+        }
+    },
+    {
+        "id": 701,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 2.905726432800293e-06,
+            "B": 1.3709068298339844e-06,
+            "C": 2.1457672119140625e-05,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 879,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 1.7583370208740234e-06,
+            "B": 1.0,
+            "C": 0.0001583099365234375,
+            "D": 4.798173904418945e-06
+        }
+    },
+    {
+        "id": 515,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 2.384185791015625e-07,
+            "B": 6.845220923423767e-08,
+            "C": 1.0,
+            "D": 1.2514647096395493e-09
+        }
+    },
+    {
+        "id": 534,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 1.2993812561035156e-05,
+            "B": 1.0,
+            "C": 1.2993812561035156e-05,
+            "D": 5.029141902923584e-07
+        }
+    },
+    {
+        "id": 3233,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 6.845220923423767e-08,
+            "B": 3.528594970703125e-05,
+            "C": 1.0,
+            "D": 8.307397365570068e-07
+        }
+    },
+    {
+        "id": 2532,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 4.267692565917969e-05,
+            "B": 0.00019073486328125,
+            "C": 0.73046875,
+            "D": 0.26953125
+        }
+    },
+    {
+        "id": 3588,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.00054168701171875,
+            "B": 2.110004425048828e-05,
+            "C": 0.98046875,
+            "D": 0.0179443359375
+        }
+    },
+    {
+        "id": 2894,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.001922607421875,
+            "B": 0.003173828125,
+            "C": 0.99609375,
+            "D": 7.43865966796875e-05
+        }
+    },
+    {
+        "id": 1346,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 1.8533319234848022e-07,
+            "B": 1.8533319234848022e-07,
+            "C": 1.0,
+            "D": 0.0001583099365234375
+        }
+    },
+    {
+        "id": 2120,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.5546875,
+            "B": 0.01019287109375,
+            "C": 0.00107574462890625,
+            "D": 0.43359375
+        }
+    },
+    {
+        "id": 505,
+        "predicted_diagnosis": "B",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.26953125,
+            "B": 0.73046875,
+            "C": 0.0008544921875,
+            "D": 7.009506225585938e-05
+        }
+    },
+    {
+        "id": 1485,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.94921875,
+            "B": 0.00142669677734375,
+            "C": 0.0135498046875,
+            "D": 0.036865234375
+        }
+    },
+    {
+        "id": 2408,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 9.632110595703125e-05,
+            "B": 3.528594970703125e-05,
+            "C": 3.528594970703125e-05,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 1,
+        "predicted_diagnosis": "C",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 6.139278411865234e-06,
+            "B": 5.817413330078125e-05,
+            "C": 1.0,
+            "D": 1.2993812561035156e-05
+        }
+    },
+    {
+        "id": 1514,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 5.817413330078125e-05,
+            "C": 3.725290298461914e-06,
+            "D": 2.905726432800293e-06
+        }
+    },
+    {
+        "id": 3032,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 5.817413330078125e-05,
+            "B": 2.753734588623047e-05,
+            "C": 1.3709068298339844e-06,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 3841,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 1.126900315284729e-07,
+            "B": 1.4435499906539917e-07,
+            "C": 1.0,
+            "D": 2.514570951461792e-08
+        }
+    },
+    {
+        "id": 3407,
+        "predicted_diagnosis": "C",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.09521484375,
+            "B": 0.0022430419921875,
+            "C": 0.90234375,
+            "D": 0.000499725341796875
+        }
+    },
+    {
+        "id": 589,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 1.8533319234848022e-07,
+            "B": 1.4435499906539917e-07,
+            "C": 1.0,
+            "D": 4.1443854570388794e-08
+        }
+    },
+    {
+        "id": 947,
+        "predicted_diagnosis": "B",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.026611328125,
+            "B": 0.87890625,
+            "C": 0.000179290771484375,
+            "D": 0.0927734375
+        }
+    },
+    {
+        "id": 3117,
+        "predicted_diagnosis": "B",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.40234375,
+            "B": 0.515625,
+            "C": 0.054443359375,
+            "D": 0.0257568359375
+        }
+    },
+    {
+        "id": 2331,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 1.1874362826347351e-08,
+            "C": 7.188646122813225e-09,
+            "D": 4.602043190971017e-10
+        }
+    },
+    {
+        "id": 253,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 1.0132789611816406e-05,
+            "B": 1.0132789611816406e-05,
+            "C": 3.725290298461914e-06,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 1841,
+        "predicted_diagnosis": "C",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.26171875,
+            "B": 0.002899169921875,
+            "C": 0.70703125,
+            "D": 0.0274658203125
+        }
+    },
+    {
+        "id": 405,
+        "predicted_diagnosis": "D",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.404296875,
+            "B": 0.042724609375,
+            "C": 0.033203125,
+            "D": 0.51953125
+        }
+    },
+    {
+        "id": 318,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 5.7697296142578125e-05,
+            "B": 0.9921875,
+            "C": 5.7697296142578125e-05,
+            "D": 0.00860595703125
+        }
+    },
+    {
+        "id": 3747,
+        "predicted_diagnosis": "C",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.1826171875,
+            "B": 0.0001010894775390625,
+            "C": 0.81640625,
+            "D": 0.0001659393310546875
+        }
+    },
+    {
+        "id": 2857,
+        "predicted_diagnosis": "C",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.047119140625,
+            "B": 0.003875732421875,
+            "C": 0.9453125,
+            "D": 0.0018310546875
+        }
+    },
+    {
+        "id": 1506,
+        "predicted_diagnosis": "B",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.000240325927734375,
+            "B": 0.71484375,
+            "C": 0.16015625,
+            "D": 0.12451171875
+        }
+    },
+    {
+        "id": 1539,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 1.3709068298339844e-06,
+            "B": 1.0,
+            "C": 1.0132789611816406e-05,
+            "D": 1.7583370208740234e-06
+        }
+    },
+    {
+        "id": 2069,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.003173828125,
+            "B": 5.817413330078125e-05,
+            "C": 0.0001583099365234375,
+            "D": 0.99609375
+        }
+    },
+    {
+        "id": 178,
+        "predicted_diagnosis": "B",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 7.188646122813225e-09,
+            "B": 1.0,
+            "C": 4.3655745685100555e-09,
+            "D": 9.74978320300579e-10
+        }
+    },
+    {
+        "id": 1249,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.89453125,
+            "B": 0.09423828125,
+            "C": 0.00049591064453125,
+            "D": 0.00994873046875
+        }
+    },
+    {
+        "id": 3223,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 1.2993812561035156e-05,
+            "B": 2.2649765014648438e-06,
+            "C": 8.307397365570068e-07,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 595,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 9.584426879882812e-05,
+            "C": 0.00116729736328125,
+            "D": 2.905726432800293e-06
+        }
+    },
+    {
+        "id": 2401,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 9.5367431640625e-06,
+            "B": 2.726912498474121e-06,
+            "C": 0.06005859375,
+            "D": 0.94140625
+        }
+    },
+    {
+        "id": 2706,
+        "predicted_diagnosis": "C",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.259765625,
+            "B": 0.02734375,
+            "C": 0.70703125,
+            "D": 0.0078125
+        }
+    },
+    {
+        "id": 1265,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.04736328125,
+            "B": 0.0011138916015625,
+            "C": 0.94921875,
+            "D": 0.000865936279296875
+        }
+    },
+    {
+        "id": 3148,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.96484375,
+            "B": 0.000415802001953125,
+            "C": 0.00506591796875,
+            "D": 0.0291748046875
+        }
+    },
+    {
+        "id": 2535,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 1.3709068298339844e-06,
+            "B": 6.845220923423767e-08,
+            "C": 3.9301812648773193e-07,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 39,
+        "predicted_diagnosis": "A",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.9375,
+            "B": 0.00011587142944335938,
+            "C": 0.00040435791015625,
+            "D": 0.06005859375
+        }
+    },
+    {
+        "id": 215,
+        "predicted_diagnosis": "B",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.000331878662109375,
+            "B": 0.9921875,
+            "C": 2.8759241104125977e-06,
+            "D": 0.008544921875
+        }
+    },
+    {
+        "id": 1657,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.00012302398681640625,
+            "B": 1.6689300537109375e-05,
+            "C": 3.528594970703125e-05,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 3204,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 7.867813110351562e-06,
+            "B": 4.798173904418945e-06,
+            "C": 1.0,
+            "D": 3.725290298461914e-06
+        }
+    },
+    {
+        "id": 2251,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 0.0002613067626953125,
+            "C": 8.307397365570068e-07,
+            "D": 6.48200511932373e-07
+        }
+    },
+    {
+        "id": 291,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 8.754432201385498e-08,
+            "B": 1.3709068298339844e-06,
+            "C": 1.0,
+            "D": 9.632110595703125e-05
+        }
+    },
+    {
+        "id": 3023,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 6.48200511932373e-07,
+            "C": 5.3085386753082275e-08,
+            "D": 4.3655745685100555e-09
+        }
+    },
+    {
+        "id": 1817,
+        "predicted_diagnosis": "C",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.421875,
+            "B": 0.03466796875,
+            "C": 0.54296875,
+            "D": 0.00104522705078125
+        }
+    },
+    {
+        "id": 1307,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 4.5299530029296875e-05,
+            "B": 6.139278411865234e-06,
+            "C": 1.0,
+            "D": 1.2993812561035156e-05
+        }
+    },
+    {
+        "id": 768,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.000545501708984375,
+            "B": 0.984375,
+            "C": 0.0140380859375,
+            "D": 0.00189971923828125
+        }
+    },
+    {
+        "id": 3888,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 3.725290298461914e-06,
+            "C": 0.00012302398681640625,
+            "D": 2.905726432800293e-06
+        }
+    },
+    {
+        "id": 952,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.0003509521484375,
+            "B": 0.49609375,
+            "C": 0.49609375,
+            "D": 0.00909423828125
+        }
+    },
+    {
+        "id": 2245,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.006683349609375,
+            "B": 0.9921875,
+            "C": 0.0001220703125,
+            "D": 0.0002593994140625
+        }
+    },
+    {
+        "id": 2986,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 4.1443854570388794e-08,
+            "B": 1.955777406692505e-08,
+            "C": 3.9301812648773193e-07,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 510,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 2.066371962428093e-09,
+            "B": 1.6079866327345371e-09,
+            "C": 9.255018085241318e-09,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 1712,
+        "predicted_diagnosis": "B",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.000568389892578125,
+            "B": 0.62109375,
+            "C": 0.0004425048828125,
+            "D": 0.376953125
+        }
+    },
+    {
+        "id": 2594,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 0.00012302398681640625,
+            "C": 1.2993812561035156e-05,
+            "D": 1.7583370208740234e-06
+        }
+    },
+    {
+        "id": 3143,
+        "predicted_diagnosis": "C",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.016845703125,
+            "B": 0.002288818359375,
+            "C": 0.71875,
+            "D": 0.263671875
+        }
+    },
+    {
+        "id": 3683,
+        "predicted_diagnosis": "D",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.00177764892578125,
+            "B": 0.000396728515625,
+            "C": 0.07568359375,
+            "D": 0.921875
+        }
+    },
+    {
+        "id": 771,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.0003337860107421875,
+            "B": 0.000553131103515625,
+            "C": 0.99609375,
+            "D": 0.001922607421875
+        }
+    },
+    {
+        "id": 2239,
+        "predicted_diagnosis": "D",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.005218505859375,
+            "B": 1.2934207916259766e-05,
+            "C": 0.00012302398681640625,
+            "D": 0.99609375
+        }
+    },
+    {
+        "id": 2402,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 3.213062882423401e-08,
+            "B": 1.2514647096395493e-09,
+            "C": 2.066371962428093e-09,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 3958,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 6.48200511932373e-07,
+            "B": 8.754432201385498e-08,
+            "C": 1.0,
+            "D": 6.48200511932373e-07
+        }
+    },
+    {
+        "id": 225,
+        "predicted_diagnosis": "B",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.0010223388671875,
+            "B": 0.53125,
+            "C": 0.055908203125,
+            "D": 0.412109375
+        }
+    },
+    {
+        "id": 931,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.0001583099365234375,
+            "B": 1.0,
+            "C": 4.5299530029296875e-05,
+            "D": 0.00116729736328125
+        }
+    },
+    {
+        "id": 2531,
+        "predicted_diagnosis": "D",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.019287109375,
+            "B": 0.040771484375,
+            "C": 0.30078125,
+            "D": 0.63671875
+        }
+    },
+    {
+        "id": 2625,
+        "predicted_diagnosis": "C",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.013916015625,
+            "B": 0.00069427490234375,
+            "C": 0.9765625,
+            "D": 0.0084228515625
+        }
+    },
+    {
+        "id": 698,
+        "predicted_diagnosis": "A",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.87890625,
+            "B": 0.0004863739013671875,
+            "C": 0.000179290771484375,
+            "D": 0.119140625
+        }
+    },
+    {
+        "id": 2420,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 6.48200511932373e-07,
+            "B": 8.754432201385498e-08,
+            "C": 3.9301812648773193e-07,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 1735,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.578125,
+            "B": 0.3515625,
+            "C": 0.047607421875,
+            "D": 0.0224609375
+        }
+    },
+    {
+        "id": 1905,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.0194091796875,
+            "B": 0.06787109375,
+            "C": 0.0869140625,
+            "D": 0.82421875
+        }
+    },
+    {
+        "id": 3607,
+        "predicted_diagnosis": "B",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.26953125,
+            "B": 0.73046875,
+            "C": 0.00019073486328125,
+            "D": 1.5616416931152344e-05
+        }
+    },
+    {
+        "id": 1751,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.921875,
+            "B": 0.0013885498046875,
+            "C": 0.07568359375,
+            "D": 3.4421682357788086e-06
+        }
+    },
+    {
+        "id": 1094,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 1.6079866327345371e-09,
+            "B": 9.255018085241318e-09,
+            "C": 1.0,
+            "D": 1.955777406692505e-08
+        }
+    },
+    {
+        "id": 2734,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 6.48200511932373e-07,
+            "C": 2.384185791015625e-07,
+            "D": 5.3085386753082275e-08
+        }
+    },
+    {
+        "id": 380,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 2.753734588623047e-05,
+            "C": 6.139278411865234e-06,
+            "D": 4.798173904418945e-06
+        }
+    },
+    {
+        "id": 2026,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.0011444091796875,
+            "B": 0.9765625,
+            "C": 0.000888824462890625,
+            "D": 0.02294921875
+        }
+    },
+    {
+        "id": 2770,
+        "predicted_diagnosis": "B",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.0751953125,
+            "B": 0.91796875,
+            "C": 0.0008392333984375,
+            "D": 0.00482177734375
+        }
+    },
+    {
+        "id": 290,
+        "predicted_diagnosis": "A",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.96875,
+            "B": 0.0177001953125,
+            "C": 0.001129150390625,
+            "D": 0.0137939453125
+        }
+    },
+    {
+        "id": 67,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.005218505859375,
+            "B": 0.00054931640625,
+            "C": 0.9921875,
+            "D": 0.000904083251953125
+        }
+    },
+    {
+        "id": 989,
+        "predicted_diagnosis": "D",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 1.126900315284729e-07,
+            "B": 6.845220923423767e-08,
+            "C": 3.0547380447387695e-07,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 2646,
+        "predicted_diagnosis": "B",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.0020904541015625,
+            "B": 0.84375,
+            "C": 0.146484375,
+            "D": 0.007293701171875
+        }
+    },
+    {
+        "id": 482,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 4.5299530029296875e-05,
+            "C": 2.2649765014648438e-06,
+            "D": 9.632110595703125e-05
+        }
+    },
+    {
+        "id": 3993,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 1.4435499906539917e-07,
+            "B": 1.955777406692505e-08,
+            "C": 1.4435499906539917e-07,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 1025,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.00518798828125,
+            "B": 0.00518798828125,
+            "C": 0.00115966796875,
+            "D": 0.98828125
+        }
+    },
+    {
+        "id": 3455,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.7265625,
+            "B": 0.000850677490234375,
+            "C": 0.267578125,
+            "D": 0.0048828125
+        }
+    },
+    {
+        "id": 187,
+        "predicted_diagnosis": "B",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 1.2636184692382812e-05,
+            "B": 0.96875,
+            "C": 0.000537872314453125,
+            "D": 0.029296875
+        }
+    },
+    {
+        "id": 1235,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 0.0002613067626953125,
+            "C": 2.1457672119140625e-05,
+            "D": 2.753734588623047e-05
+        }
+    },
+    {
+        "id": 522,
+        "predicted_diagnosis": "B",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.000728607177734375,
+            "B": 0.62109375,
+            "C": 0.000568389892578125,
+            "D": 0.376953125
+        }
+    },
+    {
+        "id": 1641,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 4.1443854570388794e-08,
+            "B": 1.0,
+            "C": 6.845220923423767e-08,
+            "D": 1.525040715932846e-08
+        }
+    },
+    {
+        "id": 3963,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 7.867813110351562e-06,
+            "B": 1.0,
+            "C": 6.139278411865234e-06,
+            "D": 1.0132789611816406e-05
+        }
+    },
+    {
+        "id": 1435,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 1.2993812561035156e-05,
+            "B": 1.0,
+            "C": 9.632110595703125e-05,
+            "D": 2.2649765014648438e-06
+        }
+    },
+    {
+        "id": 2362,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 7.486343383789062e-05,
+            "B": 2.1457672119140625e-05,
+            "C": 1.0,
+            "D": 2.1457672119140625e-05
+        }
+    },
+    {
+        "id": 1948,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 1.525040715932846e-08,
+            "B": 1.0,
+            "C": 5.3085386753082275e-08,
+            "D": 5.3085386753082275e-08
+        }
+    },
+    {
+        "id": 1178,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.9921875,
+            "B": 0.008544921875,
+            "C": 0.00015735626220703125,
+            "D": 0.0001220703125
+        }
+    },
+    {
+        "id": 1108,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 4.5299530029296875e-05,
+            "B": 1.0132789611816406e-05,
+            "C": 1.7583370208740234e-06,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 3196,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 8.307397365570068e-07,
+            "C": 5.029141902923584e-07,
+            "D": 1.0654330253601074e-06
+        }
+    },
+    {
+        "id": 754,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 4.5299530029296875e-05,
+            "B": 1.0,
+            "C": 0.00150299072265625,
+            "D": 5.029141902923584e-07
+        }
+    },
+    {
+        "id": 1728,
+        "predicted_diagnosis": "C",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.0019073486328125,
+            "B": 0.000331878662109375,
+            "C": 0.98828125,
+            "D": 0.010986328125
+        }
+    },
+    {
+        "id": 323,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 0.000553131103515625,
+            "C": 1.7583370208740234e-06,
+            "D": 0.00012302398681640625
+        }
+    },
+    {
+        "id": 1135,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 3.9301812648773193e-07,
+            "C": 3.213062882423401e-08,
+            "D": 7.188646122813225e-09
+        }
+    },
+    {
+        "id": 1017,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 1.8533319234848022e-07,
+            "B": 3.213062882423401e-08,
+            "C": 3.213062882423401e-08,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 1238,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 1.0132789611816406e-05,
+            "C": 1.0132789611816406e-05,
+            "D": 7.188646122813225e-09
+        }
+    },
+    {
+        "id": 709,
+        "predicted_diagnosis": "A",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.9765625,
+            "B": 0.01080322265625,
+            "C": 0.013916015625,
+            "D": 0.000537872314453125
+        }
+    },
+    {
+        "id": 900,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.000553131103515625,
+            "B": 0.99609375,
+            "C": 5.817413330078125e-05,
+            "D": 0.00150299072265625
+        }
+    },
+    {
+        "id": 3000,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 1.126900315284729e-07,
+            "C": 3.0547380447387695e-07,
+            "D": 3.0547380447387695e-07
+        }
+    },
+    {
+        "id": 208,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 2.905726432800293e-06,
+            "B": 1.0,
+            "C": 3.725290298461914e-06,
+            "D": 2.753734588623047e-05
+        }
+    },
+    {
+        "id": 2389,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 6.139278411865234e-06,
+            "B": 7.486343383789062e-05,
+            "C": 0.99609375,
+            "D": 0.002471923828125
+        }
+    },
+    {
+        "id": 3112,
+        "predicted_diagnosis": "D",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 1.5079975128173828e-05,
+            "B": 0.09521484375,
+            "C": 6.771087646484375e-05,
+            "D": 0.90625
+        }
+    },
+    {
+        "id": 1891,
+        "predicted_diagnosis": "B",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 2.2530555725097656e-05,
+            "B": 0.81640625,
+            "C": 3.039836883544922e-06,
+            "D": 0.1826171875
+        }
+    },
+    {
+        "id": 2945,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.00070953369140625,
+            "B": 1.0132789611816406e-05,
+            "C": 1.0,
+            "D": 8.754432201385498e-08
+        }
+    },
+    {
+        "id": 939,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.99609375,
+            "B": 0.002471923828125,
+            "C": 0.00012302398681640625,
+            "D": 8.307397365570068e-07
+        }
+    },
+    {
+        "id": 1133,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 1.4435499906539917e-07,
+            "B": 4.798173904418945e-06,
+            "C": 1.8533319234848022e-07,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 487,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 5.029141902923584e-07,
+            "B": 3.9301812648773193e-07,
+            "C": 1.0,
+            "D": 2.514570951461792e-08
+        }
+    },
+    {
+        "id": 2148,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 1.7583370208740234e-06,
+            "B": 3.0547380447387695e-07,
+            "C": 3.528594970703125e-05,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 2099,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 3.725290298461914e-06,
+            "C": 1.7583370208740234e-06,
+            "D": 1.4435499906539917e-07
+        }
+    },
+    {
+        "id": 1290,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 1.126900315284729e-07,
+            "C": 3.0547380447387695e-07,
+            "D": 4.1443854570388794e-08
+        }
+    },
+    {
+        "id": 891,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.98046875,
+            "B": 0.00311279296875,
+            "C": 0.0179443359375,
+            "D": 0.0004215240478515625
+        }
+    },
+    {
+        "id": 3228,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 3.3855438232421875e-05,
+            "B": 0.9609375,
+            "C": 0.037353515625,
+            "D": 0.00238037109375
+        }
+    },
+    {
+        "id": 3529,
+        "predicted_diagnosis": "D",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.000335693359375,
+            "B": 1.6689300537109375e-05,
+            "C": 1.2993812561035156e-05,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 1920,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 2.014636993408203e-05,
+            "B": 2.726912498474121e-06,
+            "C": 0.26953125,
+            "D": 0.73046875
+        }
+    },
+    {
+        "id": 3171,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 1.3634562492370605e-06,
+            "B": 0.004058837890625,
+            "C": 0.99609375,
+            "D": 1.8440186977386475e-07
+        }
+    },
+    {
+        "id": 1189,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.05908203125,
+            "B": 0.05908203125,
+            "C": 0.72265625,
+            "D": 0.1611328125
+        }
+    },
+    {
+        "id": 2963,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 1.0132789611816406e-05,
+            "B": 3.9301812648773193e-07,
+            "C": 1.0,
+            "D": 3.0547380447387695e-07
+        }
+    },
+    {
+        "id": 2788,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 3.9301812648773193e-07,
+            "B": 3.0547380447387695e-07,
+            "C": 1.0,
+            "D": 2.384185791015625e-07
+        }
+    },
+    {
+        "id": 1505,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 3.9301812648773193e-07,
+            "B": 3.725290298461914e-06,
+            "C": 1.0,
+            "D": 9.632110595703125e-05
+        }
+    },
+    {
+        "id": 2899,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 0.000431060791015625,
+            "C": 1.7583370208740234e-06,
+            "D": 2.2649765014648438e-06
+        }
+    },
+    {
+        "id": 368,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.99609375,
+            "B": 0.0004291534423828125,
+            "C": 3.7103891372680664e-06,
+            "D": 0.005218505859375
+        }
+    },
+    {
+        "id": 1270,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.07421875,
+            "B": 0.0164794921875,
+            "C": 0.0078125,
+            "D": 0.90234375
+        }
+    },
+    {
+        "id": 3714,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 1.2993812561035156e-05,
+            "B": 5.817413330078125e-05,
+            "C": 1.0,
+            "D": 6.139278411865234e-06
+        }
+    },
+    {
+        "id": 2230,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 2.905726432800293e-06,
+            "B": 6.139278411865234e-06,
+            "C": 1.0,
+            "D": 2.753734588623047e-05
+        }
+    },
+    {
+        "id": 3938,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.003173828125,
+            "B": 7.43865966796875e-05,
+            "C": 0.99609375,
+            "D": 3.7103891372680664e-06
+        }
+    },
+    {
+        "id": 3826,
+        "predicted_diagnosis": "A",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.8046875,
+            "B": 0.0849609375,
+            "C": 0.00021076202392578125,
+            "D": 0.10888671875
+        }
+    },
+    {
+        "id": 2575,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 1.7508864402770996e-06,
+            "B": 0.006683349609375,
+            "C": 0.9921875,
+            "D": 3.8929283618927e-07
+        }
+    },
+    {
+        "id": 3269,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 2.905726432800293e-06,
+            "B": 1.0,
+            "C": 6.139278411865234e-06,
+            "D": 2.905726432800293e-06
+        }
+    },
+    {
+        "id": 3146,
+        "predicted_diagnosis": "D",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.044921875,
+            "B": 0.33203125,
+            "C": 0.07421875,
+            "D": 0.546875
+        }
+    },
+    {
+        "id": 3029,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 5.793571472167969e-05,
+            "B": 0.00054931640625,
+            "C": 0.004058837890625,
+            "D": 0.99609375
+        }
+    },
+    {
+        "id": 3467,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 4.1443854570388794e-08,
+            "B": 1.0,
+            "C": 3.725290298461914e-06,
+            "D": 8.754432201385498e-08
+        }
+    },
+    {
+        "id": 1722,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 7.12275505065918e-06,
+            "B": 0.0022430419921875,
+            "C": 0.90234375,
+            "D": 0.09521484375
+        }
+    },
+    {
+        "id": 1928,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 3.725290298461914e-06,
+            "B": 1.3709068298339844e-06,
+            "C": 4.5299530029296875e-05,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 1112,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 2.753734588623047e-05,
+            "B": 2.905726432800293e-06,
+            "C": 1.0,
+            "D": 7.867813110351562e-06
+        }
+    },
+    {
+        "id": 347,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 2.086162567138672e-06,
+            "B": 7.3015689849853516e-06,
+            "C": 0.92578125,
+            "D": 0.07568359375
+        }
+    },
+    {
+        "id": 3775,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.0010986328125,
+            "B": 0.00180816650390625,
+            "C": 0.059814453125,
+            "D": 0.9375
+        }
+    },
+    {
+        "id": 2785,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 4.5299530029296875e-05,
+            "B": 1.0,
+            "C": 1.3709068298339844e-06,
+            "D": 1.4435499906539917e-07
+        }
+    },
+    {
+        "id": 3097,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 1.7285346984863281e-06,
+            "B": 1.3485550880432129e-06,
+            "C": 0.98046875,
+            "D": 0.0179443359375
+        }
+    },
+    {
+        "id": 714,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 2.2649765014648438e-06,
+            "C": 6.48200511932373e-07,
+            "D": 8.307397365570068e-07
+        }
+    },
+    {
+        "id": 3085,
+        "predicted_diagnosis": "D",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.00836181640625,
+            "B": 0.048095703125,
+            "C": 0.35546875,
+            "D": 0.5859375
+        }
+    },
+    {
+        "id": 312,
+        "predicted_diagnosis": "C",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.02294921875,
+            "B": 0.000537872314453125,
+            "C": 0.9765625,
+            "D": 0.00188446044921875
+        }
+    },
+    {
+        "id": 3739,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.00244140625,
+            "B": 0.0002002716064453125,
+            "C": 0.98828125,
+            "D": 0.010986328125
+        }
+    },
+    {
+        "id": 236,
+        "predicted_diagnosis": "D",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.000148773193359375,
+            "B": 0.26953125,
+            "C": 9.012222290039062e-05,
+            "D": 0.73046875
+        }
+    },
+    {
+        "id": 470,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 1.0654330253601074e-06,
+            "B": 4.1443854570388794e-08,
+            "C": 1.0,
+            "D": 8.754432201385498e-08
+        }
+    },
+    {
+        "id": 2771,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 2.753734588623047e-05,
+            "B": 1.0,
+            "C": 4.798173904418945e-06,
+            "D": 6.139278411865234e-06
+        }
+    },
+    {
+        "id": 3402,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 6.48200511932373e-07,
+            "B": 4.5299530029296875e-05,
+            "C": 1.0,
+            "D": 6.139278411865234e-06
+        }
+    },
+    {
+        "id": 3849,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 2.2649765014648438e-06,
+            "B": 1.0,
+            "C": 0.00020313262939453125,
+            "D": 0.00012302398681640625
+        }
+    },
+    {
+        "id": 103,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 8.307397365570068e-07,
+            "B": 3.0547380447387695e-07,
+            "C": 5.029141902923584e-07,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 327,
+        "predicted_diagnosis": "B",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 2.1457672119140625e-05,
+            "B": 1.0,
+            "C": 0.00012302398681640625,
+            "D": 0.000431060791015625
+        }
+    },
+    {
+        "id": 2491,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 1.7583370208740234e-06,
+            "B": 1.0,
+            "C": 1.0132789611816406e-05,
+            "D": 0.0001583099365234375
+        }
+    },
+    {
+        "id": 3743,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 3.725290298461914e-06,
+            "B": 1.0132789611816406e-05,
+            "C": 1.0,
+            "D": 3.725290298461914e-06
+        }
+    },
+    {
+        "id": 1064,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 2.2649765014648438e-06,
+            "B": 1.0132789611816406e-05,
+            "C": 1.0,
+            "D": 1.8533319234848022e-07
+        }
+    },
+    {
+        "id": 1458,
+        "predicted_diagnosis": "A",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.9609375,
+            "B": 0.00011873245239257812,
+            "C": 0.000530242919921875,
+            "D": 0.037353515625
+        }
+    },
+    {
+        "id": 3630,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 0.000335693359375,
+            "C": 4.5299530029296875e-05,
+            "D": 4.798173904418945e-06
+        }
+    },
+    {
+        "id": 1050,
+        "predicted_diagnosis": "D",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.00115203857421875,
+            "B": 0.00115203857421875,
+            "C": 0.0140380859375,
+            "D": 0.984375
+        }
+    },
+    {
+        "id": 1224,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 0.000431060791015625,
+            "C": 9.584426879882812e-05,
+            "D": 0.000431060791015625
+        }
+    },
+    {
+        "id": 30,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 1.3709068298339844e-06,
+            "B": 1.2993812561035156e-05,
+            "C": 1.6689300537109375e-05,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 1343,
+        "predicted_diagnosis": "C",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0132789611816406e-05,
+            "B": 2.1457672119140625e-05,
+            "C": 1.0,
+            "D": 0.000553131103515625
+        }
+    },
+    {
+        "id": 3184,
+        "predicted_diagnosis": "C",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 4.5299530029296875e-05,
+            "B": 0.00012302398681640625,
+            "C": 1.0,
+            "D": 7.486343383789062e-05
+        }
+    },
+    {
+        "id": 3749,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.013916015625,
+            "B": 0.9765625,
+            "C": 0.01080322265625,
+            "D": 0.00041961669921875
+        }
+    },
+    {
+        "id": 897,
+        "predicted_diagnosis": "C",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.0084228515625,
+            "B": 0.017822265625,
+            "C": 0.97265625,
+            "D": 0.000888824462890625
+        }
+    },
+    {
+        "id": 2702,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.9375,
+            "B": 0.06005859375,
+            "C": 0.000518798828125,
+            "D": 0.0008544921875
+        }
+    },
+    {
+        "id": 1867,
+        "predicted_diagnosis": "B",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.0047607421875,
+            "B": 0.90625,
+            "C": 0.0166015625,
+            "D": 0.07421875
+        }
+    },
+    {
+        "id": 80,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.00186920166015625,
+            "B": 0.96484375,
+            "C": 0.0177001953125,
+            "D": 0.0137939453125
+        }
+    },
+    {
+        "id": 3595,
+        "predicted_diagnosis": "C",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.037109375,
+            "B": 0.00390625,
+            "C": 0.95703125,
+            "D": 1.5974044799804688e-05
+        }
+    },
+    {
+        "id": 1960,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 9.255018085241318e-09,
+            "B": 1.0,
+            "C": 4.1443854570388794e-08,
+            "D": 5.3085386753082275e-08
+        }
+    },
+    {
+        "id": 2098,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 1.6689300537109375e-05,
+            "B": 0.000553131103515625,
+            "C": 1.0,
+            "D": 3.0547380447387695e-07
+        }
+    },
+    {
+        "id": 1408,
+        "predicted_diagnosis": "D",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.00070953369140625,
+            "B": 0.00150299072265625,
+            "C": 3.528594970703125e-05,
+            "D": 0.99609375
+        }
+    },
+    {
+        "id": 37,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 2.1457672119140625e-05,
+            "C": 6.139278411865234e-06,
+            "D": 6.139278411865234e-06
+        }
+    },
+    {
+        "id": 2910,
+        "predicted_diagnosis": "C",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.1484375,
+            "B": 0.0001735687255859375,
+            "C": 0.8515625,
+            "D": 0.0001354217529296875
+        }
+    },
+    {
+        "id": 3991,
+        "predicted_diagnosis": "C",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.005218505859375,
+            "B": 9.5367431640625e-05,
+            "C": 0.9921875,
+            "D": 0.00090789794921875
+        }
+    },
+    {
+        "id": 402,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.00020313262939453125,
+            "B": 1.0,
+            "C": 2.2649765014648438e-06,
+            "D": 0.00020313262939453125
+        }
+    },
+    {
+        "id": 2972,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 2.753734588623047e-05,
+            "B": 1.7583370208740234e-06,
+            "C": 1.6689300537109375e-05,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 1937,
+        "predicted_diagnosis": "D",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 4.082918167114258e-06,
+            "B": 0.2158203125,
+            "C": 0.029296875,
+            "D": 0.75390625
+        }
+    },
+    {
+        "id": 3282,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.9609375,
+            "B": 0.037353515625,
+            "C": 7.200241088867188e-05,
+            "D": 0.000530242919921875
+        }
+    },
+    {
+        "id": 2537,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 1.8533319234848022e-07,
+            "B": 1.0,
+            "C": 3.528594970703125e-05,
+            "D": 2.1457672119140625e-05
+        }
+    },
+    {
+        "id": 3106,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 1.955777406692505e-08,
+            "B": 5.3085386753082275e-08,
+            "C": 1.0,
+            "D": 4.602043190971017e-10
+        }
+    },
+    {
+        "id": 793,
+        "predicted_diagnosis": "B",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 3.6954879760742188e-06,
+            "B": 0.9921875,
+            "C": 0.00860595703125,
+            "D": 1.0013580322265625e-05
+        }
+    },
+    {
+        "id": 1525,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 1.2993812561035156e-05,
+            "B": 1.0,
+            "C": 2.1457672119140625e-05,
+            "D": 8.307397365570068e-07
+        }
+    },
+    {
+        "id": 3245,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 1.8533319234848022e-07,
+            "B": 2.753734588623047e-05,
+            "C": 1.0,
+            "D": 1.4435499906539917e-07
+        }
+    },
+    {
+        "id": 2940,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 1.955777406692505e-08,
+            "B": 4.1443854570388794e-08,
+            "C": 3.0547380447387695e-07,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 2059,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 5.817413330078125e-05,
+            "C": 4.5299530029296875e-05,
+            "D": 2.1457672119140625e-05
+        }
+    },
+    {
+        "id": 3451,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.00012302398681640625,
+            "B": 7.867813110351562e-06,
+            "C": 2.753734588623047e-05,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 2124,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 4.1443854570388794e-08,
+            "B": 3.213062882423401e-08,
+            "C": 1.0,
+            "D": 3.0547380447387695e-07
+        }
+    },
+    {
+        "id": 618,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.01373291015625,
+            "B": 0.9609375,
+            "C": 0.0014495849609375,
+            "D": 0.0225830078125
+        }
+    },
+    {
+        "id": 210,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 7.867813110351562e-06,
+            "B": 2.1457672119140625e-05,
+            "C": 0.00020313262939453125,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 2341,
+        "predicted_diagnosis": "D",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.1279296875,
+            "B": 0.2119140625,
+            "C": 0.2119140625,
+            "D": 0.447265625
+        }
+    },
+    {
+        "id": 2685,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 8.754432201385498e-08,
+            "C": 7.188646122813225e-09,
+            "D": 5.3085386753082275e-08
+        }
+    },
+    {
+        "id": 1673,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 2.2649765014648438e-06,
+            "C": 1.7583370208740234e-06,
+            "D": 1.6689300537109375e-05
+        }
+    },
+    {
+        "id": 1338,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 2.1457672119140625e-05,
+            "B": 0.00150299072265625,
+            "C": 1.0,
+            "D": 1.8533319234848022e-07
+        }
+    },
+    {
+        "id": 338,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 0.00116729736328125,
+            "C": 1.0132789611816406e-05,
+            "D": 0.00012302398681640625
+        }
+    },
+    {
+        "id": 2648,
+        "predicted_diagnosis": "C",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.006683349609375,
+            "B": 7.43865966796875e-05,
+            "C": 0.9921875,
+            "D": 0.0024566650390625
+        }
+    },
+    {
+        "id": 3193,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.0001583099365234375,
+            "B": 1.0,
+            "C": 4.5299530029296875e-05,
+            "D": 2.905726432800293e-06
+        }
+    },
+    {
+        "id": 211,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.5625,
+            "B": 0.4375,
+            "C": 8.916854858398438e-05,
+            "D": 0.0001468658447265625
+        }
+    },
+    {
+        "id": 917,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 1.7583370208740234e-06,
+            "B": 2.905726432800293e-06,
+            "C": 1.0,
+            "D": 7.486343383789062e-05
+        }
+    },
+    {
+        "id": 2590,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.58984375,
+            "B": 0.0177001953125,
+            "C": 0.03759765625,
+            "D": 0.357421875
+        }
+    },
+    {
+        "id": 2962,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 1.0654330253601074e-06,
+            "B": 3.725290298461914e-06,
+            "C": 1.0,
+            "D": 2.753734588623047e-05
+        }
+    },
+    {
+        "id": 1585,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 5.817413330078125e-05,
+            "B": 1.0,
+            "C": 4.5299530029296875e-05,
+            "D": 3.528594970703125e-05
+        }
+    },
+    {
+        "id": 431,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.70703125,
+            "B": 0.259765625,
+            "C": 0.02734375,
+            "D": 0.0078125
+        }
+    },
+    {
+        "id": 2187,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.00054931640625,
+            "B": 0.9921875,
+            "C": 0.0031585693359375,
+            "D": 0.004058837890625
+        }
+    },
+    {
+        "id": 3741,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 2.514570951461792e-08,
+            "B": 1.126900315284729e-07,
+            "C": 1.0,
+            "D": 2.384185791015625e-07
+        }
+    },
+    {
+        "id": 3974,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.0001583099365234375,
+            "B": 2.1457672119140625e-05,
+            "C": 1.0,
+            "D": 1.6689300537109375e-05
+        }
+    },
+    {
+        "id": 3374,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 6.845220923423767e-08,
+            "B": 7.188646122813225e-09,
+            "C": 3.213062882423401e-08,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 3224,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.62109375,
+            "B": 0.00026702880859375,
+            "C": 0.376953125,
+            "D": 0.00034332275390625
+        }
+    },
+    {
+        "id": 2150,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 3.0547380447387695e-07,
+            "B": 8.754432201385498e-08,
+            "C": 5.3085386753082275e-08,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 2719,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.0001583099365234375,
+            "B": 0.00116729736328125,
+            "C": 0.00150299072265625,
+            "D": 0.99609375
+        }
+    },
+    {
+        "id": 168,
+        "predicted_diagnosis": "D",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 2.753734588623047e-05,
+            "B": 1.2993812561035156e-05,
+            "C": 0.00070953369140625,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 3989,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 1.525040715932846e-08,
+            "C": 5.617039278149605e-09,
+            "D": 2.648448571562767e-09
+        }
+    },
+    {
+        "id": 3253,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 3.9301812648773193e-07,
+            "B": 1.0,
+            "C": 3.9301812648773193e-07,
+            "D": 3.0547380447387695e-07
+        }
+    },
+    {
+        "id": 2173,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 2.2649765014648438e-06,
+            "B": 3.725290298461914e-06,
+            "C": 1.0,
+            "D": 0.000431060791015625
+        }
+    },
+    {
+        "id": 549,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 9.632110595703125e-05,
+            "B": 8.754432201385498e-08,
+            "C": 1.0,
+            "D": 9.255018085241318e-09
+        }
+    },
+    {
+        "id": 1653,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 1.6689300537109375e-05,
+            "B": 1.0,
+            "C": 1.0654330253601074e-06,
+            "D": 1.8533319234848022e-07
+        }
+    },
+    {
+        "id": 2635,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 1.0654330253601074e-06,
+            "C": 1.126900315284729e-07,
+            "D": 1.1874362826347351e-08
+        }
+    },
+    {
+        "id": 3297,
+        "predicted_diagnosis": "C",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.021484375,
+            "B": 0.0037384033203125,
+            "C": 0.7109375,
+            "D": 0.26171875
+        }
+    },
+    {
+        "id": 958,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.029296875,
+            "B": 9.34600830078125e-05,
+            "C": 0.00011968612670898438,
+            "D": 0.96875
+        }
+    },
+    {
+        "id": 1154,
+        "predicted_diagnosis": "C",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.01361083984375,
+            "B": 0.02880859375,
+            "C": 0.953125,
+            "D": 0.0050048828125
+        }
+    },
+    {
+        "id": 235,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.1826171875,
+            "B": 3.719329833984375e-05,
+            "C": 0.00012969970703125,
+            "D": 0.81640625
+        }
+    },
+    {
+        "id": 622,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 4.1443854570388794e-08,
+            "B": 1.8533319234848022e-07,
+            "C": 1.0,
+            "D": 5.029141902923584e-07
+        }
+    },
+    {
+        "id": 3179,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 2.514570951461792e-08,
+            "C": 6.845220923423767e-08,
+            "D": 3.0547380447387695e-07
+        }
+    },
+    {
+        "id": 2422,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 1.4435499906539917e-07,
+            "B": 5.029141902923584e-07,
+            "C": 1.0,
+            "D": 7.188646122813225e-09
+        }
+    },
+    {
+        "id": 1655,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.00148773193359375,
+            "B": 0.00020122528076171875,
+            "C": 0.008544921875,
+            "D": 0.98828125
+        }
+    },
+    {
+        "id": 651,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.00140380859375,
+            "B": 0.93359375,
+            "C": 0.0361328125,
+            "D": 0.0281982421875
+        }
+    },
+    {
+        "id": 2887,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 1.0654330253601074e-06,
+            "B": 2.384185791015625e-07,
+            "C": 1.3709068298339844e-06,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 3044,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 4.798173904418945e-06,
+            "B": 3.725290298461914e-06,
+            "C": 1.0,
+            "D": 2.905726432800293e-06
+        }
+    },
+    {
+        "id": 706,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 1.043081283569336e-06,
+            "B": 0.02294921875,
+            "C": 0.9765625,
+            "D": 7.295608520507812e-05
+        }
+    },
+    {
+        "id": 3277,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 6.48200511932373e-07,
+            "B": 1.0,
+            "C": 6.139278411865234e-06,
+            "D": 1.6689300537109375e-05
+        }
+    },
+    {
+        "id": 1658,
+        "predicted_diagnosis": "B",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 2.2530555725097656e-05,
+            "B": 0.81640625,
+            "C": 0.1826171875,
+            "D": 0.000579833984375
+        }
+    },
+    {
+        "id": 2162,
+        "predicted_diagnosis": "C",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.003875732421875,
+            "B": 0.000865936279296875,
+            "C": 0.94921875,
+            "D": 0.047119140625
+        }
+    },
+    {
+        "id": 193,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 1.4435499906539917e-07,
+            "B": 7.867813110351562e-06,
+            "C": 1.0,
+            "D": 1.6689300537109375e-05
+        }
+    },
+    {
+        "id": 991,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 1.3709068298339844e-06,
+            "B": 5.029141902923584e-07,
+            "C": 3.9301812648773193e-07,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 1276,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 5.3085386753082275e-08,
+            "B": 2.514570951461792e-08,
+            "C": 1.0,
+            "D": 6.48200511932373e-07
+        }
+    },
+    {
+        "id": 2165,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 4.1443854570388794e-08,
+            "B": 1.0,
+            "C": 1.4435499906539917e-07,
+            "D": 6.48200511932373e-07
+        }
+    },
+    {
+        "id": 1027,
+        "predicted_diagnosis": "A",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.98828125,
+            "B": 0.000331878662109375,
+            "C": 0.010986328125,
+            "D": 0.0009002685546875
+        }
+    },
+    {
+        "id": 641,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 7.188646122813225e-09,
+            "B": 4.602043190971017e-10,
+            "C": 1.0,
+            "D": 3.4051481634378433e-09
+        }
+    },
+    {
+        "id": 3302,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 6.48200511932373e-07,
+            "B": 7.867813110351562e-06,
+            "C": 1.0,
+            "D": 8.307397365570068e-07
+        }
+    },
+    {
+        "id": 2833,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.008544921875,
+            "B": 0.000331878662109375,
+            "C": 0.0019073486328125,
+            "D": 0.98828125
+        }
+    },
+    {
+        "id": 666,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 3.725290298461914e-06,
+            "B": 2.2649765014648438e-06,
+            "C": 1.0,
+            "D": 3.0547380447387695e-07
+        }
+    },
+    {
+        "id": 2786,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 4.798173904418945e-06,
+            "B": 1.0654330253601074e-06,
+            "C": 2.2649765014648438e-06,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 1309,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 5.3085386753082275e-08,
+            "B": 1.955777406692505e-08,
+            "C": 1.525040715932846e-08,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 3988,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.01336669921875,
+            "B": 0.046630859375,
+            "C": 0.0029754638671875,
+            "D": 0.9375
+        }
+    },
+    {
+        "id": 1646,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 3.9301812648773193e-07,
+            "B": 3.9301812648773193e-07,
+            "C": 1.0,
+            "D": 1.8533319234848022e-07
+        }
+    },
+    {
+        "id": 1714,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 7.867813110351562e-06,
+            "B": 1.0132789611816406e-05,
+            "C": 1.0,
+            "D": 0.00012302398681640625
+        }
+    },
+    {
+        "id": 1826,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 1.3709068298339844e-06,
+            "B": 1.0,
+            "C": 2.753734588623047e-05,
+            "D": 1.7583370208740234e-06
+        }
+    },
+    {
+        "id": 1436,
+        "predicted_diagnosis": "A",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.96875,
+            "B": 4.410743713378906e-05,
+            "C": 4.410743713378906e-05,
+            "D": 0.029296875
+        }
+    },
+    {
+        "id": 682,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 3.0547380447387695e-07,
+            "B": 1.0,
+            "C": 1.0654330253601074e-06,
+            "D": 3.725290298461914e-06
+        }
+    },
+    {
+        "id": 2094,
+        "predicted_diagnosis": "A",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.96875,
+            "B": 0.0107421875,
+            "C": 0.0137939453125,
+            "D": 0.00836181640625
+        }
+    },
+    {
+        "id": 3977,
+        "predicted_diagnosis": "A",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.94921875,
+            "B": 0.04736328125,
+            "C": 0.0011138916015625,
+            "D": 0.0011138916015625
+        }
+    },
+    {
+        "id": 87,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.000705718994140625,
+            "B": 0.9921875,
+            "C": 0.001495361328125,
+            "D": 0.005218505859375
+        }
+    },
+    {
+        "id": 56,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 3.0547380447387695e-07,
+            "B": 2.384185791015625e-07,
+            "C": 1.0,
+            "D": 1.4435499906539917e-07
+        }
+    },
+    {
+        "id": 1919,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.00038909912109375,
+            "B": 0.90234375,
+            "C": 0.09521484375,
+            "D": 0.00023651123046875
+        }
+    },
+    {
+        "id": 1644,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 3.9301812648773193e-07,
+            "B": 1.0,
+            "C": 0.0001583099365234375,
+            "D": 1.8533319234848022e-07
+        }
+    },
+    {
+        "id": 1851,
+        "predicted_diagnosis": "A",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.984375,
+            "B": 0.0140380859375,
+            "C": 0.0002574920654296875,
+            "D": 0.00012159347534179688
+        }
+    },
+    {
+        "id": 3838,
+        "predicted_diagnosis": "B",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 4.506111145019531e-05,
+            "B": 0.7734375,
+            "C": 0.2216796875,
+            "D": 0.006683349609375
+        }
+    },
+    {
+        "id": 3549,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 2.905726432800293e-06,
+            "B": 5.029141902923584e-07,
+            "C": 8.307397365570068e-07,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 3483,
+        "predicted_diagnosis": "D",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.029296875,
+            "B": 0.0003261566162109375,
+            "C": 0.000885009765625,
+            "D": 0.96875
+        }
+    },
+    {
+        "id": 1220,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 8.754432201385498e-08,
+            "B": 1.126900315284729e-07,
+            "C": 6.139278411865234e-06,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 3854,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 4.798173904418945e-06,
+            "B": 2.753734588623047e-05,
+            "C": 1.0,
+            "D": 5.029141902923584e-07
+        }
+    },
+    {
+        "id": 3685,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.8984375,
+            "B": 0.0128173828125,
+            "C": 0.044677734375,
+            "D": 0.044677734375
+        }
+    },
+    {
+        "id": 1037,
+        "predicted_diagnosis": "A",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.94140625,
+            "B": 0.06005859375,
+            "C": 3.314018249511719e-05,
+            "D": 7.82310962677002e-07
+        }
+    },
+    {
+        "id": 670,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.058837890625,
+            "B": 0.55859375,
+            "C": 0.045654296875,
+            "D": 0.337890625
+        }
+    },
+    {
+        "id": 780,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 2.1457672119140625e-05,
+            "B": 8.307397365570068e-07,
+            "C": 8.307397365570068e-07,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 3609,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.11767578125,
+            "B": 0.150390625,
+            "C": 0.67578125,
+            "D": 0.055419921875
+        }
+    },
+    {
+        "id": 1480,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 1.525040715932846e-08,
+            "B": 1.0,
+            "C": 6.845220923423767e-08,
+            "D": 4.1443854570388794e-08
+        }
+    },
+    {
+        "id": 2425,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 0.00116729736328125,
+            "C": 4.76837158203125e-06,
+            "D": 1.6689300537109375e-05
+        }
+    },
+    {
+        "id": 2415,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 2.1457672119140625e-05,
+            "B": 3.725290298461914e-06,
+            "C": 8.307397365570068e-07,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 2538,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 1.0609626770019531e-05,
+            "B": 0.1826171875,
+            "C": 0.81640625,
+            "D": 3.719329833984375e-05
+        }
+    },
+    {
+        "id": 943,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.031005859375,
+            "B": 0.80078125,
+            "C": 0.031005859375,
+            "D": 0.138671875
+        }
+    },
+    {
+        "id": 2807,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.68359375,
+            "B": 0.11865234375,
+            "C": 0.0021820068359375,
+            "D": 0.1953125
+        }
+    },
+    {
+        "id": 3271,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 3.725290298461914e-06,
+            "C": 6.48200511932373e-07,
+            "D": 2.905726432800293e-06
+        }
+    },
+    {
+        "id": 1261,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 3.528594970703125e-05,
+            "B": 2.753734588623047e-05,
+            "C": 4.5299530029296875e-05,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 3932,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.99609375,
+            "B": 0.000705718994140625,
+            "C": 1.0073184967041016e-05,
+            "D": 0.004058837890625
+        }
+    },
+    {
+        "id": 1180,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 9.47713851928711e-06,
+            "B": 0.73046875,
+            "C": 0.26953125,
+            "D": 0.000518798828125
+        }
+    },
+    {
+        "id": 1621,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.0947265625,
+            "B": 0.002227783203125,
+            "C": 0.90234375,
+            "D": 0.001739501953125
+        }
+    },
+    {
+        "id": 1864,
+        "predicted_diagnosis": "D",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 5.078315734863281e-05,
+            "B": 0.00079345703125,
+            "C": 0.3203125,
+            "D": 0.6796875
+        }
+    },
+    {
+        "id": 3603,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 2.2649765014648438e-06,
+            "B": 1.0132789611816406e-05,
+            "C": 1.7583370208740234e-06,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 2891,
+        "predicted_diagnosis": "B",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.2255859375,
+            "B": 0.4765625,
+            "C": 0.00872802734375,
+            "D": 0.2890625
+        }
+    },
+    {
+        "id": 1663,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 6.48200511932373e-07,
+            "B": 1.0,
+            "C": 1.3709068298339844e-06,
+            "D": 0.00012302398681640625
+        }
+    },
+    {
+        "id": 3116,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 2.2649765014648438e-06,
+            "B": 1.0,
+            "C": 0.00070953369140625,
+            "D": 0.00020313262939453125
+        }
+    },
+    {
+        "id": 2737,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 5.893525667488575e-10,
+            "C": 4.602043190971017e-10,
+            "D": 2.1736923372372985e-10
+        }
+    },
+    {
+        "id": 1424,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 1.3709068298339844e-06,
+            "B": 1.0,
+            "C": 1.2993812561035156e-05,
+            "D": 3.9301812648773193e-07
+        }
+    },
+    {
+        "id": 2102,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 1.955777406692505e-08,
+            "B": 1.0,
+            "C": 5.029141902923584e-07,
+            "D": 2.905726432800293e-06
+        }
+    },
+    {
+        "id": 1553,
+        "predicted_diagnosis": "A",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.9921875,
+            "B": 0.008544921875,
+            "C": 0.00054931640625,
+            "D": 0.0002593994140625
+        }
+    },
+    {
+        "id": 1676,
+        "predicted_diagnosis": "B",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.6689300537109375e-05,
+            "B": 1.0,
+            "C": 0.0001583099365234375,
+            "D": 0.00020313262939453125
+        }
+    },
+    {
+        "id": 1625,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 0.000553131103515625,
+            "C": 0.000911712646484375,
+            "D": 1.2993812561035156e-05
+        }
+    },
+    {
+        "id": 1792,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 8.754432201385498e-08,
+            "B": 4.1443854570388794e-08,
+            "C": 2.514570951461792e-08,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 1962,
+        "predicted_diagnosis": "D",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.0140380859375,
+            "B": 0.0014801025390625,
+            "C": 0.00244140625,
+            "D": 0.98046875
+        }
+    },
+    {
+        "id": 3423,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 1.4435499906539917e-07,
+            "B": 1.0,
+            "C": 6.845220923423767e-08,
+            "D": 6.48200511932373e-07
+        }
+    },
+    {
+        "id": 3159,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.0024566650390625,
+            "B": 0.004058837890625,
+            "C": 0.9921875,
+            "D": 9.5367431640625e-05
+        }
+    },
+    {
+        "id": 1893,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 9.632110595703125e-05,
+            "B": 1.0,
+            "C": 3.528594970703125e-05,
+            "D": 0.0001583099365234375
+        }
+    },
+    {
+        "id": 2518,
+        "predicted_diagnosis": "A",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.6171875,
+            "B": 0.0186767578125,
+            "C": 0.1376953125,
+            "D": 0.2265625
+        }
+    },
+    {
+        "id": 3058,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 2.753734588623047e-05,
+            "B": 4.798173904418945e-06,
+            "C": 1.6689300537109375e-05,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 3289,
+        "predicted_diagnosis": "A",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.5625,
+            "B": 0.4375,
+            "C": 6.914138793945312e-05,
+            "D": 0.002288818359375
+        }
+    },
+    {
+        "id": 128,
+        "predicted_diagnosis": "B",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 8.270144462585449e-07,
+            "B": 0.99609375,
+            "C": 0.004058837890625,
+            "D": 9.584426879882812e-05
+        }
+    },
+    {
+        "id": 1278,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 1.0,
+            "B": 0.00116729736328125,
+            "C": 4.5299530029296875e-05,
+            "D": 3.725290298461914e-06
+        }
+    },
+    {
+        "id": 810,
+        "predicted_diagnosis": "D",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.000911712646484375,
+            "B": 0.000335693359375,
+            "C": 2.1457672119140625e-05,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 372,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 0.01031494140625,
+            "B": 0.92578125,
+            "C": 0.059326171875,
+            "D": 0.0029449462890625
+        }
+    },
+    {
+        "id": 69,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 2.753734588623047e-05,
+            "B": 3.725290298461914e-06,
+            "C": 6.48200511932373e-07,
+            "D": 1.0
+        }
+    },
+    {
+        "id": 3210,
+        "predicted_diagnosis": "A",
+        "ground_truth": "A",
+        "probabilities": {
+            "A": 0.9375,
+            "B": 0.0029754638671875,
+            "C": 0.059814453125,
+            "D": 2.014636993408203e-05
+        }
+    },
+    {
+        "id": 2199,
+        "predicted_diagnosis": "C",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 3.528594970703125e-05,
+            "B": 1.0132789611816406e-05,
+            "C": 1.0,
+            "D": 4.1443854570388794e-08
+        }
+    },
+    {
+        "id": 3997,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 4.798173904418945e-06,
+            "B": 1.0,
+            "C": 0.000335693359375,
+            "D": 6.48200511932373e-07
+        }
+    },
+    {
+        "id": 3899,
+        "predicted_diagnosis": "B",
+        "ground_truth": "B",
+        "probabilities": {
+            "A": 5.817413330078125e-05,
+            "B": 1.0,
+            "C": 2.2649765014648438e-06,
+            "D": 2.384185791015625e-07
+        }
+    },
+    {
+        "id": 1768,
+        "predicted_diagnosis": "A",
+        "ground_truth": "C",
+        "probabilities": {
+            "A": 0.9140625,
+            "B": 0.0029144287109375,
+            "C": 0.045654296875,
+            "D": 0.035400390625
+        }
+    },
+    {
+        "id": 1715,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 4.738569259643555e-06,
+            "B": 4.991888999938965e-07,
+            "C": 0.006683349609375,
+            "D": 0.9921875
+        }
+    },
+    {
+        "id": 3489,
+        "predicted_diagnosis": "D",
+        "ground_truth": "D",
+        "probabilities": {
+            "A": 0.003143310546875,
+            "B": 0.006683349609375,
+            "C": 0.000331878662109375,
+            "D": 0.98828125
+        }
+    }
+]
