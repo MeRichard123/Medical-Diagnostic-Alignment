@@ -10,8 +10,6 @@ from .BaseRewardModel import (
 from pathlib import Path
 from datasets import Dataset
 from trl import RewardConfig
-from .custom_fns import logtanh
-
 
 DEFAULT_MODEL_ID = "Qwen/Qwen2.5-7B-Instruct"
 DEFAULT_DATASET =  Path(__file__).parent.parent / 'intermediate' / 'preference_data_normalized.csv'
@@ -76,7 +74,7 @@ class PreferenceRewardModel(BaseRewardModel):
 
         return loss, r_chosen, r_rejected
 
-class LogTanhPreferenceRewardModel(PreferenceRewardModel):
+class SoftMaxPreferenceRewardModel(PreferenceRewardModel):
     def forward(
         self,
         chosen_ids: torch.Tensor,
@@ -87,8 +85,8 @@ class LogTanhPreferenceRewardModel(PreferenceRewardModel):
         r_chosen = self.get_reward(chosen_ids, chosen_mask)
         r_rejected = self.get_reward(rejected_ids, rejected_mask)
 
-        # Bradley-Terry loss on transformed rewards
-        loss = -F.logsigmoid(F.tanh(r_chosen) - F.tanh(r_rejected)).mean()
+        # Bradley-Terry loss on transformed rewards 
+        loss = -F.log_softmax(torch.stack([r_chosen, r_rejected]), dim=0)[0].mean()
 
         return loss, r_chosen, r_rejected
 
@@ -99,7 +97,7 @@ def train_preference_rm_trl(
     num_train_epochs: int = 3,
     per_device_train_batch_size: int = 8,
     use_wandb: bool = True,
-    wandb_run_name: str = 'reward-model-bt-tanh',
+    wandb_run_name: str = 'reward-model-bt-softmax',
 ):
     """Train PreferenceRewardModel using TRL's RewardTrainer with your custom Bradley-Terry loss.
 
@@ -112,7 +110,7 @@ def train_preference_rm_trl(
     if dataset_path is None:
         dataset_path = base_path / 'intermediate' / 'preference_data_normalized.csv'
     if output_dir is None:
-        output_dir = str(base_path / 'RLFF' / 'Reward_Models' / 'reward_model_manualBT')
+        output_dir = str(base_path / 'RLFF' / 'Reward_Models' / 'reward_model_softamax')
 
     tokenizer = AutoTokenizer.from_pretrained(model_id, use_fast=True)
     if tokenizer.pad_token is None:
@@ -161,7 +159,7 @@ def train_preference_rm_trl(
 
     # Initialize your custom preference reward model
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    preference_model = LogTanhPreferenceRewardModel(model_id=model_id).to(device)
+    preference_model = SoftMaxPreferenceRewardModel(model_id=model_id).to(device)
     
     # Wrap it with the adapter (for TRL compatibility)
     adapter_model = PreferenceRewardModelTRLAdapter(preference_model)
@@ -225,8 +223,8 @@ def train_preference_rm_trl(
 
 if __name__ == "__main__":
     train_preference_rm_trl(
-        output_dir=str(Path(__file__).parent.parent / 'RLFF' / 'Reward_Models' / 'reward_model_BT_minustanh'),
-        wandb_run_name='reward-model-bt-minustanh',
+        output_dir=str(Path(__file__).parent.parent / 'RLFF' / 'Reward_Models' / 'reward_model_BT_softmax'),
+        wandb_run_name='reward-model-bt-softmax',
         )
 
 

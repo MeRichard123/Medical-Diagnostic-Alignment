@@ -1,5 +1,6 @@
 __pycache__
 .venv
+.vscode/
 checkpoints
 data/images
 finetuning/tuned/
@@ -18,3 +19,5 @@ reinforcement-learning/grpo_results
 reinforcement-learning/grpo_results_VL_reasoned
 reinforcement-learning/intermediate/preference_data.csv
 reinforcement-learning/intermediate/preference_data_normalized.csv
+reinforcement-learning/intermediate/*
+.env

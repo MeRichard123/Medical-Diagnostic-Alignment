@@ -45,11 +45,16 @@ finetuned_generation = [
     "qwen2.5-7b-medical-finetuned"
 ]
 
+# TODO: Add RL models once results are available
 reinforcement_learning_models = [
     "Qwen2.5-7B-Instruct-RLVR_aligned",
     "Qwen3-VL-8B-Instruct-RLVR_aligned",
     "Qwen2.5-7B-Instruct-RLAIF_aligned",
-    "Qwen2.5-7B-Instruct-RLAIF_tanh-tanh_aligned"
+    "Qwen2.5-7B-Instruct-RLAIF_tanh-tanh_aligned",
+    "Qwen2.5-7B-Instruct-RLAIF_pref3_aligned",
+    "Qwen2.5-7B-Instruct-RLAIF_custom_GRPO_aligned",
+    "Qwen2.5-7B-Instruct-RLAIF_FrugalGRPO_noscore_aligned",
+    "Qwen2.5-7B-Instruct-RLAIF_FrugalGRPO_aligned"
 ]
 
 

@@ -11,6 +11,7 @@ from transformers import (
     AutoTokenizer,
     BitsAndBytesConfig,
 )
+
 from trl import GRPOConfig, GRPOTrainer
 try:
     import wandb
@@ -33,7 +34,7 @@ quantization_config = BitsAndBytesConfig(
 
 SFT_POLICY_PATH = BASE_PATH / "finetuning" / "tuned" / f"{MODEL}-gen-lora"
 BASE_MODEL_ID = MODEL_ID
-REWARD_MODEL_PATH = BASE_PATH / "reinforcement-learning" / "RLFF" / "Reward_Models" / "reward_model_manualBT"
+REWARD_MODEL_PATH = BASE_PATH / "reinforcement-learning" / "intermediate" / "reward_model_4o-Preferences"
 
 os.environ.setdefault("CUDA_LAUNCH_BLOCKING", "1")
 os.environ.setdefault("TOKENIZERS_PARALLELISM", "true")
@@ -41,15 +42,15 @@ os.environ.setdefault("TOKENIZERS_PARALLELISM", "true")
 
 def build_rl_prompt(findings: str) -> str:
     return (
-        "Based ONLY on the following clinical findings, reason through the diagnosis step by step.\n\n"
-        "Instructions:\n"
-        "1. First, use <think> tags to reason through the findings and consider possible diagnoses\n"
-        "2. After reasoning, provide ONLY the diagnosis label (1-4 words), respond with 'normal' if there is no diagnosis\n"
-        "3. Do not add explanation, markdown, lists, or extra text after the diagnosis\n\n"
-        f"Findings:\n{findings}\n\n"
-        "<think>\n"
-        "(reason through the findings here)\n"
-        "</think>\n\n"
+        "Task: From findings, output ONLY one diagnosis label (1-4 words).\n"
+        "If no active pathology, output: normal.\n"
+        "No explanations, no lists, no extra text.\n\n"
+        "Examples:\n"
+        "Findings: No focal consolidation, pleural effusion, or pneumothorax. Heart size normal.\n"
+        "Diagnosis: normal\n\n"
+        "Findings: Bilateral interstitial opacities with small pleural effusions.\n"
+        "Diagnosis: pulmonary edema\n\n"
+        f"Findings: {findings}\n"
         "Diagnosis:"
     )
 
@@ -125,19 +126,18 @@ def main() -> None:
         pass
 
     grpo_config = GRPOConfig(
-        output_dir=str(BASE_PATH / "reinforcement-learning" / "intermediate" / "grpo_model_manualBT"),
-        learning_rate=1.4e-5,
+        output_dir=str(BASE_PATH / "reinforcement-learning" / "intermediate" / "grpo_model_4o-Preferences-3"),
+        learning_rate=5e-8, 
         per_device_train_batch_size=4,
-        per_device_eval_batch_size=4,
-        gradient_accumulation_steps=2,  
-        num_train_epochs=3,
+        gradient_accumulation_steps=4,
+        beta=0.2,
+        max_completion_length=64,
+        num_generations=8,
+        temperature=0.5,
+        num_train_epochs=4,
         logging_strategy="steps",
         save_strategy="epoch",
         eval_strategy="no",
-        beta=0.0,
-        max_completion_length=16,
-        num_generations=4,
-        temperature=0.7,
         report_to="wandb" if _WANDB_AVAILABLE else "none",
     )
 
@@ -145,16 +145,16 @@ def main() -> None:
         try:
             wandb.init(
                 project="rl-grpo",
-                name="grpo-run-manualBT",
+                name="grpo-run-4o-Preferences-3",
                 config={
                     "model_id": MODEL_ID,
-                    "learning_rate": 1.4e-5,
+                    "learning_rate": 5e-8,
                     "per_device_train_batch_size": 4,
-                    "gradient_accumulation_steps": 2,
-                    "num_train_epochs": 3,
-                    "max_completion_length": 16,
-                    "num_generations": 4,
-                    "temperature": 0.7,
+                    "gradient_accumulation_steps": 4,
+                    "num_train_epochs": 4,
+                    "max_completion_length": 64,
+                    "num_generations": 8,
+                    "temperature": 0.5,
                 },
                 reinit=True,
             )
@@ -171,9 +171,9 @@ def main() -> None:
         processing_class=policy_tokenizer,
         args=grpo_config,
     )
-
+    # TODO: need some code to check if a checkpoint exists and pass resume_from_checkpoint accordingly
     grpo_trainer.train(resume_from_checkpoint=True)
-    grpo_trainer.save_model(str(BASE_PATH / "reinforcement-learning" / "intermediate" / "grpo_model_manualBT"))
+    grpo_trainer.save_model(str(BASE_PATH / "reinforcement-learning" / "intermediate" / "grpo_model_4o-Preferences-3"))
 
 
 if __name__ == "__main__":

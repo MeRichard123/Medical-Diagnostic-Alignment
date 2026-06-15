@@ -1,4 +1,4 @@
-from transformers import AutoModelForSequenceClassification, BitsAndBytesConfig
+from transformers import AutoModelForSequenceClassification, BitsAndBytesConfig, PretrainedConfig
 import torch.nn as nn
 import wandb, os, torch
 from trl import RewardTrainer
@@ -158,7 +158,11 @@ class PreferenceRewardModelTRLAdapter(torch.nn.Module):
         super().__init__()
         self.preference_model = preference_model
         # Expose config for TRL compatibility
-        self.config = preference_model.model.config if hasattr(preference_model, 'model') else None
+        if hasattr(preference_model, 'model') and getattr(preference_model.model, 'config', None) is not None:
+            self.config = preference_model.model.config
+        else:
+            # TRL RewardTrainer expects model.config.num_labels == 1.
+            self.config = PretrainedConfig(num_labels=1)
         self.num_labels = 1
         self.device = preference_model.device
 
@@ -188,6 +192,24 @@ class PreferenceRewardModelTRLAdapter(torch.nn.Module):
         if base_model is not None and hasattr(base_model, 'add_model_tags'):
             base_model.add_model_tags(tags)
 
+    def gradient_checkpointing_enable(self, gradient_checkpointing_kwargs=None):
+        """Enable gradient checkpointing when supported by the wrapped backend model."""
+        base_model = getattr(self.preference_model, 'model', None)
+        if base_model is not None and hasattr(base_model, 'gradient_checkpointing_enable'):
+            if gradient_checkpointing_kwargs is not None:
+                return base_model.gradient_checkpointing_enable(
+                    gradient_checkpointing_kwargs=gradient_checkpointing_kwargs
+                )
+            return base_model.gradient_checkpointing_enable()
+        return None
+
+    def gradient_checkpointing_disable(self):
+        """Disable gradient checkpointing when supported by the wrapped backend model."""
+        base_model = getattr(self.preference_model, 'model', None)
+        if base_model is not None and hasattr(base_model, 'gradient_checkpointing_disable'):
+            return base_model.gradient_checkpointing_disable()
+        return None
+
     def forward(
         self,
         input_ids: torch.Tensor,
@@ -199,7 +221,18 @@ class PreferenceRewardModelTRLAdapter(torch.nn.Module):
         This is called by RewardTrainer during inference.
         We extract the last token's hidden state and pass through the reward head.
         """
-        reward = self.preference_model.get_reward(input_ids, attention_mask)
+        # Try to extract optional prompt/answer/ground truth from kwargs and pass them
+        prompt = kwargs.get('prompt') or kwargs.get('instruction') or kwargs.get('question')
+        answer = kwargs.get('answer') or kwargs.get('text') or kwargs.get('chosen_text')
+        doctor_gt = kwargs.get('doctor_gt') or kwargs.get('ground_truth')
+
+        reward = self.preference_model.get_reward(
+            input_ids,
+            attention_mask,
+            ground_truth=doctor_gt,
+            text=answer,
+            prompt=prompt,
+        )
         return reward.unsqueeze(-1)  # TRL expects (batch_size, 1)
 
     def forward_with_pairs(
@@ -252,13 +285,35 @@ class CustomBTRewardTrainer(RewardTrainer):
         else:
             raise KeyError(f"Preference trainer expected 'chosen_input_ids'/'rejected_input_ids', 'chosen_ids'/'rejected_ids', or flat 'input_ids'/'attention_mask' in inputs; got keys: {list(inputs.keys())}")
 
+        # Extract optional ground truth and text fields for frugal reward metrics
+        # Support both 'ground_truth' and 'doctor_gt' dataset keys
+        ground_truth = inputs.get('ground_truth', None) or inputs.get('doctor_gt', None)
+        prompt = inputs.get('prompt', None) or inputs.get('instruction', None)
+        chosen_text = inputs.get('chosen_text', None) or inputs.get('chosen_texts', None) or inputs.get('chosen', None)
+        rejected_text = inputs.get('rejected_text', None) or inputs.get('rejected_texts', None) or inputs.get('rejected', None)
+
         # Call the custom forward which returns (loss, r_chosen, r_rejected)
-        loss, r_chosen, r_rejected = pref_model.forward(
-            chosen_ids,
-            chosen_mask,
-            rejected_ids,
-            rejected_mask,
-        )
+        # Try to pass all parameters; if the model doesn't accept them, fall back
+        try:
+            loss, r_chosen, r_rejected = pref_model.forward(
+                chosen_ids,
+                chosen_mask,
+                rejected_ids,
+                rejected_mask,
+                ground_truth_chosen=ground_truth,
+                ground_truth_rejected=ground_truth,
+                chosen_text=chosen_text,
+                rejected_text=rejected_text,
+                prompt=prompt,
+            )
+        except TypeError:
+            # Fallback for models that don't accept these parameters
+            loss, r_chosen, r_rejected = pref_model.forward(
+                chosen_ids,
+                chosen_mask,
+                rejected_ids,
+                rejected_mask,
+            )
         
         outputs = {
             'loss': loss,

@@ -26,6 +26,8 @@ tokenizer = AutoTokenizer.from_pretrained(MODEL_ID, use_fast=True)
 
 from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training, TaskType
 
+RUN_NAME = "reward-model-4o-Preferences"
+
 # after loading quantization_config and model:
 reward_model = AutoModelForSequenceClassification.from_pretrained(
     MODEL_ID,
@@ -88,14 +90,14 @@ training_args = RewardConfig(
     metric_for_best_model="eval_loss",
     greater_is_better=False,
     report_to="wandb" if _WANDB_AVAILABLE else "none",
-    run_name="reward-model-run",
+    run_name=RUN_NAME,
 )
 
 if _WANDB_AVAILABLE:
     # initialize a W&B run (harmless if already initialized)
     try:
         if wandb.run is None:
-            wandb.init(project="rl-reward", name="reward-model-run", config={"model_id": MODEL_ID})
+            wandb.init(project="rl-reward", name=RUN_NAME, config={"model_id": MODEL_ID})
     except Exception:
         pass
 
@@ -108,4 +110,4 @@ reward_trainer = RewardTrainer(
 )
 
 reward_trainer.train()
-reward_trainer.save_model(str(BASE_PATH / "reinforcement-learning" / "intermediate" / "reward_model"))
+reward_trainer.save_model(str(BASE_PATH / "reinforcement-learning" / "intermediate" / "reward_model_4o-Preferences"))

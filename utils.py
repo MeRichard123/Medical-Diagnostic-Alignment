@@ -156,3 +156,13 @@ def build_gen_prompt(df_row):
 
     """
     return question, df_row['copt']
+
+
+DEBUG = False
+
+def Debug(fmt, *args):
+    if DEBUG:
+        if args:
+            print('[DEBUG]' + fmt.format(*args))
+        else:
+            print(f"[DEBUG] {fmt}")  

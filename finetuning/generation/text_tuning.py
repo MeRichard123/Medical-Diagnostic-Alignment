@@ -38,7 +38,6 @@ data = pd.read_csv("./data/processed_iuxray_mcqa_dataset.csv")
 
 train_df, test_df = train_test_split(data, test_size=0.2, random_state=42)
 
-
 def build_sft_dataset(dataframe: pd.DataFrame) -> Dataset:
     records = []
     for _, row in dataframe.iterrows():
