@@ -43,6 +43,9 @@ def is_reward_function(func: RewardFunc) -> bool:
 def is_reward_model(func: RewardFunc) -> bool:
     return isinstance(func, PreTrainedModel) or isinstance(func, PeftModel)
 
+
+# Implemetation based on https://github.com/anshulsawant/tinier-ppo-tutorial
+
 class GRPOTrainer:
     def __init__(self, 
                  reward_funcs: RewardFunc | List[RewardFunc], 
