@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 import numpy as np
 from utils import reference_impl
 import pandas as pd
+from typing import Dict, Any
 
 class Evaluator(ABC):
     BASE_DIR = "./"
@@ -48,7 +49,7 @@ class Evaluator(ABC):
 
             return -np.log(q)
         else:
-            gt_logprob = predicted_probs.get('ground_truth_logprob')
+            gt_logprob = predicted_probs.get('ground_truth_logprob') or 0.0
             return -gt_logprob
     
     def multiclass_brier_score(self, prob_dict, actual_class):
@@ -64,8 +65,5 @@ class Evaluator(ABC):
             return None # no Brier for Open Ended Tasks
         
     @abstractmethod
-    def evaluate(self, ground_truth, predictions):
-        return
-
-    
-
+    def evaluate(self, ground_truth, predictions, probs) -> Dict[Any, Any]:
+        return {}

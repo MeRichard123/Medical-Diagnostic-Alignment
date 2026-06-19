@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from typing import Optional
+from pathlib import Path
 
 @dataclass
 class QuantizationConfig:
@@ -14,7 +15,7 @@ class ModelConfigSection:
     model_name: str = "Qwen/Qwen2-0.5B"
     ref_model_name: Optional[str] = "Qwen/Qwen2-0.5B"
     tokenizer_name: str = "Qwen/Qwen2-0.5B"
-    peft_adaptor_path: Optional[str] = None
+    peft_adaptor_path: Optional[str|Path] = None
     trust_remote_code: bool = True
     dtype: str = "bfloat16"
     attn_implementation: str = "sdpa"
@@ -43,8 +44,8 @@ class TrainingConfigSection:
     seed: int = 42             
     log_interval: int = 1      
     save_interval: int = 10    
-    output_dir: str = "outputs/ppo_gsm8k_model" 
-    output_dir_grpo: str = "outputs/grpo_gsm8k_model"
+    output_dir: str|Path = "outputs/ppo_gsm8k_model" 
+    output_dir_grpo: str|Path = "outputs/grpo_gsm8k_model"
     device: str = "cuda"     
     gradient_checkpointing: bool = True 
 

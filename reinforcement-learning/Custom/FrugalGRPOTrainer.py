@@ -1,4 +1,4 @@
-# Implemetation modified and customised frmo https://github.com/anshulsawant/tinier-ppo-tutorial
+# Implementation modified and customised from https://github.com/anshulsawant/tinier-ppo-tutorial
 
 
 from sentence_transformers import SentenceTransformer
@@ -6,7 +6,7 @@ from .rlUtils import masked_mean, pad_and_collate_tensors, Debug
 from .data_utils import load_and_process_dataset, save_model, create_generation_config
 from .Config import GRPOConfig
 import wandb
-import torch
+import torch 
 import torch.nn.functional as F
 from torch.optim import AdamW
 from torch.utils.data import DataLoader
@@ -33,25 +33,28 @@ import random
 import math
 from tqdm.auto import tqdm
 import os
-from typing import Dict, Any, Tuple, List, Callable, TypeAlias
+from typing import Dict, Any, Tuple, List, Callable, TypeAlias, Optional, TypeGuard
 import time # For timing
+from pathlib import Path
 
 RewardFunction: TypeAlias = Callable[[str, str], float] 
 RewardModel: TypeAlias = PreTrainedModel | PeftModel
 RewardFunc: TypeAlias = RewardFunction | RewardModel
+Number: TypeAlias = int | float
 
-def is_reward_function(func: RewardFunc) -> bool:
+
+def is_reward_function(func: RewardFunc) -> TypeGuard[RewardFunction]:
     return callable(func) and not isinstance(func, PreTrainedModel) and not isinstance(func, PeftModel)
 
-def is_reward_model(func: RewardFunc) -> bool:
+def is_reward_model(func: RewardFunc) -> TypeGuard[RewardModel]:
     return isinstance(func, PreTrainedModel) or isinstance(func, PeftModel)
 
 
 class FrugalGRPOTrainer:
-    def __init__(self, args: GRPOConfig, reward_funcs: List[RewardFunc] = [], reward_processors: List[PreTrainedTokenizerBase] = []):
+    def __init__(self, args: GRPOConfig, reward_funcs: List[RewardFunc] = [], reward_processors: List[Optional[PreTrainedTokenizerBase]] = [], experimental: bool = False):
         self.args = args
         self.reward_funcs: List[RewardFunc] = reward_funcs
-        self.reward_processors: List[PreTrainedTokenizerBase] = reward_processors
+        self.reward_processors: List[Optional[PreTrainedTokenizerBase]] = reward_processors
 
         self.t_acc = torch.nn.Parameter(torch.tensor(1.0, dtype=torch.float32))
         self.t_score = torch.nn.Parameter(torch.tensor(1.0, dtype=torch.float32))
@@ -61,6 +64,7 @@ class FrugalGRPOTrainer:
         # temp alloc for num_consistency_samples
         num_consistency_samples = 4
         self.num_consistency_samples = num_consistency_samples
+        self.experimental = experimental
 
         # 1. Initial Setup: Device, Output Directory, Config Saving
         self.device, self.output_dir = self.__training_setup()
@@ -79,7 +83,7 @@ class FrugalGRPOTrainer:
             raise ValueError("Length of reward_processors must match length of reward_funcs")
             
         for i, (reward_processing_class, reward_func) in enumerate(zip(self.reward_processors, self.reward_funcs, strict=True)):
-            if is_reward_model(reward_func):
+            if is_reward_model(reward_func) and (not reward_processing_class is None):
                 if reward_processing_class.pad_token_id is None:
                     reward_processing_class.pad_token = reward_processing_class.eos_token
                     reward_func.config.pad_token_id = reward_processing_class.pad_token_id
@@ -94,7 +98,9 @@ class FrugalGRPOTrainer:
             self.args.training.total_ppo_steps = self.args.grad_accum_steps
 
 
-    def _placeholder_metric(self, input_ids: torch.Tensor) -> torch.Tensor:
+    def _placeholder_metric(self, input_ids: torch.Tensor | None) -> torch.Tensor:
+        if input_ids is None:
+            raise ValueError("Placeholder invalid")
         batch_size = input_ids.shape[0] if input_ids.ndim > 1 else 1
         return torch.zeros(batch_size, device=input_ids.device, dtype=torch.float32)
 
@@ -129,7 +135,7 @@ class FrugalGRPOTrainer:
         
         return torch.tensor(accs, device=input_ids.device, dtype=torch.float32)
     
-    def score(self, text, ground_truth, input_ids=None):
+    def score(self, text, ground_truth, input_ids=None) -> torch.Tensor | None:
         if len(self.reward_funcs) == 0:
             print("Warning: No reward functions provided, returning 0 score.")
             return self._placeholder_metric(input_ids)
@@ -151,7 +157,7 @@ class FrugalGRPOTrainer:
                     )
                 else:
                     inputs = None
-
+                
                 reward_func = reward_func.to(input_ids.device) if input_ids is not None else reward_func
                 inputs = { k: v.to(input_ids.device) for k, v in inputs.items() }
                 with torch.no_grad():
@@ -236,6 +242,9 @@ class FrugalGRPOTrainer:
         if ground_truth is None or text is None:
             return self._placeholder_metric(input_ids)
 
+        if logprobs is None:
+            raise ValueError("Cannot compute confiedence with no probabilities")
+
         cos = torch.nn.CosineSimilarity(dim=0)
         gt_embedding = self.sentence_embedding_model.encode(ground_truth, convert_to_tensor=True)
         pred_embedding = self.sentence_embedding_model.encode(text, convert_to_tensor=True)
@@ -251,22 +260,24 @@ class FrugalGRPOTrainer:
     def _positive_temp(self, temp: torch.Tensor) -> torch.Tensor:
         return F.softplus(temp) + 1e-6
 
-    def U_plus(self, input_ids: torch.Tensor, ground_truth=None, text=None, prompt=None) -> torch.Tensor:
+    def U_plus(self, input_ids: torch.Tensor, ground_truth=None, text=None, prompt=None) -> Number:
         accuracy = self.acc(input_ids, ground_truth=ground_truth, text=text)
         Debug(f"Accuracy: {accuracy.mean().item():.4f}")
         acc_contrib = accuracy / self._positive_temp(self.t_acc)
         Debug(f"Accuracy contrib: {acc_contrib.mean().item():.4f}") 
         reward_model_score = self.score(text, ground_truth, input_ids=input_ids)
-        Debug(f"Reward model score: {reward_model_score.mean().item():.4f}")
-        reward_contrib = reward_model_score / self._positive_temp(self.t_score)
-        delta_plus = (
-            acc_contrib + reward_contrib
-        )
-        Debug(f"Delta plus: {delta_plus.mean().item():.4f}")
-        return delta_plus.mean().item()
+        if not reward_model_score is None and type(reward_model_score) == torch.Tensor:
+            Debug(f"Reward model score: {reward_model_score.mean().item():.4f}")
+            reward_contrib = reward_model_score / self._positive_temp(self.t_score)
+            delta_plus = (
+                acc_contrib + reward_contrib
+            )
+            Debug(f"Delta plus: {delta_plus.mean().item():.4f}")
+            return delta_plus.mean().item()
+        return 0.0
     
 
-    def U_minus(self, input_ids: torch.Tensor, mask: torch.Tensor, ground_truth=None, text=None, prompt=None, logprobs=None) -> torch.Tensor:
+    def U_minus(self, input_ids: torch.Tensor, mask: torch.Tensor, ground_truth=None, text=None, prompt=None, logprobs=None) -> Number:
         reliability_score = self.reliab(input_ids, prompt=prompt) 
         miscalib_score = self.miscalib(input_ids, mask=mask, ground_truth=ground_truth, text=text, logprobs=logprobs)
         Debug(f"Reliability score: {reliability_score.mean().item():.4f}, Miscalibration score: {miscalib_score.mean().item():.4f}")
@@ -282,6 +293,79 @@ class FrugalGRPOTrainer:
 
 
     def __compute_grpo_advantages(
+            self,
+            utilities: torch.Tensor,
+            kl_penalties: torch.Tensor,
+            response_mask: torch.Tensor,
+            group_size: int,
+    ) -> torch.Tensor:
+        """
+        Compute GRPO advantages by combining rewards and KL penalties, then applying GAE.
+
+        Args:
+            rewards: Tensor of shape (batch_size, seq_len) containing token-level rewards.
+            kl_penalties: Tensor of shape (batch_size, seq_len) containing token-level KL penalties.
+            response_mask: Tensor of shape (batch_size, seq_len) indicating valid response tokens.
+            group_size: Number of samples in each group for GRPO.
+        Returns:
+            advantages: Tensor of shape (batch_size, seq_len) containing the computed advantages.
+        """
+        with torch.no_grad():
+            num_samples = utilities.shape[0]
+            num_prompts = num_samples // group_size
+            if num_samples % group_size != 0:
+                print(f"Warning: Number of samples ({num_samples}) must be divisible by group_size ({group_size}).")
+                num_prompts = num_samples // group_size 
+
+            # reshape to (num_prompts, group_size)
+            if utilities.dim() == 1:
+                utilities = utilities.view(num_prompts, group_size)
+        
+            # compute KL 
+            mean_kl_per_seq = masked_mean(kl_penalties, response_mask, dim=1)  # (num_samples,)
+            mean_kl_per_seq = mean_kl_per_seq.view(num_prompts, group_size)  # (num_prompts, group_size)
+            adjusted_utilities = utilities - self.args.kl_coeff * mean_kl_per_seq  # (num_prompts, group_size)
+
+            pos_mask = adjusted_utilities > 0
+            neg_mask = ~pos_mask
+            advantages = torch.zeros_like(adjusted_utilities)
+
+            pos_count = pos_mask.sum(dim=1).clamp(min=1)
+            neg_count = neg_mask.sum(dim=1).clamp(min=1)
+
+            mu_p = (adjusted_utilities * pos_mask).sum(dim=1) / pos_count
+            mu_n = (adjusted_utilities * neg_mask).sum(dim=1) / neg_count
+
+            advantages[pos_mask] = (
+                adjusted_utilities[pos_mask] 
+                - mu_n[:, None].expand_as(adjusted_utilities)[pos_mask]
+            )
+
+            advantages[neg_mask] = (
+                adjusted_utilities[neg_mask]
+                - mu_p[:, None].expand_as(adjusted_utilities)[neg_mask]
+            )
+
+            # reshape back to (num_prompts * group_size, 1)
+            advantages = advantages.view(num_prompts * group_size, 1)  # (num_samples, 1)
+            response_len = response_mask.shape[1]
+            advantages = advantages.expand(-1, response_len)  # (num_samples, seq_len)
+
+            Debug("reward mean", utilities.mean())
+            Debug("reward std", utilities.std())
+
+            Debug("adv mean", advantages.mean())
+            Debug("adv std", advantages.std())
+
+            Debug("adv min", advantages.min())
+            Debug("adv max", advantages.max())
+
+            # Mask out non-response tokens
+            advantages = advantages * response_mask.float()  # Mask out non-response tokens
+        return advantages
+
+
+    def __compute_grpo_advantages1(
             self,
             utilities: torch.Tensor,
             kl_penalties: torch.Tensor,
@@ -972,7 +1056,7 @@ class FrugalGRPOTrainer:
 
         return all_epoch_metrics
 
-    def __training_setup(self) -> Tuple[torch.device, str]:
+    def __training_setup(self) -> Tuple[torch.device, str|Path]:
         random.seed(self.args.training.seed)
         np.random.seed(self.args.training.seed)
         torch.manual_seed(self.args.training.seed)
@@ -1159,7 +1243,9 @@ class FrugalGRPOTrainer:
         optimizer, lr_scheduler = self.__setup_optimizer_and_scheduler()
 
         # 4. Load and preprocess dataset
-        preprocessed_dataset = load_and_process_dataset(self.args, self.tokenizer)
+        preprocessed_dataset = load_and_process_dataset(
+            self.args, self.tokenizer, self.experimental
+        )
 
         # 5. Load generation config
         generation_config = create_generation_config(self.args, self.tokenizer)

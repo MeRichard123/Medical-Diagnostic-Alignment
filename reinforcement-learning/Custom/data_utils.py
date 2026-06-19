@@ -10,7 +10,7 @@ accelerator = accelerate.Accelerator()
 
 
 def load_and_process_dataset(
-        cfg: PPOConfig, tokenizer: PreTrainedTokenizerBase
+    cfg: PPOConfig, tokenizer: PreTrainedTokenizerBase, experimental: bool = False
 ) -> Dataset:
     print(f"Loading dataset: {cfg.dataset.dataset_path}")
     data = pd.read_csv(cfg.dataset.dataset_path)
@@ -70,7 +70,15 @@ def load_and_process_dataset(
 
     num_samples = cfg.dataset.num_samples
     if num_samples is not None and num_samples < len(raw_dataset):
-        raw_dataset = raw_dataset.shuffle(seed=cfg.training.seed).select(range(num_samples))
+        # TODO: put this back to using num samples once experimentas are done 
+        if experimental:
+            normal_curr = raw_dataset.filter(lambda ex: ex['copt'] == 'Normal') 
+            raw_dataset = normal_curr.shuffle(seed=cfg.training.seed)\
+                .select(range(min(50, len(normal_curr))))
+        else: 
+            raw_dataset = raw_dataset.shuffle(seed=cfg.training.seed)\
+                .select(range(num_samples))
+        
         print(f"Dataset shuffled and truncated to {num_samples} samples.")
 
     print(f"Final dataset size: {len(raw_dataset)}")

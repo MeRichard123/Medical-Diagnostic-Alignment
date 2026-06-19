@@ -54,7 +54,8 @@ reinforcement_learning_models = [
     "Qwen2.5-7B-Instruct-RLAIF_pref3_aligned",
     "Qwen2.5-7B-Instruct-RLAIF_custom_GRPO_aligned",
     "Qwen2.5-7B-Instruct-RLAIF_FrugalGRPO_noscore_aligned",
-    "Qwen2.5-7B-Instruct-RLAIF_FrugalGRPO_aligned"
+    "Qwen2.5-7B-Instruct-RLAIF_FrugalGRPO_aligned",
+    "Qwen2.5-7B-Instruct-RLAIF_GroupedGRPO_aligned",
 ]
 
 
@@ -229,26 +230,26 @@ write_metrics_csv(
 )
 write_metrics_csv(
     "evaluation_stats_report.csv",
-    ["model", "EM", "TokP", "TokR", "TokF1", "Contain", "CharSim", "CosSim", "KL", "Perp", "BERTScore_P", "BERTScore_R", "BERTScore_F1"],
+    ["model", "EM", "TokP", "TokR", "TokF1", "Contain", "CharSim", "CosSim", "KL", "Perp", "BERTScore_P", "BERTScore_R", "BERTScore_F1", "Reliability", "Miscalibration"],
     report_stats,
 )
 write_metrics_csv(
     "evaluation_stats_report_vlm.csv",
-    ["model", "EM", "TokP", "TokR", "TokF1", "Contain", "CharSim", "CosSim", "KL", "Perp", "BERTScore_P", "BERTScore_R", "BERTScore_F1"],
+    ["model", "EM", "TokP", "TokR", "TokF1", "Contain", "CharSim", "CosSim", "KL", "Perp", "BERTScore_P", "BERTScore_R", "BERTScore_F1", "Reliability", "Miscalibration"],
     report_vlm_stats,
 )
 write_metrics_csv(
     "evaluation_stats_finetuned_report.csv",
-    ["model", "EM", "TokP", "TokR", "TokF1", "Contain", "CharSim", "CosSim", "KL", "Perp", "BERTScore_P", "BERTScore_R", "BERTScore_F1"],
+    ["model", "EM", "TokP", "TokR", "TokF1", "Contain", "CharSim", "CosSim", "KL", "Perp", "BERTScore_P", "BERTScore_R", "BERTScore_F1", "Reliability", "Miscalibration"],
     finetuned_report_stats,
 )
 write_metrics_csv(
     "evaluation_stats_finetuned_vlm_report.csv",
-    ["model", "EM", "TokP", "TokR", "TokF1", "Contain", "CharSim", "CosSim", "KL", "Perp", "BERTScore_P", "BERTScore_R", "BERTScore_F1"],
+    ["model", "EM", "TokP", "TokR", "TokF1", "Contain", "CharSim", "CosSim", "KL", "Perp", "BERTScore_P", "BERTScore_R", "BERTScore_F1", "Reliability", "Miscalibration"],
     finetuned_vlm_report_stats,
 )
 write_metrics_csv(
     "evaluation_stats_rl_report.csv",
-    ["model", "EM", "TokP", "TokR", "TokF1", "Contain", "CharSim", "CosSim", "KL", "Perp", "BERTScore_P", "BERTScore_R", "BERTScore_F1"],
+    ["model", "EM", "TokP", "TokR", "TokF1", "Contain", "CharSim", "CosSim", "KL", "Perp", "BERTScore_P", "BERTScore_R", "BERTScore_F1", "Reliability", "Miscalibration"],
     rl_report_stats,
 )

@@ -1,19 +1,17 @@
 from .Generic import Evaluator
 import numpy as np
-import torch
+import torch, math
 from difflib import SequenceMatcher
 from sentence_transformers import SentenceTransformer
 from bert_score import score as bert_score
-import torch.nn as nn
-from transformers import DistilBertTokenizer, RobertaTokenizer    
-from sklearn.metrics import roc_auc_score
+from transformers import RobertaTokenizer    
 
 
 class QAEvaluator(Evaluator):
     def __init__(self, model):
         super().__init__(model)
         self.model = model
-
+ 
     def compute_f1_and_balanced_accuracy(self, ground_truth, predictions):
         possible_labels = super().get_possible_labels()
 
@@ -71,7 +69,6 @@ class QAEvaluator(Evaluator):
             return float("nan")
         return float(np.mean(cleaned))
     
-
     def evaluate(self, ground_truth, predictions, probs):
         exact_matches = sum(gt == pred for gt, pred in zip(ground_truth, predictions))
         em = exact_matches / len(ground_truth) if len(ground_truth) > 0 else 0 
@@ -186,14 +183,6 @@ class ReportEvaluator(QAEvaluator):
 
         return precision, recall, f1
 
-    @staticmethod
-    def _extract_sequence_confidence(prob_obj):
-        if isinstance(prob_obj, dict) and prob_obj.get("type") == "token_probs":
-            seq_conf = prob_obj.get("sequence_confidence")
-            if seq_conf is not None:
-                return float(seq_conf)
-        return None
-
     def cosine_similarity(self, gt_text, pred_text):
         cos = torch.nn.CosineSimilarity(dim=0)
         gt_embedding = self.sentence_embedding_model.encode(gt_text, convert_to_tensor=True)
@@ -208,6 +197,21 @@ class ReportEvaluator(QAEvaluator):
         for gt, pred in zip(gt_texts, pred_texts):
             sims.append(self.cosine_similarity(gt, pred))
         return self._safe_mean(sims)
+
+    def miscalibration(self, gt_text: str, pred_text: str, confidence: float) -> float:
+        acc = (self.cosine_similarity(gt_text, pred_text) + 1) / 2
+
+        return abs(confidence - acc)
+
+    def reliability(self):
+        pass
+
+    def batch_miscalibration(self, gt_texts, pred_texts, confidences):
+        vals = []
+        for gt, pred, conf in zip(gt_texts, pred_texts, confidences):
+            ECE = self.miscalibration(gt, pred, conf)
+            vals.append(ECE)
+        return self._safe_mean(vals)
 
     def evaluate(self, ground_truth, predictions, probs, raw):
         exact_matches = sum(gt == pred for gt, pred in zip(ground_truth, predictions))
@@ -263,6 +267,9 @@ class ReportEvaluator(QAEvaluator):
         ]
         kl_avg = self._safe_mean(kl_scores)
         perplexity = np.exp(kl_avg) if np.isfinite(kl_avg) and kl_avg < 700 else float('inf')
+    
+        confidences = [p['sequence_confidence'] for p in probs]
+        miscalib = self.batch_miscalibration(ground_truth, predictions, confidences)
 
         print(f"Evaluation Results for {self.model}:")
         print(f"Exact Match: {em:.4f}")
@@ -294,4 +301,6 @@ class ReportEvaluator(QAEvaluator):
             "BERTScore_P": bert_p,
             "BERTScore_R": bert_r,
             "BERTScore_F1": bert_f1,
+            "Reliability": 0,
+            "Miscalibration": miscalib
         }
