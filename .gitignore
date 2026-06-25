@@ -20,4 +20,5 @@ ReinforcementLearning/grpo_results_VL_reasoned
 ReinforcementLearning/intermediate/preference_data.csv
 ReinforcementLearning/intermediate/preference_data_normalized.csv
 ReinforcementLearning/intermediate/*
+!ReinforcementLearning/intermediate/*.py
 .env
