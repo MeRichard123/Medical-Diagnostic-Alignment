@@ -12,6 +12,7 @@ ReinforcementLearning/grpo_results/
 ReinforcementLearning/rl_results_VL_reasoned/
 wandb/
 ReinforcementLearning/RLFF/Reward_Models/
+ReinforcementLearning/exp/
 ReinforcementLearning/intermediate/grpo_model_BT_tanhminustanh
 ReinforcementLearning/intermediate/grpo_model_manualBT
 ReinforcementLearning/intermediate/reward_model_rewardTrainer
@@ -22,3 +23,4 @@ ReinforcementLearning/intermediate/preference_data_normalized.csv
 ReinforcementLearning/intermediate/*
 !ReinforcementLearning/intermediate/*.py
 .env
+results/runs/
