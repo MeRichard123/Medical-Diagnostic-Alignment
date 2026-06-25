@@ -1,11 +1,11 @@
 from .Generic import Evaluator
 import numpy as np
-import torch, math
 from difflib import SequenceMatcher
 from sentence_transformers import SentenceTransformer
 from bert_score import score as bert_score
 from transformers import RobertaTokenizer    
-
+from ReinforcementLearning.Custom.Config import QuantizationConfig 
+import torch
 
 class QAEvaluator(Evaluator):
     def __init__(self, model):
@@ -163,11 +163,19 @@ def build_inputs_with_special_tokens(self, token_ids_0, token_ids_1=None):
     return [self.cls_token_id] + token_ids_0 + [self.sep_token_id] + token_ids_1 + [self.sep_token_id]
 
 
+quantisation_config = QuantizationConfig(
+    load_in_4bit=True,
+    bnb_4bit_quant_type="nf4",
+    bnb_4bit_compute_dtype="float16",
+    bnb_4bit_use_double_quant=True
+)
+
+
 class ReportEvaluator(QAEvaluator):
     def __init__(self, model):
         super().__init__(model)
-        self.sentence_embedding_model = SentenceTransformer("all-MiniLM-L6-v2") 
-
+        self.sentence_embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
+    
     @staticmethod
     def _token_overlap(gt_text, pred_text):
         gt_tokens = gt_text.split()
@@ -202,9 +210,6 @@ class ReportEvaluator(QAEvaluator):
         acc = (self.cosine_similarity(gt_text, pred_text) + 1) / 2
 
         return abs(confidence - acc)
-
-    def reliability(self):
-        pass
 
     def batch_miscalibration(self, gt_texts, pred_texts, confidences):
         vals = []
@@ -270,7 +275,9 @@ class ReportEvaluator(QAEvaluator):
     
         confidences = [p['sequence_confidence'] for p in probs]
         miscalib = self.batch_miscalibration(ground_truth, predictions, confidences)
+       
 
+        reliab = 0
         print(f"Evaluation Results for {self.model}:")
         print(f"Exact Match: {em:.4f}")
         print(f"Token Precision: {token_precision:.4f}")
@@ -284,6 +291,8 @@ class ReportEvaluator(QAEvaluator):
         print(f"BERTScore P: {bert_p:.4f}")
         print(f"BERTScore R: {bert_r:.4f}")
         print(f"BERTScore F1: {bert_f1:.4f}")
+        print(f"Reliability: {reliab:.4f}")
+        print(f"Miscalibration: {miscalib:.4f}")
 
 
         print("-" * 50)
@@ -301,6 +310,6 @@ class ReportEvaluator(QAEvaluator):
             "BERTScore_P": bert_p,
             "BERTScore_R": bert_r,
             "BERTScore_F1": bert_f1,
-            "Reliability": 0,
+            "Reliability": reliab,
             "Miscalibration": miscalib
         }

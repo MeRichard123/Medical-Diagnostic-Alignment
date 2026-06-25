@@ -27,8 +27,9 @@ MODEL = MODEL_ID.split("/")[-1]
 
 BASE_PATH = Path(__file__).parent.parent.parent
 # MODEL_PATH = BASE_PATH / "finetuning" / "tuned" / f"{MODEL}-gen-lora"
-#MODEL_PATH = BASE_PATH / "reinforcement-learning" / "exp" / f"experiment1"
-MODEL_PATH = BASE_PATH / "reinforcement-learning" / "grpo_results" / "Qwen2.5-7B-Instruct-gen-lora-grpo-frugal-v1/final_model"
+MODEL_PATH = BASE_PATH / "ReinforcementLearning" / "exp" / f"experiment-Grouped" / "final_model"
+
+#MODEL_PATH = BASE_PATH / "ReinforcementLearning" / "grpo_results" / "Qwen2.5-7B-Instruct-gen-lora-grpo-frugal-v1/final_model"
 
 # Kavyaah/medical-coding-llm
 # unsloth/Meta-Llama-3.1-8B-Instruct-bnb-4bit
