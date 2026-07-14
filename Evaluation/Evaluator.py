@@ -206,15 +206,37 @@ class ReportEvaluator(QAEvaluator):
             sims.append(self.cosine_similarity(gt, pred))
         return self._safe_mean(sims)
 
-    def miscalibration(self, gt_text: str, pred_text: str, confidence: float) -> float:
+def batch_with_bins_miscalibration(self, gt_texts, pred_texts, confidences, n_bins=10):
+    """Calculate Expected Calibration Error using bins."""
+    accuracies = []
+    for gt, pred in zip(gt_texts, pred_texts):
+        sim = (self.cosine_similarity(gt, pred) + 1) / 2
+        is_correct = 1 if sim > 0.5 else 0  # or your threshold
+        accuracies.append(is_correct)
+    bins = np.linspace(0, 1, n_bins + 1)
+    bin_indices = np.digitize(confidences, bins, right=False)
+    ece = 0.0
+    for i in range(1, n_bins + 1):
+        mask = bin_indices == i
+        if not np.any(mask):
+            continue
+        
+        avg_conf = np.mean(np.array(confidences)[mask])
+        avg_acc = np.mean(np.array(accuracies)[mask])
+        bin_weight = np.sum(mask) / len(confidences)
+        ece += bin_weight * abs(avg_conf - avg_acc)
+    
+    return ece
+    
+    def per_sample_miscalibration(self, gt_text: str, pred_text: str, confidence: float) -> float:
         acc = (self.cosine_similarity(gt_text, pred_text) + 1) / 2
 
         return abs(confidence - acc)
 
-    def batch_miscalibration(self, gt_texts, pred_texts, confidences):
+    def batch_per_sample_miscalibration(self, gt_texts, pred_texts, confidences):
         vals = []
         for gt, pred, conf in zip(gt_texts, pred_texts, confidences):
-            ECE = self.miscalibration(gt, pred, conf)
+            ECE = self.per_sample_miscalibration(gt, pred, conf)
             vals.append(ECE)
         return self._safe_mean(vals)
 
@@ -274,7 +296,7 @@ class ReportEvaluator(QAEvaluator):
         perplexity = np.exp(kl_avg) if np.isfinite(kl_avg) and kl_avg < 700 else float('inf')
     
         confidences = [p['sequence_confidence'] for p in probs]
-        miscalib = self.batch_miscalibration(ground_truth, predictions, confidences)
+        miscalib = self.batch_per_sample_miscalibration(ground_truth, predictions, confidences)
        
 
         reliab = 0
