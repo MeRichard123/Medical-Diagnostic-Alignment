@@ -1,23 +1,25 @@
 import os
 import shutil
 import gc
-from typing import Tuple, List, Dict, Optional
+from typing import Tuple, Union
 from collections import Counter
 from transformers import (
-    get_scheduler,
     AutoTokenizer,
+    AutoProcessor,
     AutoModelForCausalLM,
-    GenerationConfig,
+    AutoModelForImageTextToText,
+    MllamaForConditionalGeneration,
+    Qwen3VLForConditionalGeneration,
     BitsAndBytesConfig,
     PreTrainedModel,
-    PreTrainedTokenizerBase
+    PreTrainedTokenizerBase,
 )
 from peft import PeftModel
 import torch
-import random
 import pandas as pd
 import numpy as np
-from ReinforcementLearning.Custom.Config import ModelConfigSection, QuantizationConfig
+from utils import resolve_image_path
+from ReinforcementLearning.Custom.Config import ModelConfigSection
 
 # Complete mapping from your model names to Hugging Face IDs
 MODEL_ID_MAPPING = {
@@ -83,9 +85,33 @@ MODEL_ID_MAPPING = {
     "Qwen2.5-7B-Instruct-RLAIF_GroupedGRPO_aligned": "Qwen/Qwen2.5-7B-Instruct",
 }
 
-# Cache for loaded models to avoid reloading
-_LOADED_MODEL_CACHE = {}
-_LOADED_TOKENIZER_CACHE = {}
+_BASE_MODEL_CACHE = {}
+_TOKENIZER_CACHE = {}
+
+def is_vlm_hf_id(model_id: str) -> bool:
+    model_id_lower = model_id.lower()
+    if "qwen" in model_id_lower and "vl" in model_id_lower:
+        return True
+    if "llama" in model_id_lower and "vision" in model_id_lower:
+        return True
+    if "smolvlm" in model_id_lower or ("smol" in model_id_lower and "vlm" in model_id_lower):
+        return True
+    if "blip" in model_id_lower:
+        return True
+    return False
+
+
+def _load_pretrained_model(model_id: str, model_kwargs: dict) -> PreTrainedModel:
+    if "Qwen" in model_id and "VL" in model_id:
+        return Qwen3VLForConditionalGeneration.from_pretrained(model_id, **model_kwargs)
+    if "Llama" in model_id and "Vision" in model_id:
+        return MllamaForConditionalGeneration.from_pretrained(model_id, **model_kwargs)
+    if "smol" in model_id.lower():
+        return AutoModelForImageTextToText.from_pretrained(model_id, **model_kwargs)
+    if "blip" in model_id.lower():
+        return AutoModelForImageTextToText.from_pretrained(model_id, **model_kwargs)
+    return AutoModelForCausalLM.from_pretrained(model_id, **model_kwargs)
+
 
 def get_hf_model_id(model_name):
     """Get Hugging Face model ID for a given model name."""
@@ -130,79 +156,31 @@ def cleanup_model_cache(model_name, cache_dir=None):
         os.makedirs(cache_dir, exist_ok=True)
         print(f"Cleared {cache_dir}")
     
-def cleanup_loaded_models(keep_base_model=False):
-    """
-    Clean up all loaded models and clear cache.
-    
-    Args:
-        keep_base_model: If True, keeps the base model but unloads adaptors
-    """
-    global _LOADED_MODEL_CACHE, _LOADED_TOKENIZER_CACHE
-    
-    for key in list(_LOADED_MODEL_CACHE.keys()):
-        model = _LOADED_MODEL_CACHE[key]
-        if model is not None:
-            try:
-                # If it's a PeftModel, unload the adaptor
-                if isinstance(model, PeftModel):
-                    print(f"Unloading PEFT adaptor for {key}")
-                    # Unload adaptor but keep base model
-                    model.unload_adapter()
-                    # If we want to keep base model, we could do:
-                    # base_model = model.base_model.model
-                    # _LOADED_MODEL_CACHE[key] = base_model
-                # Delete the model
-                del _LOADED_MODEL_CACHE[key]
-            except Exception as e:
-                print(f"Error cleaning up model {key}: {e}")
-                del _LOADED_MODEL_CACHE[key]
-    
-    for key in list(_LOADED_TOKENIZER_CACHE.keys()):
-        if _LOADED_TOKENIZER_CACHE[key] is not None:
-            del _LOADED_TOKENIZER_CACHE[key]
-    
-    _LOADED_MODEL_CACHE.clear()
-    _LOADED_TOKENIZER_CACHE.clear()
-    
+def cleanup_base_model_cache():
+    """Clear cached base models and tokenizers from memory."""
+    global _BASE_MODEL_CACHE, _TOKENIZER_CACHE
+    for model_name in _BASE_MODEL_CACHE.keys():
+        cleanup_model_cache(model_name)
+
+    _BASE_MODEL_CACHE.clear()
+    _TOKENIZER_CACHE.clear()
+
     if torch.cuda.is_available():
         torch.cuda.empty_cache()
         torch.cuda.synchronize()
-    
+
     gc.collect()
-    print("✅ Memory cleaned up")
+    print("Base model cache cleared")
 
-def load_models_and_tokenizer(device: torch.device, config: ModelConfigSection, use_cache=True) -> Tuple[PeftModel, PreTrainedTokenizerBase]:
-    """Load models with caching support."""
-    
-    # Check if we can use cached model
-    cache_key = f"{config.model_name}_{config.peft_adaptor_path}"
-    
-    if use_cache and cache_key in _LOADED_MODEL_CACHE:
-        print(f"Using cached model for {config.model_name}")
-        return _LOADED_MODEL_CACHE[cache_key], _LOADED_TOKENIZER_CACHE.get(cache_key)
-    
-    print(f"Loading tokenizer: {config.tokenizer_name}")
 
+def _build_model_kwargs(config: ModelConfigSection, device: torch.device) -> dict:
     trust_remote_code = config.trust_remote_code
-    tokenizer = AutoTokenizer.from_pretrained(
-        config.tokenizer_name,
-        trust_remote_code=trust_remote_code,
-    )
-    if tokenizer.pad_token is None or tokenizer.pad_token_id is None:
-        print("Tokenizer does not have a pad token. Setting pad token to eos token.")
-        tokenizer.pad_token = tokenizer.eos_token
-        tokenizer.pad_token_id = tokenizer.eos_token_id
-
-    tokenizer.padding_side = "left"
-
-    print(f"Loading actor model: {config.model_name}")
-
     model_kwargs = {"trust_remote_code": trust_remote_code}
+
     model_dtype_str = config.dtype
     if model_dtype_str != "auto":
         try:
-            model_dtype = getattr(torch, model_dtype_str)
-            model_kwargs["dtype"] = model_dtype
+            model_kwargs["dtype"] = getattr(torch, model_dtype_str)
             print(f"Setting model dtype to {model_dtype_str}.")
         except AttributeError:
             print(f"Invalid dtype '{model_dtype_str}' specified. Falling back to auto.")
@@ -217,48 +195,85 @@ def load_models_and_tokenizer(device: torch.device, config: ModelConfigSection, 
             bnb_4bit_compute_dtype=getattr(torch, quantization_cfg.bnb_4bit_compute_dtype),
             bnb_4bit_use_double_quant=quantization_cfg.bnb_4bit_use_double_quant,
         )
+        device_index = device.index if device.index is not None else 0
+        model_kwargs["device_map"] = {"": device_index}
 
-    attn_implementation = config.attn_implementation
-    if attn_implementation:
-        model_kwargs["attn_implementation"] = attn_implementation
-        print(f"Using attention implementation: {attn_implementation}.")
-    if 'phi' in config.model_name.lower() or 'medical-coding' in config.model_name.lower():
-        model_kwargs["attn_implementation"] = "eager"
-        print(f"Using attention implementation: eager.")
-    
-    actor_model = AutoModelForCausalLM.from_pretrained(
-        config.model_name, **model_kwargs
+    if not is_vlm_hf_id(config.model_name):
+        attn_implementation = config.attn_implementation
+        if attn_implementation:
+            model_kwargs["attn_implementation"] = attn_implementation
+            print(f"Using attention implementation: {attn_implementation}.")
+        if "phi" in config.model_name.lower() or "medical-coding" in config.model_name.lower():
+            model_kwargs["attn_implementation"] = "eager"
+            print("Using attention implementation: eager.")
+
+    return model_kwargs
+
+
+def _load_tokenizer_or_processor(config: ModelConfigSection) -> Union[PreTrainedTokenizerBase, object]:
+    if is_vlm_hf_id(config.model_name):
+        processor = AutoProcessor.from_pretrained(
+            config.tokenizer_name,
+            trust_remote_code=config.trust_remote_code,
+        )
+        if processor.tokenizer.pad_token is None or processor.tokenizer.pad_token_id is None:
+            print("Processor tokenizer does not have a pad token. Setting pad token to eos token.")
+            processor.tokenizer.pad_token = processor.tokenizer.eos_token
+            processor.tokenizer.pad_token_id = processor.tokenizer.eos_token_id
+        return processor
+
+    tokenizer = AutoTokenizer.from_pretrained(
+        config.tokenizer_name,
+        trust_remote_code=config.trust_remote_code,
     )
+    if tokenizer.pad_token is None or tokenizer.pad_token_id is None:
+        print("Tokenizer does not have a pad token. Setting pad token to eos token.")
+        tokenizer.pad_token = tokenizer.eos_token
+        tokenizer.pad_token_id = tokenizer.eos_token_id
+    tokenizer.padding_side = "left"
+    return tokenizer
+
+
+def load_base_model(
+    device: torch.device, config: ModelConfigSection
+) -> Tuple[PreTrainedModel, Union[PreTrainedTokenizerBase, object]]:
+    cache_key = config.model_name
+
+    if cache_key in _BASE_MODEL_CACHE:
+        print(f"Using cached base model {cache_key}")
+        return _BASE_MODEL_CACHE[cache_key], _TOKENIZER_CACHE[cache_key]
+
+    print(f"Loading base model {cache_key}")
+
+    tokenizer = _load_tokenizer_or_processor(config)
+    model_kwargs = _build_model_kwargs(config, device)
+    model = _load_pretrained_model(config.model_name, model_kwargs)
 
     if not model_kwargs.get("quantization_config"):
-        actor_model = actor_model.to(device)
-    if actor_model.config.pad_token_id is None:
-        print("Actor model does not have a pad token. Setting pad token to eos token.")
-        actor_model.config.pad_token_id = tokenizer.pad_token_id
+        model = model.to(device)
 
-    print(f"Actor model loaded with dtype: {actor_model.dtype}")
-    # gradient checkpointing can be enabled here if needed, but be cautious with 8-bit models
-    print("Enabling gradient checkpointing for actor model.")
-    actor_model.gradient_checkpointing_enable()
+    decode_tokenizer = tokenizer.tokenizer if is_vlm_hf_id(config.model_name) else tokenizer
+    if getattr(model.config, "pad_token_id", None) is None and decode_tokenizer.pad_token_id is not None:
+        model.config.pad_token_id = decode_tokenizer.pad_token_id
 
-    if config.peft_adaptor_path:
-        print(f"Loading PEFT adaptor from {config.peft_adaptor_path}")
-        actor_model = PeftModel.from_pretrained(
-            actor_model, 
-            config.peft_adaptor_path, 
-            is_trainable=True,
-            device_map="auto"
-        ).to(device)
-        print("PEFT adaptor loaded and applied to actor model.")
-    else:
-        print("No Peft config using base model")
-    
-    # Cache the loaded model if requested
-    if use_cache:
-        _LOADED_MODEL_CACHE[cache_key] = actor_model
-        _LOADED_TOKENIZER_CACHE[cache_key] = tokenizer
-           
-    return actor_model, tokenizer
+    print(f"Base model loaded with dtype: {model.dtype}")
+
+    _BASE_MODEL_CACHE[cache_key] = model
+    _TOKENIZER_CACHE[cache_key] = tokenizer
+
+    return model, tokenizer
+
+
+def load_adapter(base_model, peft_path):
+    if peft_path is None:
+        return base_model
+
+    print(f"Loading PEFT adaptor from {peft_path}")
+    return PeftModel.from_pretrained(
+        base_model,
+        peft_path,
+        is_trainable=False,
+    )
 
 def build_rlvr_prompt(findings: str, impression: str) -> str:
     return (
@@ -274,99 +289,131 @@ def build_rlvr_prompt(findings: str, impression: str) -> str:
         "Diagnosis:"
     )
 
-def compute_reliability_for_model(model, tokenizer, preds, gts, prompt_ids, device, num_samples=15, num_consistency=4):
+
+def _decode_tokenizer(tokenizer_or_processor):
+    return tokenizer_or_processor.tokenizer if hasattr(tokenizer_or_processor, "tokenizer") else tokenizer_or_processor
+
+
+def _build_vlm_inputs(row, processor, device):
+    prompt = build_rlvr_prompt(row["findings"], row["impression"])
+    vision_prompt = (
+        "You are a radiology assistant. Use the X-ray image(s) and clinical findings.\n"
+        f"{prompt}"
+    )
+
+    images = []
+    for col in ("image_1", "image_2", "image_3"):
+        value = row.get(col)
+        if value is None or pd.isna(value) or str(value).strip() in ("", "None", "nan"):
+            continue
+        path = resolve_image_path(value)
+        if path:
+            images.append(path)
+
+    content = [{"type": "text", "text": vision_prompt}]
+    for _ in images:
+        content.append({"type": "image"})
+    messages = [{"role": "user", "content": content}]
+
+    try:
+        text = processor.apply_chat_template(messages, add_generation_prompt=True)
+    except (ValueError, AttributeError):
+        text = vision_prompt
+
+    processor_images = [images] if images else None
+    inputs = processor(text=text, images=processor_images, return_tensors="pt")
+    return {k: v.to(device) for k, v in inputs.items()}
+
+
+def _extract_diagnosis(text: str) -> str:
+    return text.split("\n")[-1].strip() if text else ""
+
+
+def compute_reliability_for_model(
+    model,
+    tokenizer,
+    preds,
+    gts,
+    prompt_ids,
+    device,
+    is_vlm=False,
+    num_samples=15,
+    num_consistency=4,
+):
     """Compute reliability using a pre-loaded model."""
     dataset = pd.read_csv("./data/processed_iuxray_mcqa_dataset.csv")
-    
-    # Sample indices
-    subset = dataset.sample(min(num_samples, len(dataset)))
+    sample_uids = set(dataset.sample(min(num_samples, len(dataset)))["uid"].values)
+    uid_to_row = dataset.set_index("uid")
     reliab_scores = []
-    
-    data = zip(preds, gts, prompt_ids)
-    for i, (pred, gt, prompt_id) in enumerate(data):
-        if i in subset['uid'].values:
-            row = subset[subset['uid'] == i]
-            if len(row) == 0:
-                continue
-            row = row.iloc[0]
-            prompt = build_rlvr_prompt(row['findings'], row['impression'])
-            prompt_input = tokenizer(prompt, return_tensors='pt', truncation=True, max_length=512)
+    decode_tokenizer = _decode_tokenizer(tokenizer)
+
+    for pred, gt, prompt_id in zip(preds, gts, prompt_ids):
+        if prompt_id not in sample_uids or prompt_id not in uid_to_row.index:
+            continue
+        row = uid_to_row.loc[prompt_id]
+
+        if is_vlm:
+            prompt_input = _build_vlm_inputs(row, tokenizer, device)
+            input_len = prompt_input["input_ids"].shape[1]
+            gen_kwargs = {
+                "max_new_tokens": 100,
+                "temperature": 0.7,
+                "do_sample": True,
+                "pad_token_id": decode_tokenizer.eos_token_id,
+                "eos_token_id": decode_tokenizer.eos_token_id,
+            }
+        else:
+            prompt = build_rlvr_prompt(row["findings"], row["impression"])
+            prompt_input = decode_tokenizer(
+                prompt, return_tensors="pt", truncation=True, max_length=512
+            )
             prompt_input = {k: v.to(device) for k, v in prompt_input.items()}
-            
-            with torch.no_grad():
-                outputs = model.generate(
-                    **prompt_input,
-                    num_return_sequences=num_consistency,
-                    max_new_tokens=100,
-                    temperature=0.7,
-                    do_sample=True,
-                )
-            
-            # Decode completions and extract diagnoses
-            diagnoses = []
-            for seq in outputs:
-                text = tokenizer.decode(seq, skip_special_tokens=True)
-                # Extract diagnosis after the last newline
-                diagnosis = text.split('\n')[-1].strip() if text else ""
-                if diagnosis:
-                    diagnoses.append(diagnosis)
-            
-            # Compute consistency: proportion of samples that match the most common diagnosis
-            if diagnoses:
-                diagnosis_counts = Counter(diagnoses)
-                max_count = max(diagnosis_counts.values()) if diagnosis_counts else 0
-                consistency = max_count / len(diagnoses) if len(diagnoses) > 0 else 0.0
-                reliab_scores.append(consistency)
-    
+            input_len = prompt_input["input_ids"].shape[1]
+            gen_kwargs = {
+                "max_new_tokens": 100,
+                "temperature": 0.7,
+                "do_sample": True,
+            }
+
+        with torch.no_grad():
+            outputs = model.generate(
+                **prompt_input,
+                num_return_sequences=num_consistency,
+                **gen_kwargs,
+            )
+
+        diagnoses = []
+        for seq in outputs:
+            generated_ids = seq[input_len:]
+            text = decode_tokenizer.decode(generated_ids, skip_special_tokens=True)
+            diagnosis = _extract_diagnosis(text)
+            if diagnosis:
+                diagnoses.append(diagnosis)
+
+        if diagnoses:
+            diagnosis_counts = Counter(diagnoses)
+            max_count = max(diagnosis_counts.values()) if diagnosis_counts else 0
+            consistency = max_count / len(diagnoses) if len(diagnoses) > 0 else 0.0
+            reliab_scores.append(consistency)
+
     mean_reliability = np.mean(reliab_scores) if reliab_scores else 0.0
     print(f"Reliability score: {mean_reliability:.4f} (based on {len(reliab_scores)} samples)")
     return mean_reliability
 
-def compute_self_consistency(config, preds, gts, prompt_ids, use_cache=True, cleanup_after=True):
-    """Compute self-consistency with optional caching and cleanup."""
+
+def compute_self_consistency(base_model, tokenizer, peft_path, preds, gts, prompt_ids, model_id=None):
+    """Load an adapter onto a cached base model, evaluate, then drop the wrapper."""
     device = torch.device("cuda")
-    model, tokenizer = load_models_and_tokenizer(device, config, use_cache=use_cache)
-    
+    model = load_adapter(base_model, peft_path)
+    is_vlm = is_vlm_hf_id(model_id) if model_id else False
+
     try:
-        reliability = compute_reliability_for_model(
-            model, tokenizer, preds, gts, prompt_ids, device
+        return compute_reliability_for_model(
+            model, tokenizer, preds, gts, prompt_ids, device, is_vlm=is_vlm
         )
-        return reliability
     finally:
-        if cleanup_after:
-            # Clean up only this model if not using cache
-            if not use_cache:
-                del model
-                del tokenizer
-                if torch.cuda.is_available():
-                    torch.cuda.empty_cache()
-                gc.collect()
-            else:
-                if isinstance(model, PeftModel):
-                    try:
-                        model.unload_adapter()
-                        print(f"Unloaded PEFT adaptor")
-                    except:
-                        pass
-                
-                # Delete model and tokenizer
-                del model
-                del tokenizer
-                
-                # Clear GPU cache
-                if torch.cuda.is_available():
-                    torch.cuda.empty_cache()
-                gc.collect()
-
-
-
-# Function to clean all caches after processing
-def cleanup_all_caches(model):
-    """Clean all model caches and free memory."""
-    cleanup_loaded_models()
-    
-    # Optional: Also clean disk cache
-    cleanup_model_cache(model)  # You'd need to implement this carefully
-    
-    print("All caches cleaned up")
+        del model
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
+        gc.collect()
 

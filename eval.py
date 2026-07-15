@@ -1,10 +1,16 @@
 import os
 import json
 import numpy as np
+import torch
 from Evaluation.Evaluator import QAEvaluator, VisionEvaluator, ReportEvaluator
 from pathlib import Path
 from typing import Optional
-from Evaluation.reliability import MODEL_ID_MAPPING, cleanup_all_caches, compute_self_consistency
+from Evaluation.reliability import (
+    MODEL_ID_MAPPING,
+    load_base_model,
+    compute_self_consistency,
+    cleanup_base_model_cache,
+)
 from ReinforcementLearning.Custom.Config import QuantizationConfig, ModelConfigSection
 
 
@@ -54,7 +60,9 @@ vision_models = [
 
 finetuned_models = [
     "Qwen2.5-7B-Instruct-lora",
-    "meditron-7b-lora", "Qwen3-VL-8B-Instruct-lora",
+    "meditron-7b-lora",
+     
+    "Qwen3-VL-8B-Instruct-lora",
     "SmolVLM-Instruct-lora"
 ]
 
@@ -63,7 +71,7 @@ trained_vision = [
 ]
 
 finetuned_generation = [
-    "Qwen2.5-7B-Instruct-finetuned",
+    #"Qwen2.5-7B-Instruct-finetuned",
     "gemma-3-4b-it-finetuned",
     "medgemma-4b-it-finetuned",
     "meditron-7b-finetuned",
@@ -80,15 +88,15 @@ LORA_Tuned_Paths = {
 
 # TODO: Add RL models once results are available
 reinforcement_learning_models = [
-    "Qwen2.5-7B-Instruct-RLVR_aligned",
+    #"Qwen2.5-7B-Instruct-RLVR_aligned",
     "Qwen3-VL-8B-Instruct-RLVR_aligned",
-    "Qwen2.5-7B-Instruct-RLAIF_aligned",
-    "Qwen2.5-7B-Instruct-RLAIF_tanh-tanh_aligned",
-    "Qwen2.5-7B-Instruct-RLAIF_pref3_aligned",
-    "Qwen2.5-7B-Instruct-RLAIF_custom_GRPO_aligned",
-    "Qwen2.5-7B-Instruct-RLAIF_FrugalGRPO_noscore_aligned",
-    "Qwen2.5-7B-Instruct-RLAIF_FrugalGRPO_aligned",
-    "Qwen2.5-7B-Instruct-RLAIF_GroupedGRPO_aligned",
+    #"Qwen2.5-7B-Instruct-RLAIF_aligned",
+    #"Qwen2.5-7B-Instruct-RLAIF_tanh-tanh_aligned",
+    #"Qwen2.5-7B-Instruct-RLAIF_pref3_aligned",
+    #"Qwen2.5-7B-Instruct-RLAIF_custom_GRPO_aligned",
+    # "Qwen2.5-7B-Instruct-RLAIF_FrugalGRPO_noscore_aligned",
+    # "Qwen2.5-7B-Instruct-RLAIF_FrugalGRPO_aligned",
+    #"Qwen2.5-7B-Instruct-RLAIF_GroupedGRPO_aligned",
 ]
 
 BASE_RL = BASE_PATH / "ReinforcementLearning"
@@ -109,7 +117,7 @@ RL_Tuned_Paths = {
 
 
 generation_task = [
-    "Qwen2.5-7B-Instruct", 
+    #"Qwen2.5-7B-Instruct", 
     "medgemma-4b-it", 
     "meditron-7b", 
     "medical-coding-llm",
@@ -254,15 +262,18 @@ def evaluate_report_group(model_names, suffix="_generation_results.json", skip_m
 
 def write_metrics_csv(file_name, columns, stats, reliabs=None):
     out_path = os.path.join(METRIC_PATH, file_name)
-    if reliabs:
-        stats['Reliability'] = reliabs[stats['model']]
     with open(out_path, "w") as f:
         f.write(",".join(columns) + "\n")
         for stat in stats:
             row = [stat["model"]]
             for metric_name in columns[1:]:
-                if not stat[metric_name] is None:
-                    row.append(f"{stat[metric_name]:.4f}")
+                value = stat.get(metric_name)
+                if reliabs and metric_name == "Reliability" and stat["model"] in reliabs:
+                    value = reliabs[stat["model"]]
+                if value is not None:
+                    row.append(f"{value:.4f}")
+                else:
+                    row.append("")
             f.write(",".join(row) + "\n")
 
 stats_text = evaluate_classification_group(models, QAEvaluator)
@@ -280,7 +291,6 @@ rl_report_stats = evaluate_report_group(reinforcement_learning_models, skip_miss
 
 all_models = finetuned_generation + reinforcement_learning_models + generation_task + generation_vlm + finetuned_vlm_generation
 tuned = LORA_Tuned_Paths | RL_Tuned_Paths | VLM_Tuned_Paths
-CACHE = "microsoft/Phi-3-mini-4k-instruct"
 
 def get_model_id_and_peft(model: str):
     hugging_face_id = MODEL_ID_MAPPING.get(model)
@@ -288,52 +298,52 @@ def get_model_id_and_peft(model: str):
     return hugging_face_id, peft_path
 
 consistencies = {}
+current_model_id = None
+base_model = None
+tokenizer = None
 
 for model in sorted(all_models):
-    if 'phi' in model.lower() or 'coding' in model.lower():
+    if "phi" in model.lower() or "coding" in model.lower() or 'llama' in model.lower() or 'vl' in model.lower():
         continue
+
     id_, peft = get_model_id_and_peft(model)
-    if id_ and CACHE == id_:
-        model_config = ModelConfigSection(
-            model_name = id_,
-            ref_model_name = id_,
-            tokenizer_name = id_,
-            peft_adaptor_path = peft,
-            quantization = quantisation_config
+    if not id_:
+        continue
+
+    parse = _load_results(model, "_generation_results.json", skip_missing=True)
+    if parse is None:
+        continue
+
+    if id_ != current_model_id:
+        if base_model is not None:
+            del base_model
+            del tokenizer
+            cleanup_base_model_cache()
+
+        base_config = ModelConfigSection(
+            model_name=id_,
+            ref_model_name=id_,
+            tokenizer_name=id_,
+            quantization=quantisation_config,
         )
+        base_model, tokenizer = load_base_model(torch.device("cuda"), base_config)
+        current_model_id = id_
 
-        parse = _load_results(model, "_generation_results.json")
-        gts, preds, _, pred_raw, prompt_ids = _extract_report_fields(parse)
+    gts, preds, _, pred_raw, prompt_ids = _extract_report_fields(parse)
+    consistencies[model] = compute_self_consistency(
+        base_model,
+        tokenizer,
+        peft,
+        preds,
+        gts,
+        prompt_ids,
+        model_id=id_,
+    )
 
-        c = compute_self_consistency(
-                model_config,
-                preds,
-                gts, 
-                prompt_ids
-        )
-        consistencies[model] = c
-    elif CACHE != id_:
-        cleanup_all_caches(model)
-        CACHE = id_
-        if id_:
-            model_config = ModelConfigSection(
-                model_name = id_,
-                ref_model_name = id_,
-                tokenizer_name = id_,
-                peft_adaptor_path = peft,
-                quantization = quantisation_config
-            )
-
-            parse = _load_results(model, "_generation_results.json")
-            gts, preds, _, pred_raw, prompt_ids = _extract_report_fields(parse)
-
-            c = compute_self_consistency(
-                    model_config,
-                    preds,
-                    gts, 
-                    prompt_ids
-            ) 
-            consistencies[model] = c
+if base_model is not None:
+    del base_model
+    del tokenizer
+    cleanup_base_model_cache()
 
 
 consistencies['Meta-Llama-3.1-8B-Instruct-bnb-4bit'] = 0.2667 
