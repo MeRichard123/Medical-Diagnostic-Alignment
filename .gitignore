@@ -5,7 +5,7 @@ checkpoints
 data/images
 finetuning/tuned/
 lookup_data/
-ReinforcementLearning/aligned/
+
 ReinforcementLearning/intermediate/reward_model/
 ReinforcementLearning/intermediate/grpo_model/
 ReinforcementLearning/grpo_results/
