@@ -199,7 +199,7 @@ class ReportEvaluator(QAEvaluator):
         if isinstance(similarity, torch.Tensor):
             return float(similarity.detach().cpu().item())
         return float(similarity)
-    
+            
     def batch_cosine_similarity(self, gt_texts, pred_texts):
         sims = []
         for gt, pred in zip(gt_texts, pred_texts):
@@ -241,10 +241,9 @@ class ReportEvaluator(QAEvaluator):
         return self._safe_mean(vals)
 
     def perplexity(self, probabilities): 
-        probs = [p['probability'] for p in probabilities if p['probability'] > 0]
-        if not probs:
+        log_probs = [p['ground_truth_logprob'] for p in probabilities]
+        if not log_probs:
             return float('inf')
-        log_probs = np.log(probs)
         avg_log_prob = np.mean(log_probs)
         perplexity = np.exp(-avg_log_prob) if np.isfinite(avg_log_prob) and avg_log_prob < 700 else float('inf')
         return perplexity
@@ -297,18 +296,12 @@ class ReportEvaluator(QAEvaluator):
 
         cosine_sim = self.batch_cosine_similarity(ground_truth, predictions)
 
-        kl_scores = [
-            self.calculate_kl_divergence(prob_dict, actual)
-            for prob_dict, actual in zip(probs, ground_truth)
-        ]
-        kl_avg = self._safe_mean(kl_scores)
-
         perplexity = self.perplexity(probs)
         confidences = [p['sequence_confidence'] for p in probs]
         miscalib = self.batch_with_bins_miscalibration(ground_truth, predictions, confidences)
-       
 
         reliab = 0
+        kl_avg = 0
         print(f"Evaluation Results for {self.model}:")
         print(f"Exact Match: {em:.4f}")
         print(f"Token Precision: {token_precision:.4f}")
@@ -344,3 +337,181 @@ class ReportEvaluator(QAEvaluator):
             "Reliability": reliab,
             "Miscalibration": miscalib
         }
+
+def compute_kl_divergence(policy_model, ref_model, tokeniser, prompt_ids, pred, max_length=1024):
+    """
+    KL divergence between policy and reference models on the generated response.
+    Returns 0.0 when the policy and reference models are the same, and NaN when
+    there is no usable prompt content to score.
+    """
+    if policy_model is ref_model:
+        return float('nan')
+
+    if isinstance(prompt_ids, torch.Tensor):
+        prompt_tokens = prompt_ids.detach().cpu().flatten().tolist()
+    elif hasattr(prompt_ids, "tolist"):
+        prompt_tokens = prompt_ids.tolist()
+        if isinstance(prompt_tokens, int):
+            prompt_tokens = [prompt_tokens]
+    elif isinstance(prompt_ids, (str, bytes)):
+        prompt_tokens = tokeniser.encode(str(prompt_ids), add_special_tokens=False)
+    elif isinstance(prompt_ids, (int, np.integer)):
+        prompt_tokens = []
+    elif isinstance(prompt_ids, (list, tuple)):
+        if prompt_ids and all(isinstance(item, (int, np.integer)) for item in prompt_ids):
+            prompt_tokens = []
+        else:
+            prompt_tokens = tokeniser.encode(" ".join(str(item) for item in prompt_ids), add_special_tokens=False)
+    else:
+        prompt_tokens = []
+
+    response_ids = tokeniser.encode(str(pred), add_special_tokens=False)
+
+    if not response_ids:
+        return float('nan')
+
+    full_tokens = prompt_tokens + response_ids
+    prompt_len = len(prompt_tokens)
+    full_len = len(full_tokens)
+
+    if full_len == 0:
+        return float('nan')
+
+    try:
+        model_device = next(policy_model.parameters()).device
+    except StopIteration:
+        model_device = torch.device("cpu")
+
+    input_ids = torch.tensor([full_tokens], device=model_device)
+    attn_mask = torch.ones_like(input_ids)
+
+    with torch.no_grad():
+        policy_logits = policy_model(input_ids=input_ids, attention_mask=attn_mask).logits[0]
+        ref_logits = ref_model(input_ids=input_ids, attention_mask=attn_mask).logits[0]
+
+    seq_len = policy_logits.shape[0]
+    start_idx = max(prompt_len - 1, 0)
+    end_idx = full_len - 1
+
+    if end_idx >= seq_len:
+        end_idx = seq_len - 1
+    if start_idx >= seq_len - 1:
+        return float('nan')
+
+    num_response_tokens = min(full_len - prompt_len, end_idx - start_idx)
+    if num_response_tokens <= 0:
+        return float('nan')
+
+    response_token_ids = full_tokens[prompt_len:prompt_len + num_response_tokens]
+
+    kl_sum = 0.0
+    for t, tok_id in enumerate(response_token_ids):
+        logit_idx = start_idx + t
+        if logit_idx >= seq_len - 1:
+            break
+        pol_probs = torch.softmax(policy_logits[logit_idx], dim=-1)
+        ref_probs = torch.softmax(ref_logits[logit_idx], dim=-1)
+        kl_t = torch.sum(pol_probs * (torch.log(pol_probs + 1e-10) - torch.log(ref_probs + 1e-10)))
+        kl_sum += kl_t.item()
+
+    return kl_sum / num_response_tokens
+
+def compute_kl_and_ppl(policy_model, ref_model, tokeniser, prompt_ids, pred, max_length=1024):
+    """
+    Returns (KL_divergence, policy_perplexity, ref_perplexity) over the generated response.
+    """
+    if policy_model is ref_model:
+        return float('nan'), float('nan'), float('nan')
+
+    # --- Tokenisation (exactly as you had it) ---
+    if isinstance(prompt_ids, torch.Tensor):
+        prompt_tokens = prompt_ids.detach().cpu().flatten().tolist()
+    elif hasattr(prompt_ids, "tolist"):
+        prompt_tokens = prompt_ids.tolist()
+        if isinstance(prompt_tokens, int):
+            prompt_tokens = [prompt_tokens]
+    elif isinstance(prompt_ids, (str, bytes)):
+        prompt_tokens = tokeniser.encode(str(prompt_ids), add_special_tokens=False)
+    elif isinstance(prompt_ids, (int, np.integer)):
+        prompt_tokens = []
+    elif isinstance(prompt_ids, (list, tuple)):
+        if prompt_ids and all(isinstance(item, (int, np.integer)) for item in prompt_ids):
+            prompt_tokens = []
+        else:
+            prompt_tokens = tokeniser.encode(" ".join(str(item) for item in prompt_ids), add_special_tokens=False)
+    else:
+        prompt_tokens = []
+
+    response_ids = tokeniser.encode(str(pred), add_special_tokens=False)
+
+    if not response_ids:
+        return float('nan'), float('nan'), float('nan')
+
+    full_tokens = prompt_tokens + response_ids
+    prompt_len = len(prompt_tokens)
+    full_len = len(full_tokens)
+
+    if full_len == 0:
+        return float('nan'), float('nan'), float('nan')
+
+    # --- Forward pass ---
+    try:
+        model_device = next(policy_model.parameters()).device
+    except StopIteration:
+        model_device = torch.device("cpu")
+
+    input_ids = torch.tensor([full_tokens], device=model_device)
+    attn_mask = torch.ones_like(input_ids)
+
+    with torch.no_grad():
+        policy_logits = policy_model(input_ids=input_ids, attention_mask=attn_mask).logits[0]
+        ref_logits = ref_model(input_ids=input_ids, attention_mask=attn_mask).logits[0]
+
+    seq_len = policy_logits.shape[0]
+    start_idx = max(prompt_len - 1, 0)  # logits index for the first response token
+    end_idx = full_len - 1
+
+    if end_idx >= seq_len:
+        end_idx = seq_len - 1
+    if start_idx >= seq_len - 1:
+        return float('nan'), float('nan'), float('nan')
+
+    num_response_tokens = min(full_len - prompt_len, end_idx - start_idx)
+    if num_response_tokens <= 0:
+        return float('nan'), float('nan'), float('nan')
+
+    response_token_ids = full_tokens[prompt_len:prompt_len + num_response_tokens]
+
+    # --- Accumulate metrics ---
+    kl_sum = 0.0
+    policy_log_prob_sum = 0.0
+    ref_log_prob_sum = 0.0
+
+    for t, tok_id in enumerate(response_token_ids):
+        logit_idx = start_idx + t
+        if logit_idx >= seq_len - 1:
+            break
+
+        # 1) Per-token KL divergence (over the full vocabulary)
+        pol_probs = torch.softmax(policy_logits[logit_idx], dim=-1)
+        ref_probs = torch.softmax(ref_logits[logit_idx], dim=-1)
+        kl_t = torch.sum(pol_probs * (torch.log(pol_probs + 1e-10) - torch.log(ref_probs + 1e-10)))
+        kl_sum += kl_t.item()
+
+        # 2) Log-probability of the *actual* generated token (for perplexity)
+        pol_log_softmax = torch.log_softmax(policy_logits[logit_idx], dim=-1)
+        ref_log_softmax = torch.log_softmax(ref_logits[logit_idx], dim=-1)
+        policy_log_prob_sum += pol_log_softmax[tok_id].item()
+        ref_log_prob_sum += ref_log_softmax[tok_id].item()
+
+    # --- Final calculations ---
+    avg_kl = kl_sum / num_response_tokens
+
+    # Perplexity = exp(- average log-likelihood)
+    avg_policy_log_prob = policy_log_prob_sum / num_response_tokens
+    avg_ref_log_prob = ref_log_prob_sum / num_response_tokens
+
+    policy_ppl = torch.exp(torch.tensor(-avg_policy_log_prob)).item()
+    ref_ppl = torch.exp(torch.tensor(-avg_ref_log_prob)).item()
+
+    return avg_kl, policy_ppl, ref_ppl

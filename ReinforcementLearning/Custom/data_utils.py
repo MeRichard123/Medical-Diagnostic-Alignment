@@ -9,9 +9,53 @@ import pandas as pd
 accelerator = accelerate.Accelerator()
 
 
+def resolve_image_path(filename):
+    if pd.isna(filename) or str(filename).strip() in ("", "None", "nan"):
+        return None
+
+    name = str(filename).strip()
+    candidates = [
+        os.path.join(".", "data", "images", "processed", name),
+    ]
+    for path in candidates:
+        if os.path.exists(path):
+            return path
+    return None
+
+
+def collect_image_paths(row):
+    images = []
+    for col in ["image_1", "image_2", "image_3"]:
+        image_path = resolve_image_path(row.get(col))
+        if image_path:
+            images.append(image_path)
+    return images[:1]
+
+
 def load_and_process_dataset(
     cfg: PPOConfig, tokenizer: PreTrainedTokenizerBase, experimental: bool = False
 ) -> Dataset:
+    def normalize_prompt_for_tokenizer(prompt):
+        if isinstance(prompt, str):
+            return prompt
+        if isinstance(prompt, list):
+            if all(isinstance(item, dict) for item in prompt):
+                if hasattr(tokenizer, "apply_chat_template"):
+                    try:
+                        return tokenizer.apply_chat_template(
+                            prompt,
+                            tokenize=False,
+                            add_generation_prompt=True,
+                        )
+                    except Exception:
+                        pass
+                return "\n".join(str(item.get("content", "")) for item in prompt)
+            if all(isinstance(item, str) for item in prompt):
+                return " ".join(prompt)
+            if any(isinstance(item, (list, tuple)) for item in prompt):
+                return "\n".join(normalize_prompt_for_tokenizer(item) for item in prompt)
+        return str(prompt)
+
     print(f"Loading dataset: {cfg.dataset.dataset_path}")
     data = pd.read_csv(cfg.dataset.dataset_path)
     qwen_results = pd.read_json("results/Qwen2.5-7B-Instruct_generation_results.json", orient="records")
@@ -44,9 +88,12 @@ def load_and_process_dataset(
         for _, row in dataframe.iterrows():
             correct = row["copt"]
             prompt = build_rlvr_prompt(str(row["findings"]))
-            # Include all samples for training - GRPO will learn to improve
+            images = collect_image_paths(row)
+            if not images:
+                continue
             records.append({
-                "prompt": prompt,
+                "prompt": [{"role": "user", "content": prompt}],
+                "images": images,
                 "solution": correct,
             })
         return Dataset.from_list(records)
@@ -56,8 +103,12 @@ def load_and_process_dataset(
         for _, row in dataframe.iterrows():
             correct = row["copt"]
             prompt = build_rlvr_prompt(str(row["findings"]))
+            images = collect_image_paths(row)
+            if not images:
+                continue
             records.append({
-                "prompt": prompt,
+                "prompt": [{"role": "user", "content": prompt}],
+                "images": images,
                 "solution": correct,
             })
         return Dataset.from_list(records)
@@ -82,7 +133,21 @@ def load_and_process_dataset(
         print(f"Dataset shuffled and truncated to {num_samples} samples.")
 
     print(f"Final dataset size: {len(raw_dataset)}")
-    raw_dataset = raw_dataset.map(lambda x: tokenizer(x["prompt"], truncation=True, padding="max_length", max_length=512), batched=True)
+
+    def tokenize_example(example):
+        text = normalize_prompt_for_tokenizer(example["prompt"])
+        encoded = tokenizer(
+            text,
+            truncation=True,
+            padding="max_length",
+            max_length=512,
+        )
+        return {
+            "input_ids": encoded["input_ids"],
+            "attention_mask": encoded["attention_mask"],
+        }
+
+    raw_dataset = raw_dataset.map(tokenize_example)
     return raw_dataset
 
 

@@ -3,7 +3,7 @@ import sys
 from pathlib import Path
 
 import pandas as pd
-from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
+from transformers import AutoModelForCausalLM, AutoModelForSequenceClassification, AutoTokenizer, BitsAndBytesConfig
 from huggingface_hub import login
 import torch
 from datasets import Dataset
@@ -26,7 +26,7 @@ MODEL_ID = "Qwen/Qwen2.5-7B-Instruct"
 MODEL = MODEL_ID.split("/")[-1]
 
 wandb_run = None
-wandb_run_name = os.getenv("WANDB_RUN_NAME", f"{MODEL}_grpo")
+wandb_run_name = os.getenv("WANDB_RUN_NAME", f"{MODEL}_rlff")
 report_to = "none"
 if wandb is not None:
     wandb_project = "rl-tuning-medical-model-alignment"
@@ -46,6 +46,7 @@ else:
 BASE_PATH = Path(__file__).parent.parent
 MODEL_PATH = BASE_PATH / "finetuning" / "tuned" / f"{MODEL}-gen-lora"
 GRPO_RESULTS_PATH = BASE_PATH / "reinforcement-learning" / "grpo_results"
+REWARD_MODEL_PATH = BASE_PATH / "ReinforcementLearning" / "RLFF" / "Reward_Models" / 'reward_model_BT_frugal' / "policy_adapter"
 
 data = pd.read_csv("./data/processed_iuxray_mcqa_dataset.csv")
 
@@ -128,6 +129,9 @@ model = PeftModel.from_pretrained(
     is_trainable=True
 )
 
+
+
+
 model = model.to("cuda")
 model.eval()
 model.config.tie_word_embeddings = False
@@ -147,7 +151,50 @@ if tokeniser.pad_token is None:
 
 # Import modular reward functions from rewards module
 
-reward_funcs = get_reward_funcs(use_verifier=True)
+
+reward_tokenizer = AutoTokenizer.from_pretrained(MODEL_ID, use_fast=True)
+if reward_tokenizer.pad_token is None:
+    reward_tokenizer.pad_token = reward_tokenizer.eos_token
+if getattr(reward_tokenizer, "pad_token_id", None) is None and reward_tokenizer.eos_token_id is not None:
+    reward_tokenizer.pad_token_id = reward_tokenizer.eos_token_id
+
+reward_base = AutoModelForSequenceClassification.from_pretrained(
+    MODEL_ID,
+    num_labels=1,
+    low_cpu_mem_usage=True,
+    offload_buffers=True,
+    offload_folder=str(BASE_PATH / "offload"),
+    quantization_config= BitsAndBytesConfig(
+        load_in_4bit=True,
+        bnb_4bit_quant_type="nf4",
+        bnb_4bit_compute_dtype=torch.bfloat16,
+        bnb_4bit_use_double_quant=True,
+    ),
+    device_map="auto",
+)
+
+def dummy_prepare_inputs_for_generation(self, input_ids, **kwargs):
+    # Return the minimal dict required by the forward pass.
+    return {"input_ids": input_ids, **kwargs}
+import types
+if not hasattr(reward_base, 'prepare_inputs_for_generation'):
+    reward_base.prepare_inputs_for_generation = types.MethodType(
+        dummy_prepare_inputs_for_generation, reward_base
+    )
+
+print("Loaded Reward Model Base from:", MODEL_ID)
+reward_model = PeftModel.from_pretrained(
+    reward_base,
+    REWARD_MODEL_PATH,
+    is_trainable=False,
+    offload_buffers=True,
+    offload_folder=str(BASE_PATH / "offload"),
+)
+reward_base.config.pad_token_id = reward_tokenizer.pad_token_id
+print(f"Loaded Reward Model from PEFT path: {REWARD_MODEL_PATH}")
+reward_model.eval()
+for param in reward_model.parameters():
+    param.requires_grad = False
 
 training_args = GRPOConfig(
     output_dir=str(GRPO_RESULTS_PATH),
@@ -213,11 +260,12 @@ def resolve_resume_checkpoint(results_path: Path, preferred_step: int = 450) -> 
 
 trainer = GRPOTrainer(
     model=model,
-    reward_funcs=reward_funcs,
+    reward_funcs=reward_model,
     args=training_args,
     train_dataset=train_dataset,
     eval_dataset=test_dataset,
     processing_class=tokeniser,
+    reward_processing_classes=reward_tokenizer,
 )
 if wandb_run is not None:
     try:
@@ -249,7 +297,7 @@ else:
     print(f"No checkpoint found under {GRPO_RESULTS_PATH}; starting a fresh run.")
     trainer.train()
 
-trainer.save_model(f"./reinforcement-learning/aligned/{MODEL}-RLVR_GRPO")
+trainer.save_model(f"./ReinforcementLearning/aligned/{MODEL}-RLFF_GRPO")
 
 if wandb_run is not None:
     wandb.finish()

@@ -39,7 +39,6 @@ class Evaluator(ABC):
 
     So evaluating KL reduces to negative log likelihood, using the probability assigned to the true class.
     """
-    
     def calculate_kl_divergence(self, predicted_probs, actual_outcome):
         if actual_outcome == 'Error':
             return float('-inf')  # or some large number to indicate error
@@ -52,6 +51,7 @@ class Evaluator(ABC):
             gt_logprob = predicted_probs.get('ground_truth_logprob') or 0.0
             return -gt_logprob
     
+
     def multiclass_brier_score(self, prob_dict, actual_class):
         # Convert dict to arrays
         if isinstance(prob_dict, dict) and 'type' not in prob_dict:

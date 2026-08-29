@@ -40,7 +40,7 @@ class DatasetConfigSection:
 
 @dataclass
 class TrainingConfigSection:
-    total_ppo_steps: Optional[int] = None 
+    total_ppo_steps: Optional[int] = 3
     seed: int = 42             
     log_interval: int = 1      
     save_interval: int = 10    
@@ -71,7 +71,7 @@ class BaseConfig:
 @dataclass
 class PPOConfig(BaseConfig):
     learning_rate: float = 2.0e-6 
-    epochs: int = 2 
+    epochs: int = 10
     batch_size: int = 8 
     mini_batch_size: int = 2 
     grad_accum_steps: int = 8  

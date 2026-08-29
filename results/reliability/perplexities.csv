@@ -1,0 +1,6 @@
+model,perplexity
+Qwen2.5-7B-Instruct-RLVR_aligned,1073411567137.6478
+Qwen2.5-7B-Instruct-RLAIF_pref3_aligned,927148707419.5226
+Qwen2.5-7B-Instruct-RLAIF_FrugalGRPO_aligned,898327552604.5059
+Qwen2.5-7B-Instruct-RLAIF_MORL_aligned,941516962951.2954
+Qwen2.5-7B-Instruct-RLAIF_RLFF_aligned,952691193039.9893

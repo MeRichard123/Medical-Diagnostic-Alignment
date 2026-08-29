@@ -12,7 +12,8 @@ from transformers import (
     BitsAndBytesConfig,
 )
 
-from trl import GRPOConfig, GRPOTrainer
+from trl.trainer.grpo_trainer import GRPOTrainer
+from trl.trainer.grpo_config import GRPOConfig
 try:
     import wandb
     _WANDB_AVAILABLE = True

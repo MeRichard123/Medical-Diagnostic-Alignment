@@ -34,7 +34,8 @@ MODEL_ID = os.getenv("GEN_MODEL_ID", _DEFAULT_MODEL_ID)
 MODEL = MODEL_ID.split("/")[-1]
 BASE_PATH = pathlib.Path(__file__).parent.parent.parent
 # MODEL_PATH = BASE_PATH / "finetuning" / "tuned" / f"{MODEL}-gen-lora"
-MODEL_PATH = BASE_PATH / "reinforcement-learning" / "aligned" / f"{MODEL}-RLVR_GRPO"
+MODEL_PATH = BASE_PATH / "ReinforcementLearning" / "exp" / f"experiment-morlVL" / "final_model"
+#MODEL_PATH = BASE_PATH / "ReinforcementLearning" / "exp" / f"experiment-frugalVL" / "final_model"
 USE_LORA = os.getenv("USE_VLM_LORA", "1").strip().lower() in {"1", "true", "yes"}
 
 data = pd.read_csv("./data/processed_iuxray_mcqa_dataset.csv")
@@ -230,8 +231,13 @@ for i in tqdm(range(len(test_df))):
 	obj['ground_truth'] = correct
 	obj['probabilities'] = probs
 	results.append(obj)
-
-if USING_LORA and "reinforcement" in MODEL_PATH.parts:
+if USING_LORA and "grpo_model_4o-Preferences-vl" in MODEL_PATH.parts:
+	modifier = "-RLAIF-VL"
+elif USING_LORA and "frugalVL" in MODEL_PATH.parts:
+	modifier = "-frugalVL"
+elif USING_LORA and "morlVL" in MODEL_PATH.parts:
+	modifier = "-morlVL"
+elif USING_LORA and "reinforcement" in MODEL_PATH.parts:
 	modifier = "-RLVR_aligned"
 elif USING_LORA:
 	modifier = "-finetuned"
@@ -244,8 +250,11 @@ if not os.path.exists(f"./results/{MODEL}{modifier}_generation_results.json"):
 		json.dump(results, f, indent=4, default=json_serialiser)
 	print(f"Saved results to ./results/{MODEL}{modifier}_generation_results.json")
 else:
-	counter += 1
 	print(f"File ./results/{MODEL}{modifier}_generation_results.json already exists.")
+	counter += 1
+	while os.path.exists(f"./results/{MODEL}{modifier}_generation_results_{counter}.json"):
+		counter += 1
+		
 	with open(f"./results/{MODEL}{modifier}_generation_results_{counter}.json", "w") as f:
 		json.dump(results, f, indent=4, default=json_serialiser)
 	print(f"Saved results to ./results/{MODEL}{modifier}_generation_results_{counter}.json")

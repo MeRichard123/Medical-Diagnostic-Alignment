@@ -27,7 +27,7 @@ MODEL = MODEL_ID.split("/")[-1]
 
 BASE_PATH = Path(__file__).parent.parent.parent
 # MODEL_PATH = BASE_PATH / "finetuning" / "tuned" / f"{MODEL}-gen-lora"
-MODEL_PATH = BASE_PATH / "ReinforcementLearning" / "exp" / f"experiment-Grouped" / "final_model"
+MODEL_PATH = BASE_PATH / "ReinforcementLearning" / "aligned" / f"{MODEL}-RLFF_GRPO"
 
 #MODEL_PATH = BASE_PATH / "ReinforcementLearning" / "grpo_results" / "Qwen2.5-7B-Instruct-gen-lora-grpo-frugal-v1/final_model"
 
@@ -201,5 +201,5 @@ for i in tqdm(range(len(test_df))):
     obj['probabilities'] = probs
     results.append(obj)   
 
-with open(f"./results/{MODEL}-RLAIF_FrugalGRPO_aligned_generation_results.json", "w") as f:
+with open(f"./results/{MODEL}-RLAIF_RLFF_aligned_generation_results.json", "w") as f:
     json.dump(results, f, indent=4, default=json_serialiser)

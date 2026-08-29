@@ -1,0 +1,6 @@
+model,self_consistency
+Qwen2.5-7B-Instruct-RLVR_aligned,0.1
+Qwen2.5-7B-Instruct-RLAIF_pref3_aligned,0.15833333333333333
+Qwen2.5-7B-Instruct-RLAIF_FrugalGRPO_aligned,0.1
+Qwen2.5-7B-Instruct-RLAIF_MORL_aligned,0.5055555555555555
+Qwen2.5-7B-Instruct-RLAIF_RLFF_aligned,0.4277777777777778

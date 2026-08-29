@@ -1,5 +1,6 @@
 from ..Custom.Config import GRPOConfig, ModelConfigSection, QuantizationConfig, TrainingConfigSection, WandBConfigSection
 from ..Custom.FrugalGRPOTrainer import FrugalGRPOTrainer
+from ..Custom.MOGRPOTrainer import MORLGRPOTrainer
 from pathlib import Path
 from transformers import AutoTokenizer, AutoModelForSequenceClassification, BitsAndBytesConfig
 from peft import PeftModel
@@ -9,7 +10,7 @@ MODEL_ID = "Qwen/Qwen2.5-7B-Instruct"
 MODEL = MODEL_ID.split("/")[-1]
 BASE_PATH = Path(__file__).parent.parent.parent
 MODEL_PATH = BASE_PATH / "finetuning" / "tuned" / f"{MODEL}-gen-lora"
-GRPO_RESULTS_PATH = BASE_PATH / "ReinforcementLearning" / "exp" / f"experiment-Grouped-v2"
+GRPO_RESULTS_PATH = BASE_PATH / "ReinforcementLearning" / "exp" / f"experiment-morl"
 
 SFT_POLICY_PATH = BASE_PATH / "finetuning" / "tuned" / f"{MODEL}-gen-lora"
 BASE_MODEL_ID = MODEL_ID
@@ -70,7 +71,7 @@ if __name__ == '__main__':
         wandb = WandBConfigSection(
             report_to_wandb=True,
             project="rl-tuning-medical-model-alignment",
-            name=f"{MODEL}_grpo_frugal_grouped"
+            name=f"{MODEL}_grpo_morl",
         ),
         training = TrainingConfigSection(
             seed=42,
@@ -88,11 +89,10 @@ if __name__ == '__main__':
         rollout_samples=8,
         group_size=4,
     )
-    trainer = FrugalGRPOTrainer(
+    trainer = MORLGRPOTrainer(
         args=experimental_cfg, 
         reward_funcs=[reward_model],
         reward_processors=[reward_tokenizer],
-        experimental=True
     )
 
     trainer.train()

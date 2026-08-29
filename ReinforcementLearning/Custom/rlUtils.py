@@ -17,23 +17,17 @@ def Debug(fmt, *args):
 def masked_mean(tensor: torch.Tensor, 
                 mask: Optional[torch.Tensor], 
                 dim: Optional[int] = None) -> torch.Tensor:
-    if mask is not None:
+    if mask is None:
         return torch.mean(tensor, dim=dim)
-    
-    mask = mask.bool()
-    
-    # Expand mask if needed
+
+    mask = mask.to(device=tensor.device)
     while mask.dim() < tensor.dim():
         mask = mask.unsqueeze(-1)
-        mask = mask.expand_as(tensor)
+    mask = mask.expand_as(tensor).to(dtype=tensor.dtype)
 
-    masked_tensor = torch.where(
-        mask, tensor,
-        torch.tensor(0.0, device=tensor.device, dtype=tensor.dtype)
-    )
-
-    mean = masked_tensor.sum(dim=dim) / mask.sum(dim=dim).float() + 1e-8  
-    return torch.Tensor(mean, requires_grad=True)
+    masked_sum = (tensor * mask).sum(dim=dim)
+    denom = mask.sum(dim=dim).clamp(min=1e-8)
+    return masked_sum / denom
 
 def masked_whiten(
         tensor: torch.Tensor,

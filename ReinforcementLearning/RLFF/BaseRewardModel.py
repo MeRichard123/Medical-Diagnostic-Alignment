@@ -285,12 +285,27 @@ class CustomBTRewardTrainer(RewardTrainer):
         else:
             raise KeyError(f"Preference trainer expected 'chosen_input_ids'/'rejected_input_ids', 'chosen_ids'/'rejected_ids', or flat 'input_ids'/'attention_mask' in inputs; got keys: {list(inputs.keys())}")
 
-        # Extract optional ground truth and text fields for frugal reward metrics
-        # Support both 'ground_truth' and 'doctor_gt' dataset keys
+        # Extract optional ground truth and text fields for frugal reward metrics.
+        # TRL keeps raw preference strings under the canonical `chosen`/`rejected`
+        # columns, while some custom datasets also carry `chosen_text`/
+        # `rejected_text` names. Accept both to avoid losing the text during collation.
         ground_truth = inputs.get('ground_truth', None) or inputs.get('doctor_gt', None)
         prompt = inputs.get('prompt', None) or inputs.get('instruction', None)
-        chosen_text = inputs.get('chosen_text', None) or inputs.get('chosen_texts', None) or inputs.get('chosen', None)
-        rejected_text = inputs.get('rejected_text', None) or inputs.get('rejected_texts', None) or inputs.get('rejected', None)
+        chosen_text = (
+            inputs.get('chosen_text', None)
+            or inputs.get('chosen_texts', None)
+            or inputs.get('chosen', None)
+            or inputs.get('response_chosen', None)
+        )
+        rejected_text = (
+            inputs.get('rejected_text', None)
+            or inputs.get('rejected_texts', None)
+            or inputs.get('rejected', None)
+            or inputs.get('response_rejected', None)
+        )
+
+        print('chosen_text input:', chosen_text)
+        print('rejected_text input:', rejected_text)
 
         # Call the custom forward which returns (loss, r_chosen, r_rejected)
         # Try to pass all parameters; if the model doesn't accept them, fall back

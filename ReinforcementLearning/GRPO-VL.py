@@ -8,7 +8,8 @@ from huggingface_hub import login
 import torch
 from datasets import Dataset
 from .rewards import get_reward_funcs
-from trl import GRPOTrainer, GRPOConfig
+from trl.trainer.grpo_trainer import GRPOTrainer
+from trl.trainer.grpo_config import GRPOConfig
 from peft import PeftModel
 import wandb
 

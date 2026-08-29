@@ -1,3 +1,4 @@
+import copy
 import os
 import shutil
 import gc
@@ -83,6 +84,11 @@ MODEL_ID_MAPPING = {
     "Qwen2.5-7B-Instruct-RLAIF_FrugalGRPO_noscore_aligned": "Qwen/Qwen2.5-7B-Instruct",
     "Qwen2.5-7B-Instruct-RLAIF_FrugalGRPO_aligned": "Qwen/Qwen2.5-7B-Instruct",
     "Qwen2.5-7B-Instruct-RLAIF_GroupedGRPO_aligned": "Qwen/Qwen2.5-7B-Instruct",
+    "Qwen2.5-7B-Instruct-RLAIF_MORL_aligned": "Qwen/Qwen2.5-7B-Instruct",
+    "Qwen2.5-7B-Instruct-RLAIF_RLFF_aligned": "Qwen/Qwen2.5-7B-Instruct",
+    "Qwen3-VL-8B-Instruct-RLAIF-VL": "Qwen/Qwen3-VL-8B-Instruct",
+    "Qwen3-VL-8B-Instruct-morlVL": "Qwen/Qwen3-VL-8B-Instruct",
+    "Qwen3-VL-8B-Instruct-frugalVL": "Qwen/Qwen3-VL-8B-Instruct",
 }
 
 _BASE_MODEL_CACHE = {}
@@ -231,6 +237,10 @@ def _load_tokenizer_or_processor(config: ModelConfigSection) -> Union[PreTrained
         tokenizer.pad_token = tokenizer.eos_token
         tokenizer.pad_token_id = tokenizer.eos_token_id
     tokenizer.padding_side = "left"
+    if not tokenizer.bos_token:
+        print("Tokenizer does not have a bos token. Setting bos token to eos token.")
+        tokenizer.bos_token = tokenizer.eos_token
+        tokenizer.bos_token_id = tokenizer.eos_token_id
     return tokenizer
 
 
@@ -259,18 +269,24 @@ def load_base_model(
     print(f"Base model loaded with dtype: {model.dtype}")
 
     _BASE_MODEL_CACHE[cache_key] = model
-    _TOKENIZER_CACHE[cache_key] = tokenizer
+    _TOKENIZER_CACHE[cache_key] = decode_tokenizer
 
-    return model, tokenizer
+    return model, decode_tokenizer
 
 
 def load_adapter(base_model, peft_path):
     if peft_path is None:
         return base_model
 
+    try:
+        model_for_adapter = copy.deepcopy(base_model)
+    except Exception as exc:
+        print(f"Could not deep-copy base model for adapter loading: {exc}")
+        model_for_adapter = base_model
+
     print(f"Loading PEFT adaptor from {peft_path}")
     return PeftModel.from_pretrained(
-        base_model,
+        model_for_adapter,
         peft_path,
         is_trainable=False,
     )
@@ -320,7 +336,13 @@ def _build_vlm_inputs(row, processor, device):
     except (ValueError, AttributeError):
         text = vision_prompt
 
-    processor_images = [images] if images else None
+    if isinstance(text, list):
+        text = text[0] if text else ""
+    if not isinstance(text, str):
+        text = vision_prompt
+
+    processor_images = images if images else None  
+
     inputs = processor(text=text, images=processor_images, return_tensors="pt")
     return {k: v.to(device) for k, v in inputs.items()}
 
@@ -338,7 +360,7 @@ def compute_reliability_for_model(
     device,
     is_vlm=False,
     num_samples=15,
-    num_consistency=4,
+    num_consistency=10,
 ):
     """Compute reliability using a pre-loaded model."""
     dataset = pd.read_csv("./data/processed_iuxray_mcqa_dataset.csv")
@@ -375,16 +397,21 @@ def compute_reliability_for_model(
                 "do_sample": True,
             }
 
-        with torch.no_grad():
-            outputs = model.generate(
-                **prompt_input,
-                num_return_sequences=num_consistency,
-                **gen_kwargs,
-            )
+        all_generated_ids = []
+        for _ in range(num_consistency):
+            with torch.no_grad():
+                # Generate just 1 sequence per call
+                output = model.generate(
+                    **prompt_input,
+                    num_return_sequences=1,
+                    **gen_kwargs,
+                )
+                # output shape: (1, total_len) -> extract only the new tokens
+                generated_ids = output[0][input_len:]
+                all_generated_ids.append(generated_ids)
 
         diagnoses = []
-        for seq in outputs:
-            generated_ids = seq[input_len:]
+        for generated_ids in all_generated_ids:
             text = decode_tokenizer.decode(generated_ids, skip_special_tokens=True)
             diagnosis = _extract_diagnosis(text)
             if diagnosis:
@@ -410,10 +437,5 @@ def compute_self_consistency(base_model, tokenizer, peft_path, preds, gts, promp
     try:
         return compute_reliability_for_model(
             model, tokenizer, preds, gts, prompt_ids, device, is_vlm=is_vlm
-        )
-    finally:
-        del model
-        if torch.cuda.is_available():
-            torch.cuda.empty_cache()
-        gc.collect()
+        ), model
 

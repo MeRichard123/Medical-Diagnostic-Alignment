@@ -1,5 +1,7 @@
+import math
 import re
-from transformers import AutoModelForCausalLM, AutoTokenizer
+from sentence_transformers import SentenceTransformer
+from transformers import AutoModelForCausalLM, AutoModelForSequenceClassification, AutoTokenizer
 import torch
 import torch.nn.functional as F
 from .BaseRewardModel import (
@@ -26,57 +28,70 @@ DEFAULT_DATASET =  Path(__file__).parent.parent / 'intermediate' / 'preference_d
 DEFAULT_SAMPLES = 5000
 DEFAULT_BATCH_SIZE = 2
 DEFAULT_GRAD_ACCUM = 16
-DEFAULT_MAX_LENGTH = 512
+DEFAULT_MAX_LENGTH = 256
 DEFAULT_EPOCHS = 1
 DEFAULT_LR = 5e-5
 DEFAULT_WARMUP_RATIO = 0.1
 DEFAULT_SEED = 42
 
+BASE_PATH = Path(__file__).parent.parent.parent
 
-def extract_judge_score(answer: str, split_str: str = "Total rating:") -> int:
-    try:
-        if split_str in answer:
-            rating = answer.split(split_str)[1]
-        else:
-            rating = answer
-        digit_groups = [el.strip() for el in re.findall(r"\d+(?:\.\d+)?", rating)]
-        return float(digit_groups[0])
-    except Exception as e:
-        print(e)
-        return None
+MODEL_ID = "Qwen/Qwen2.5-7B-Instruct"
+MODEL = MODEL_ID.split("/")[-1]
+SFT_POLICY_PATH = BASE_PATH / "finetuning" / "tuned" / f"{MODEL}-gen-lora"
+BASE_MODEL_ID = MODEL_ID
+REWARD_MODEL_PATH = BASE_PATH / "ReinforcementLearning" / "intermediate" / "reward_model_4o-Preferences"
 
-def llm_judge(question: str, answer: str, doctor_gt: str) -> float:
-    prompt = """You are an expert medical judge. Evaluate clinical correctness.
+reward_tokenizer = AutoTokenizer.from_pretrained(MODEL_ID, use_fast=True)
+if reward_tokenizer.pad_token is None:
+    reward_tokenizer.pad_token = reward_tokenizer.eos_token
+if getattr(reward_tokenizer, "pad_token_id", None) is None and reward_tokenizer.eos_token_id is not None:
+    reward_tokenizer.pad_token_id = reward_tokenizer.eos_token_id
 
-    Question: {question}
+reward_base = AutoModelForSequenceClassification.from_pretrained(
+    BASE_MODEL_ID,
+    num_labels=1,
+    low_cpu_mem_usage=True,
+    offload_buffers=True,
+    offload_folder=str(BASE_PATH / "offload"),
+    quantization_config= BitsAndBytesConfig(
+        load_in_4bit=True,
+        bnb_4bit_quant_type="nf4",
+        bnb_4bit_compute_dtype=torch.bfloat16,
+        bnb_4bit_use_double_quant=True,
+    ),
+    device_map="auto",
+)
+print("Loaded Reward Model Base from:", BASE_MODEL_ID)
+reward_model = PeftModel.from_pretrained(
+    reward_base,
+    REWARD_MODEL_PATH,
+    is_trainable=False,
+    offload_buffers=True,
+    offload_folder=str(BASE_PATH / "offload"),
+)
+print(f"Loaded Reward Model from PEFT path: {REWARD_MODEL_PATH}")
+reward_model.eval()
+for param in reward_model.parameters():
+    param.requires_grad = False
 
-    Rubric (1-5):
-    1=clinically wrong  2=mostly wrong  3=partially correct  4=mostly correct  5=fully correct
+# set reward model padding token 
+reward_model.config.pad_token_id = reward_tokenizer.pad_token_id
 
-    Doctor ground truth: {doctor_gt}
-    Answer: {answer}
-
-    Return JSON only in the form: {{"score_a": <1-5>, "explanation": "<one sentence>"}}
-    """
-    output = llm_client.text_generation(
-        prompt=prompt.format(question=question, answer=answer, doctor_gt=doctor_gt),
-        max_new_tokens=1000,
-    )
-    # output may be a complex object; attempt to extract text
-    response = getattr(output, 'generated_text', None) or str(output)
-    score = extract_judge_score(response)
-    return score
 
 class FrugalRewardModel(torch.nn.Module):
-    def __init__(self, policy_model=None, judge_model=None, tokenizer=None, num_consistency_samples: int = 4, **kwargs):
+    def __init__(self, policy_model=None, reward_funcs=None, reward_processors=None, tokenizer=None, num_consistency_samples: int = 4, **kwargs):
         super().__init__()
         self.t_acc = torch.nn.Parameter(torch.tensor(1.0, dtype=torch.float32))
         self.t_score = torch.nn.Parameter(torch.tensor(1.0, dtype=torch.float32))
         self.t_reliab = torch.nn.Parameter(torch.tensor(1.0, dtype=torch.float32))
         self.t_miscalib = torch.nn.Parameter(torch.tensor(1.0, dtype=torch.float32))
+        self.sentence_embedding_model = SentenceTransformer("all-MiniLM-L6-v2") 
+
         
         self.policy_model = policy_model
-        self.judge_model = judge_model
+        self.reward_funcs = reward_funcs or []          # list of callables or models
+        self.reward_processors = reward_processors or [] # tokenizers/processors for each model
         self.tokenizer = tokenizer
         self.num_consistency_samples = num_consistency_samples
 
@@ -88,63 +103,89 @@ class FrugalRewardModel(torch.nn.Module):
     def device(self) -> torch.device:
         return next(self.parameters()).device
 
-    def acc(self, input_ids: torch.Tensor, attention_mask: torch.Tensor, ground_truth=None, text=None):
-        """Accuracy: 1.0 if prediction matches doctor's ground truth, 0.0 otherwise.
-        
-        Args:
-            text: The predicted response text (assumes it ends with the diagnosis).
-            ground_truth: The correct diagnosis label.
-        """
+    def acc(self, input_ids, attention_mask, ground_truth=None, text=None):
         if ground_truth is None or text is None:
             return self._placeholder_metric(input_ids)
-        
-        batch_size = input_ids.shape[0] if input_ids.ndim > 1 else 1
-        # Extract diagnosis from text (last line or last 1-4 words)
-        if isinstance(text, str):
-            text = [text]
-        if isinstance(ground_truth, str):
-            ground_truth = [ground_truth]
-        
-        accs = []
-        for pred, gt in zip(text, ground_truth):
-            pred_diagnosis = pred.strip().split('\n')[-1].strip() if pred else ""
-            match = 1.0 if pred_diagnosis.lower() == gt.lower() else 0.0
-            accs.append(match)
-        
-        return torch.tensor(accs, device=input_ids.device, dtype=torch.float32)
+        # ensure lists
+        if isinstance(text, str): text = [text]
+        if isinstance(ground_truth, str): ground_truth = [ground_truth]
+        # compute embeddings and cosine similarity
+        gt_emb = self.sentence_embedding_model.encode(ground_truth, convert_to_tensor=True)
+        pred_emb = self.sentence_embedding_model.encode(text, convert_to_tensor=True)
+        sim = F.cosine_similarity(gt_emb, pred_emb, dim=1)  # shape (batch_size,)
+        return ((sim + 1) / 2).to(input_ids.device)   # scale to [0,1]
     
-    def score(self, question, answer, doctor_gt, input_ids: torch.Tensor = None) -> torch.Tensor:
-        """LLM-judge score: question, answer, doctor_gt -> tensor in [0,1].
+    def score(self, text, ground_truth, input_ids=None) -> torch.Tensor | None:
+            """Returns tensor of shape (batch_size,) using reward_funcs/reward_processors."""
+            if not self.reward_funcs:
+                # fallback to placeholder
+                return self._placeholder_metric(input_ids) if input_ids is not None else torch.tensor([0.0], device=self.device)
 
-        `question`, `answer`, and `doctor_gt` can be strings or lists of strings.
-        If `input_ids` is provided it is used to determine the device and batch size;
-        otherwise `self.device` is used.
+            if isinstance(text, str):
+                text = [text]
+            if isinstance(ground_truth, str):
+                ground_truth = [ground_truth]
+
+            batch_size = len(text)
+            device = input_ids.device if input_ids is not None else self.device
+
+        
+            total_rewards = None
+            for func, processor in zip(self.reward_funcs, self.reward_processors):
+                # If it's a callable that takes (text, ground_truth) directly:
+                if callable(func) and not isinstance(func, torch.nn.Module):
+                    pass
+                else:
+                    # It's a reward model (torch.nn.Module)
+                    if processor is not None:
+                        # Tokenize the text (just the response)
+                        inputs = processor(text, padding=True, return_tensors='pt', truncation=True)
+                        inputs = {k: v.to(device) for k, v in inputs.items()}
+                    else:
+                        inputs = {'input_ids': torch.tensor([0]).to(device)}  # fallback
+
+                    func = func.to(device)
+                    with torch.no_grad():
+                        outputs = func(**inputs)
+                        reward_i = outputs.logits.squeeze(-1) if hasattr(outputs, "logits") else outputs.squeeze(-1)
+                        if reward_i.dim() == 0:
+                            reward_i = reward_i.unsqueeze(0)
+                        if reward_i.shape[0] != batch_size:
+                            reward_i = reward_i.repeat(batch_size)
+
+                    if total_rewards is None:
+                        total_rewards = reward_i
+                    else:
+                        total_rewards += reward_i
+
+            if total_rewards is not None:
+                return total_rewards
+            else:
+                # fallback if no model gave a result
+                return torch.zeros(batch_size, device=device, dtype=torch.float32)
+
+    def _confidence_from_logprobs(self, mask: torch.Tensor, logprobs: torch.Tensor) -> torch.Tensor:
+            """Per-sample confidence in [0,1], derived from mean token logprob."""
+            mask = mask.float()
+            token_counts = mask.sum(dim=1).clamp(min=1)
+            mean_logprob = (logprobs * mask).sum(dim=1) / token_counts
+            confidence = torch.exp(mean_logprob)
+            has_tokens = mask.sum(dim=1) > 0
+            confidence = torch.where(has_tokens, confidence, torch.full_like(confidence, 0.5))
+            return confidence   
+
+    def calibration_alignment(self, confidence: torch.Tensor, accuracy: torch.Tensor) -> torch.Tensor:
         """
-        if self.judge_model is None or answer is None:
-            # Return placeholder matching batch size
-            if input_ids is not None and isinstance(input_ids, torch.Tensor):
-                return self._placeholder_metric(input_ids)
-            return torch.tensor([0.0], device=self.device, dtype=torch.float32)
-
-        # Normalize to lists
-        if isinstance(question, str):
-            question = [question]
-        if isinstance(answer, str):
-            answer = [answer]
-        if isinstance(doctor_gt, str):
-            doctor_gt = [doctor_gt]
-
-        scores = []
-        for q, a, gt in zip(question, answer, doctor_gt):
-            try:
-                sc = llm_judge(q, a, gt)
-                scores.append((float(sc) / 5.0) if sc is not None else 0.0)
-            except Exception as e:
-                print(f"Error in score(): {e}")
-                scores.append(0.0)
-
-        device = input_ids.device if (input_ids is not None and isinstance(input_ids, torch.Tensor)) else self.device
-        return torch.tensor(scores, device=device, dtype=torch.float32)
+        Per-sample alignment utility (batch_size,): negative perpendicular
+        distance from (confidence, accuracy) to the y=x line. 0 = perfectly
+        calibrated (confidence exactly matches accuracy); more negative = further
+        off the line in either direction (over- or under-confident). Higher
+        (closer to 0) is better, matching the 'higher = better' convention of
+        other utilities.
+        """
+        diff = accuracy - confidence
+        dist = torch.abs(diff) / math.sqrt(2.0)
+        return -dist
         
         
 
@@ -200,14 +241,13 @@ class FrugalRewardModel(torch.nn.Module):
         
         return torch.tensor(reliab_scores, device=input_ids.device, dtype=torch.float32)
 
-    def miscalib(self, input_ids: torch.Tensor, attention_mask: torch.Tensor, ground_truth=None, text=None):
-        """Miscalibration: Expected Calibration Error (ECE) placeholder.
-        
-        For now, use a simple proxy: if confidence (all 1s from model) doesn't match accuracy.
+    def miscalib(self, input_ids: torch.Tensor, attention_mask: torch.Tensor, ground_truth=None, text=None, logprobs=None):
+        """Miscalibration: Expected Calibration Error (ECE) based on logprobs vs accuracy.
         
         Args:
             text: The response text.
             ground_truth: The correct label.
+            logprobs: Token-level log probabilities for confidence estimation.
         
         Returns:
             Miscalibration score (0 = well-calibrated, higher = worse).
@@ -220,42 +260,119 @@ class FrugalRewardModel(torch.nn.Module):
         if isinstance(ground_truth, str):
             ground_truth = [ground_truth]
         
-        miscalibs = []
-        for pred, gt in zip(text, ground_truth):
-            pred_diagnosis = pred.strip().split('\n')[-1].strip() if pred else ""
-            is_correct = 1.0 if pred_diagnosis.lower() == gt.lower() else 0.0
-            # Assume model confidence is always high (model always outputs something)
-            # Miscalibration = |confidence - accuracy|, confidence ≈ 1.0
-            miscalib = abs(1.0 - is_correct)
-            miscalibs.append(miscalib)
+        # Compute accuracy
+        accuracy = self.acc(input_ids, attention_mask, ground_truth=ground_truth, text=text)
         
-        return torch.tensor(miscalibs, device=input_ids.device, dtype=torch.float32)
+        # Compute confidence from logprobs if available
+        if logprobs is not None:
+            confidence = self._confidence_from_logprobs(attention_mask, logprobs)
+        else:
+            # Fallback: assume high confidence
+            confidence = torch.ones_like(accuracy)
+        
+        # Miscalibration = |confidence - accuracy|
+        miscalib = torch.abs(confidence - accuracy)
+        return miscalib
 
     def _positive_temp(self, temp: torch.Tensor) -> torch.Tensor:
         return F.softplus(temp) + 1e-6
 
-    def U_plus(self, input_ids: torch.Tensor, attention_mask: torch.Tensor, ground_truth=None, text=None, prompt=None) -> torch.Tensor:
-        delta_plus = (
-            self.acc(input_ids, attention_mask, ground_truth=ground_truth, text=text) / self._positive_temp(self.t_acc)
-            + self.score(prompt, text, ground_truth, input_ids=input_ids) / self._positive_temp(self.t_score)
+    def get_logprobs(self, input_ids: torch.Tensor, attention_mask: torch.Tensor) -> torch.Tensor:
+        """Extract token-level log probabilities from model forward pass.
+        
+        Args:
+            input_ids: Token IDs, shape (batch_size, seq_len)
+            attention_mask: Attention mask, shape (batch_size, seq_len)
+        
+        Returns:
+            Token log probabilities, shape (batch_size, seq_len)
+        """
+        if self.policy_model is None:
+            return torch.zeros_like(input_ids, dtype=torch.float32)
+        
+        outputs = self.policy_model(
+            input_ids=input_ids,
+            attention_mask=attention_mask,
         )
-        return torch.tanh(delta_plus)
+        
+        # Get logits and compute log probabilities
+        logits = outputs.logits  # Shape: (batch_size, seq_len, vocab_size)
+        log_probs = F.log_softmax(logits, dim=-1)  # Shape: (batch_size, seq_len, vocab_size)
+        
+        # Gather log probabilities for the actual tokens
+        input_ids_expanded = input_ids.unsqueeze(-1)  # (batch_size, seq_len, 1)
+        token_log_probs = log_probs.gather(-1, input_ids_expanded).squeeze(-1)  # (batch_size, seq_len)
+        
+        # Keep the graph: the preference loss must update the policy adapter.
+        return token_log_probs
+
+    def U_plus(self, input_ids: torch.Tensor, attention_mask: torch.Tensor, ground_truth=None, text=None, prompt=None) -> torch.Tensor:
+        """Returns tensor of shape (batch_size, 2) with [score_component, accuracy_component]"""
+        batch_size = input_ids.shape[0] if input_ids.ndim > 1 else 1
+        
+        # Handle string inputs
+        if isinstance(text, str):
+            text = [text]
+        if isinstance(ground_truth, str):
+            ground_truth = [ground_truth]
+        
+        # Compute accuracy for each sample in batch (detached from graph)
+        accuracy = self.acc(input_ids, attention_mask, ground_truth=ground_truth, text=text)
+        accuracy_scaled = accuracy * self.t_acc
+        
+        # Compute reward model scores (detached from graph)
+        reward_model_score = self.score(text, ground_truth, input_ids=input_ids)
+        
+        if reward_model_score is not None and isinstance(reward_model_score, torch.Tensor):
+            # Scale with temperature and tanh to prevent explosion
+            reward_scaled = torch.tanh(reward_model_score / 5.0)  # Bound to [-1, 1]
+            reward_scaled = reward_scaled * self.t_score
+            
+            score_col = reward_scaled.unsqueeze(1)  # (batch_size, 1)
+            acc_col = accuracy_scaled.unsqueeze(1)  # (batch_size, 1)
+            return torch.cat([score_col, acc_col], dim=1)  # (batch_size, 2)
+        
+        # Fallback: return accuracy for both components
+        acc_col = accuracy_scaled.unsqueeze(1)  # (batch_size, 1)
+        return torch.cat([acc_col, acc_col], dim=1)  # (batch_size, 2)
     
 
-    def U_minus(self, input_ids: torch.Tensor, attention_mask: torch.Tensor, ground_truth=None, text=None, prompt=None) -> torch.Tensor:
-        delta_minus = (
-            self.reliab(input_ids, attention_mask, prompt=prompt) / self._positive_temp(self.t_reliab)
-            + self.miscalib(input_ids, attention_mask, ground_truth=ground_truth, text=text) / self._positive_temp(self.t_miscalib)
+    def U_minus(self, input_ids: torch.Tensor, attention_mask: torch.Tensor, ground_truth=None, text=None, prompt=None, logprobs=None) -> torch.Tensor:
+        """Returns tensor of shape (batch_size, 2) with [miscalib_component, calib_align_component]"""
+        batch_size = input_ids.shape[0] if input_ids.ndim > 1 else 1
+        
+        if isinstance(text, str):
+            text = [text]
+        if isinstance(ground_truth, str):
+            ground_truth = [ground_truth]
+        
+        # Compute miscalibration (higher = worse)
+        miscalib = self.miscalib(
+            input_ids,
+            attention_mask,
+            ground_truth=ground_truth,
+            text=text,
+            logprobs=logprobs,
         )
-        return torch.tanh(delta_minus)
+        miscalib_scaled = miscalib * self.t_miscalib
+        miscalib_col = miscalib_scaled.reshape(-1, 1)
+
+        if logprobs is not None:
+            confidence = self._confidence_from_logprobs(attention_mask, logprobs)
+            accuracy = self.acc(input_ids, attention_mask, ground_truth=ground_truth, text=text)
+            calib_align = self.calibration_alignment(confidence, accuracy)
+            calib_align_scaled = calib_align * self.t_reliab
+            calib_col = calib_align_scaled.reshape(-1, 1)
+            return torch.cat([miscalib_col, calib_col], dim=1)
+        
+        return torch.cat([miscalib_col, miscalib_col], dim=1)  # fallback, keep width=2
 
 
-    def get_reward(self, input_ids: torch.Tensor, attention_mask: torch.Tensor, ground_truth=None, text=None, prompt=None) -> torch.Tensor:
+    def get_reward(self, input_ids: torch.Tensor, attention_mask: torch.Tensor, ground_truth=None, text=None, prompt=None, logprobs=None) -> torch.Tensor:
         """Compute the frugal reward as U_plus - U_minus."""
-        reward = (
-            self.U_plus(input_ids, attention_mask, ground_truth=ground_truth, text=text, prompt=prompt) 
-            - self.U_minus(input_ids, attention_mask, ground_truth=ground_truth, text=text, prompt=prompt)
-        )
+        u_plus = self.U_plus(input_ids, attention_mask, ground_truth=ground_truth, text=text, prompt=prompt)
+        u_minus = self.U_minus(input_ids, attention_mask, ground_truth=ground_truth, text=text, prompt=prompt, logprobs=logprobs)
+        reward = u_plus - u_minus
         return reward
 
     def forward(
@@ -269,29 +386,65 @@ class FrugalRewardModel(torch.nn.Module):
         chosen_text=None,
         rejected_text=None,
         prompt=None,
+        chosen_logprobs=None,
+        rejected_logprobs=None,
     ) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
         """Compute Bradley-Terry preference loss with frugal reward metrics.
 
         Returns:
             loss: -log(sigmoid(r_chosen - r_rejected))
             r_chosen: Rewards for chosen responses
-            r_rejected: Rewards for rejected responses
+            r_rejected: Rewards for rejected response
         """
+        print(rejected_text)
+        print(chosen_text)
+        # Compute logprobs if not provided
+        if chosen_logprobs is None:
+            chosen_logprobs = self.get_logprobs(chosen_ids, chosen_mask)
+        if rejected_logprobs is None:
+            rejected_logprobs = self.get_logprobs(rejected_ids, rejected_mask)
+        
         r_chosen = self.get_reward(
             chosen_ids, chosen_mask,
             ground_truth=ground_truth_chosen,
             text=chosen_text,
-            prompt=prompt
+            prompt=prompt,
+            logprobs=chosen_logprobs
         )
         r_rejected = self.get_reward(
             rejected_ids, rejected_mask,
             ground_truth=ground_truth_rejected,
             text=rejected_text,
-            prompt=prompt
+            prompt=prompt,
+            logprobs=rejected_logprobs
         )
 
-        # Bradley-Terry loss
-        loss = -F.logsigmoid(r_chosen - r_rejected).mean()
+        # Bradley-Terry loss (use mean of both components if 2D)
+        r_chosen_scalar = r_chosen.mean(dim=1) if r_chosen.dim() > 1 else r_chosen
+        r_rejected_scalar = r_rejected.mean(dim=1) if r_rejected.dim() > 1 else r_rejected
+
+        print("\n--- BT DEBUG ---")
+        print("chosen reward:")
+        print(r_chosen.detach().cpu())
+
+        print("rejected reward:")
+        print(r_rejected.detach().cpu())
+
+        print("chosen scalar:",
+            r_chosen_scalar.detach().cpu())
+
+        print("rejected scalar:",
+            r_rejected_scalar.detach().cpu())
+
+        print("reward difference:",
+            (r_chosen_scalar - r_rejected_scalar).detach().cpu())
+
+        print("temperatures:")
+        print("t_acc     =", self._positive_temp(self.t_acc).item())
+        print("t_score   =", self._positive_temp(self.t_score).item())
+        print("t_reliab  =", self._positive_temp(self.t_reliab).item())
+        print("t_miscalib=", self._positive_temp(self.t_miscalib).item())
+        loss = -F.logsigmoid(r_chosen_scalar - r_rejected_scalar).mean()
 
         return loss, r_chosen, r_rejected
 
@@ -300,7 +453,7 @@ def train_preference_rm_trl(
     dataset_path: Path | None = None,
     output_dir: str | None = None,
     num_train_epochs: int = 3,
-    per_device_train_batch_size: int = 8,
+    per_device_train_batch_size: int = 2,
     use_wandb: bool = True,
     wandb_run_name: str = 'reward-model-bt-tanh',
     policy_model=None,
@@ -349,16 +502,33 @@ def train_preference_rm_trl(
             'rejected_attention_mask': rejected_enc['attention_mask'],
         }
 
+    def normalize_text(value):
+        if value is None:
+            return ""
+        if isinstance(value, (list, tuple)):
+            value = " ".join(str(v) for v in value if v is not None)
+        value = str(value)
+        if value == 'nan' or value.strip() == '':
+            return ""
+        return value
+
     data_list = []
     for _, row in pref_df.iterrows():
-        pair = tokenize_pair(row['chosen'], row['rejected'])
-        pair['doctor_gt'] = row['doctor_gt']
-        pair['instruction'] = row['instruction']
-        pair['chosen_text'] = row['chosen']
-        pair['rejected_text'] = row['rejected']
+        chosen_text = normalize_text(row['chosen'])
+        rejected_text = normalize_text(row['rejected'])
+        pair = tokenize_pair(chosen_text, rejected_text)
+        pair['doctor_gt'] = normalize_text(row['doctor_gt'])
+        pair['instruction'] = normalize_text(row['instruction'])
+        pair['chosen'] = chosen_text
+        pair['rejected'] = rejected_text
+        pair['chosen_text'] = chosen_text
+        pair['rejected_text'] = rejected_text
+
         data_list.append(pair)
 
-    # Create dataset
+    # Create dataset. Keep both raw TRL names (`chosen`/`rejected`) and custom names
+    # (`chosen_text`/`rejected_text`) so the trainer can access the text in
+    # `compute_loss()` even after TRL tokenization/collation.
     train_dataset = Dataset.from_dict({
         'chosen_input_ids': [d['chosen_input_ids'] for d in data_list],
         'chosen_attention_mask': [d['chosen_attention_mask'] for d in data_list],
@@ -366,6 +536,8 @@ def train_preference_rm_trl(
         'rejected_attention_mask': [d['rejected_attention_mask'] for d in data_list],
         'doctor_gt': [d['doctor_gt'] for d in data_list],
         'instruction': [d['instruction'] for d in data_list],
+        'chosen': [d['chosen'] for d in data_list],
+        'rejected': [d['rejected'] for d in data_list],
         'chosen_text': [d['chosen_text'] for d in data_list],
         'rejected_text': [d['rejected_text'] for d in data_list],
     })
@@ -376,14 +548,101 @@ def train_preference_rm_trl(
     train_dataset = train_eval_split['train']
     eval_dataset = train_eval_split['test']
 
+    class PreferenceTextCollator:
+        def __init__(self, tokenizer, max_length):
+            self.tokenizer = tokenizer
+            self.max_length = max_length
+
+        def __call__(self, features):
+            def normalize_text(value):
+                if value is None:
+                    return ""
+                if isinstance(value, (list, tuple)):
+                    value = " ".join(str(v) for v in value if v is not None)
+                value = str(value)
+                if value == 'nan' or value.strip() == '':
+                    return ""
+                return value
+
+            chosen_texts = []
+            rejected_texts = []
+            ground_truths = []
+            prompts = []
+
+            for f in features:
+                # Try to get raw text from various possible keys
+                chosen = f.get('chosen_text', f.get('chosen'))
+                rejected = f.get('rejected_text', f.get('rejected'))
+                gt = f.get('doctor_gt', f.get('ground_truth'))
+                prompt = f.get('instruction', f.get('prompt'))
+
+                # If text is missing, decode token IDs if present
+                if chosen is None and 'chosen_input_ids' in f:
+                    chosen = self.tokenizer.decode(f['chosen_input_ids'], skip_special_tokens=True)
+                if rejected is None and 'rejected_input_ids' in f:
+                    rejected = self.tokenizer.decode(f['rejected_input_ids'], skip_special_tokens=True)
+                # Also support 'chosen_ids' if that's the key
+                if chosen is None and 'chosen_ids' in f:
+                    chosen = self.tokenizer.decode(f['chosen_ids'], skip_special_tokens=True)
+                if rejected is None and 'rejected_ids' in f:
+                    rejected = self.tokenizer.decode(f['rejected_ids'], skip_special_tokens=True)
+
+                chosen_texts.append(normalize_text(chosen))
+                rejected_texts.append(normalize_text(rejected))
+                ground_truths.append(normalize_text(gt))
+                prompts.append(normalize_text(prompt))
+
+            # Tokenize chosen and rejected (for the reward model's input)
+            chosen_enc = self.tokenizer(
+                chosen_texts,
+                padding=True,
+                truncation=True,
+                max_length=self.max_length,
+                return_tensors='pt'
+            )
+            rejected_enc = self.tokenizer(
+                rejected_texts,
+                padding=True,
+                truncation=True,
+                max_length=self.max_length,
+                return_tensors='pt'
+            )
+
+            batch = {
+                'chosen_input_ids': chosen_enc['input_ids'],
+                'chosen_attention_mask': chosen_enc['attention_mask'],
+                'rejected_input_ids': rejected_enc['input_ids'],
+                'rejected_attention_mask': rejected_enc['attention_mask'],
+                'chosen_text': chosen_texts,
+                'rejected_text': rejected_texts,
+                'doctor_gt': ground_truths,
+                'instruction': prompts,
+            }
+            return batch
+
     # Initialize your custom preference reward model
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     preference_model = FrugalRewardModel(
         policy_model=policy_model,
-        judge_model=judge_model,
+        reward_funcs=[reward_model],
+        reward_processors=[reward_tokenizer],
         tokenizer=tokenizer,
         num_consistency_samples=4
-    ).to(device)
+    ).to(device)    
+
+    policy_trainable_params = [
+        parameter for parameter in preference_model.policy_model.parameters()
+        if parameter.requires_grad
+    ] if preference_model.policy_model is not None else []
+    if not policy_trainable_params:
+        raise RuntimeError(
+            "The policy model has no trainable parameters. Load the PEFT adapter "
+            "with is_trainable=True before starting reward-model training."
+        )
+    print(
+        "Trainable policy parameters:",
+        sum(parameter.numel() for parameter in policy_trainable_params),
+    )
     
     # Wrap it with the adapter (for TRL compatibility)
     adapter_model = PreferenceRewardModelTRLAdapter(preference_model)
@@ -433,11 +692,20 @@ def train_preference_rm_trl(
         train_dataset=train_dataset,
         eval_dataset=eval_dataset,
         processing_class=tokenizer,
+        data_collator=PreferenceTextCollator(tokenizer, DEFAULT_MAX_LENGTH),
         args=training_args,
     )
 
     trainer.train()
     trainer.save_model(output_dir)
+
+    # TRL saves the reward-training wrapper. Save the actual policy adapter
+    # separately so it can be loaded with PeftModel.from_pretrained().
+    policy_adapter_output_dir = Path(output_dir) / "policy_adapter"
+    policy_adapter_output_dir.mkdir(parents=True, exist_ok=True)
+    preference_model.policy_model.save_pretrained(policy_adapter_output_dir)
+    tokenizer.save_pretrained(policy_adapter_output_dir)
+    print(f"Saved trained policy adapter to: {policy_adapter_output_dir}")
     
     finish_wandb()
     return preference_model
@@ -468,12 +736,13 @@ if __name__ == "__main__":
     )
     print("Loaded Policy Model Base from:", BASE_MODEL_ID)
     policy_model = PeftModel.from_pretrained(
-        policy_base,
+        policy_base,    
         SFT_POLICY_PATH,
         is_trainable=True,
         offload_buffers=True,
         offload_folder=str(BASE_PATH / "offload"),
     )
+    policy_model.gradient_checkpointing_enable()
     print(f"Loaded Policy Model from PEFT path: {SFT_POLICY_PATH}")
 
 
@@ -482,6 +751,7 @@ if __name__ == "__main__":
         output_dir=str(Path(__file__).parent.parent / 'RLFF' / 'Reward_Models' / 'reward_model_BT_frugal'),
         wandb_run_name='reward-model-bt-frugal',
         policy_model=policy_model,
+        judge_model=reward_model,
         )
 
 

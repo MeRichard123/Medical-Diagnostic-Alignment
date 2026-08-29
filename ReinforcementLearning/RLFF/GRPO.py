@@ -3,7 +3,7 @@ from ..Custom.FrugalGRPOTrainer import FrugalGRPOTrainer
 from pathlib import Path
 from transformers import AutoTokenizer, AutoModelForSequenceClassification, BitsAndBytesConfig
 from peft import PeftModel
-import torch
+import torch, types
 
 MODEL_ID = "Qwen/Qwen2.5-7B-Instruct"
 MODEL = MODEL_ID.split("/")[-1]
@@ -13,8 +13,7 @@ GRPO_RESULTS_PATH = BASE_PATH / "ReinforcementLearning" / "grpo_results" / f"{MO
 
 SFT_POLICY_PATH = BASE_PATH / "finetuning" / "tuned" / f"{MODEL}-gen-lora"
 BASE_MODEL_ID = MODEL_ID
-REWARD_MODEL_PATH = BASE_PATH / "ReinforcementLearning" / "intermediate" / "reward_model_4o-Preferences"
-    
+REWARD_MODEL_PATH = BASE_PATH / "ReinforcementLearning" / "RLFF" / "Reward_Models" / "reward_model_BT_frugal" / "policy_adapter"
 
 reward_tokenizer = AutoTokenizer.from_pretrained(MODEL_ID, use_fast=True)
 if reward_tokenizer.pad_token is None:
@@ -36,6 +35,16 @@ reward_base = AutoModelForSequenceClassification.from_pretrained(
     ),
     device_map="auto",
 )
+
+def dummy_prepare_inputs_for_generation(self, input_ids, **kwargs):
+    # Return the minimal dict required by the forward pass.
+    return {"input_ids": input_ids, **kwargs}
+
+if not hasattr(reward_base, 'prepare_inputs_for_generation'):
+    reward_base.prepare_inputs_for_generation = types.MethodType(
+        dummy_prepare_inputs_for_generation, reward_base
+    )
+
 print("Loaded Reward Model Base from:", BASE_MODEL_ID)
 reward_model = PeftModel.from_pretrained(
     reward_base,

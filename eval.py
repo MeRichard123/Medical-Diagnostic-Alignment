@@ -2,12 +2,13 @@ import os
 import json
 import numpy as np
 import torch
-from Evaluation.Evaluator import QAEvaluator, VisionEvaluator, ReportEvaluator
+from Evaluation.Evaluator import QAEvaluator, VisionEvaluator, ReportEvaluator, compute_kl_divergence
 from pathlib import Path
 from typing import Optional
 from Evaluation.reliability import (
     MODEL_ID_MAPPING,
     load_base_model,
+    load_adapter,
     compute_self_consistency,
     cleanup_base_model_cache,
 )
@@ -71,7 +72,7 @@ trained_vision = [
 ]
 
 finetuned_generation = [
-    #"Qwen2.5-7B-Instruct-finetuned",
+    "Qwen2.5-7B-Instruct-finetuned",
     "gemma-3-4b-it-finetuned",
     "medgemma-4b-it-finetuned",
     "meditron-7b-finetuned",
@@ -88,15 +89,20 @@ LORA_Tuned_Paths = {
 
 # TODO: Add RL models once results are available
 reinforcement_learning_models = [
-    #"Qwen2.5-7B-Instruct-RLVR_aligned",
+    "Qwen2.5-7B-Instruct-RLVR_aligned",
     "Qwen3-VL-8B-Instruct-RLVR_aligned",
-    #"Qwen2.5-7B-Instruct-RLAIF_aligned",
-    #"Qwen2.5-7B-Instruct-RLAIF_tanh-tanh_aligned",
-    #"Qwen2.5-7B-Instruct-RLAIF_pref3_aligned",
-    #"Qwen2.5-7B-Instruct-RLAIF_custom_GRPO_aligned",
-    # "Qwen2.5-7B-Instruct-RLAIF_FrugalGRPO_noscore_aligned",
-    # "Qwen2.5-7B-Instruct-RLAIF_FrugalGRPO_aligned",
-    #"Qwen2.5-7B-Instruct-RLAIF_GroupedGRPO_aligned",
+    "Qwen2.5-7B-Instruct-RLAIF_aligned",
+    "Qwen2.5-7B-Instruct-RLAIF_tanh-tanh_aligned",
+    "Qwen2.5-7B-Instruct-RLAIF_pref3_aligned",
+    "Qwen2.5-7B-Instruct-RLAIF_custom_GRPO_aligned",
+    "Qwen2.5-7B-Instruct-RLAIF_FrugalGRPO_noscore_aligned",
+    "Qwen2.5-7B-Instruct-RLAIF_FrugalGRPO_aligned",
+    "Qwen2.5-7B-Instruct-RLAIF_GroupedGRPO_aligned",
+    "Qwen2.5-7B-Instruct-RLAIF_MORL_aligned",
+    "Qwen2.5-7B-Instruct-RLAIF_RLFF_aligned",
+    "Qwen3-VL-8B-Instruct-RLAIF-VL",
+    "Qwen3-VL-8B-Instruct-morlVL",
+    "Qwen3-VL-8B-Instruct-frugalVL",
 ]
 
 BASE_RL = BASE_PATH / "ReinforcementLearning"
@@ -113,15 +119,20 @@ RL_Tuned_Paths = {
     "Qwen2.5-7B-Instruct-RLAIF_FrugalGRPO_noscore_aligned":BASE_RL/'grpo_results'/'Qwen2.5-7B-Instruct-gen-lora-grpo-frugal-accmiscal'/'final_model',
     "Qwen2.5-7B-Instruct-RLAIF_FrugalGRPO_aligned": BASE_RL / 'grpo_results' / 'Qwen2.5-7B-Instruct-gen-lora-grpo-frugal-v1' / 'final_model',
     "Qwen2.5-7B-Instruct-RLAIF_GroupedGRPO_aligned": BASE_RL / 'exp' / 'experiment-Grouped' / 'final_model',
+    "Qwen2.5-7B-Instruct-RLAIF_MORL_aligned": BASE_RL / 'exp' / 'experiment-MORL' / 'final_model',
+    "Qwen2.5-7B-Instruct-RLAIF_RLFF_aligned": BASE_RL / 'exp' / 'experiment-RLFF' / 'final_model',
+    "Qwen3-VL-8B-Instruct-RLAIF-VL": BASE_RL / 'intermediate' / 'grpo_model_4o-Preferences-vl',
+    "Qwen3-VL-8B-Instruct-morlVL": BASE_RL / 'exp' / 'experiment-morlVL' / 'final_model',
+    "Qwen3-VL-8B-Instruct-frugalVL": BASE_RL / 'exp' / 'experiment-frugalVL' / 'final_model',
 }
 
 
 generation_task = [
-    #"Qwen2.5-7B-Instruct", 
+    "Qwen2.5-7B-Instruct", 
     "medgemma-4b-it", 
     "meditron-7b", 
     "medical-coding-llm",
-    #"Meta-Llama-3.1-8B-Instruct-bnb-4bit", 
+    "Meta-Llama-3.1-8B-Instruct-bnb-4bit", 
     "Phi-3-mini-4k-instruct", 
     "gemma-3-4b-it",
     "qwen2.5-7b-medical"
@@ -132,7 +143,7 @@ generation_vlm = [
     "SmolVLM-Instruct",
     "Qwen3-VL-4B-Instruct",
     "Qwen3-VL-8B-Instruct",
-    #"Llama-3.2-11B-Vision-Instruct",
+    "Llama-3.2-11B-Vision-Instruct",
     "blip2-opt-2.7b",
 ]
 
@@ -260,7 +271,7 @@ def evaluate_report_group(model_names, suffix="_generation_results.json", skip_m
 
     return stats
 
-def write_metrics_csv(file_name, columns, stats, reliabs=None):
+def write_metrics_csv(file_name, columns, stats, reliabs=None, kl_scores=None):
     out_path = os.path.join(METRIC_PATH, file_name)
     with open(out_path, "w") as f:
         f.write(",".join(columns) + "\n")
@@ -270,6 +281,8 @@ def write_metrics_csv(file_name, columns, stats, reliabs=None):
                 value = stat.get(metric_name)
                 if reliabs and metric_name == "Reliability" and stat["model"] in reliabs:
                     value = reliabs[stat["model"]]
+                if kl_scores and metric_name == "KL_Divergence" and stat["model"] in kl_scores:
+                    value = kl_scores[stat["model"]]
                 if value is not None:
                     row.append(f"{value:.4f}")
                 else:
@@ -289,6 +302,7 @@ finetuned_vlm_report_stats = evaluate_report_group(finetuned_vlm_generation, ski
 rl_report_stats = evaluate_report_group(reinforcement_learning_models, skip_missing=True)
 
 
+
 all_models = finetuned_generation + reinforcement_learning_models + generation_task + generation_vlm + finetuned_vlm_generation
 tuned = LORA_Tuned_Paths | RL_Tuned_Paths | VLM_Tuned_Paths
 
@@ -298,47 +312,62 @@ def get_model_id_and_peft(model: str):
     return hugging_face_id, peft_path
 
 consistencies = {}
+kls = {}
 current_model_id = None
 base_model = None
 tokenizer = None
 
 for model in sorted(all_models):
-    if "phi" in model.lower() or "coding" in model.lower() or 'llama' in model.lower() or 'vl' in model.lower():
+    if "phi" in model.lower() or "coding" in model.lower() or 'llama' in model.lower() or 'vl' in model.lower() or "blip" in model.lower():
         continue
 
     id_, peft = get_model_id_and_peft(model)
     if not id_:
         continue
 
-    parse = _load_results(model, "_generation_results.json", skip_missing=True)
-    if parse is None:
-        continue
+    # parse = _load_results(model, "_generation_results.json", skip_missing=True)
+    # if parse is None:
+    #     continue
 
-    if id_ != current_model_id:
-        if base_model is not None:
-            del base_model
-            del tokenizer
-            cleanup_base_model_cache()
+    # if id_ != current_model_id:
+    #     if base_model is not None:
+    #         del base_model
+    #         del tokenizer
+    #         cleanup_base_model_cache()
 
-        base_config = ModelConfigSection(
-            model_name=id_,
-            ref_model_name=id_,
-            tokenizer_name=id_,
-            quantization=quantisation_config,
-        )
-        base_model, tokenizer = load_base_model(torch.device("cuda"), base_config)
-        current_model_id = id_
+    #     base_config = ModelConfigSection(
+    #         model_name=id_,
+    #         ref_model_name=id_,
+    #         tokenizer_name=id_,
+    #         quantization=quantisation_config,
+    #     )
+    #     base_model, tokenizer = load_base_model(torch.device("cuda"), base_config)
+    #     current_model_id = id_
 
-    gts, preds, _, pred_raw, prompt_ids = _extract_report_fields(parse)
-    consistencies[model] = compute_self_consistency(
-        base_model,
-        tokenizer,
-        peft,
-        preds,
-        gts,
-        prompt_ids,
-        model_id=id_,
-    )
+    # gts, preds, _, pred_raw, prompt_ids = _extract_report_fields(parse)
+    # consistencies[model] = compute_self_consistency(
+    #     base_model,
+    #     tokenizer,
+    #     peft,
+    #     preds,
+    #     gts,
+    #     prompt_ids,
+    #     model_id=id_,
+    # )
+
+    # policy_model = load_adapter(base_model, peft)
+    # try:
+    #     kl_scores = [
+    #         compute_kl_divergence(policy_model, base_model, tokenizer, prompt_id, pred)
+    #         for prompt_id, pred in zip(prompt_ids, pred_raw)
+    #     ]
+    #     kls[model] = float(np.nanmean(kl_scores)) if np.any(np.isfinite(kl_scores)) else float("nan")
+    # finally:
+    #     del policy_model
+    #     torch.cuda.empty_cache()
+    #     cleanup_base_model_cache()
+
+
 
 if base_model is not None:
     del base_model
@@ -346,12 +375,16 @@ if base_model is not None:
     cleanup_base_model_cache()
 
 
-consistencies['Meta-Llama-3.1-8B-Instruct-bnb-4bit'] = 0.2667 
-consistencies['"Llama-3.2-11B-Vision-Instruct'] = 0.2917
+# consistencies['Meta-Llama-3.1-8B-Instruct-bnb-4bit'] = 0.2667 
+# consistencies['"Llama-3.2-11B-Vision-Instruct'] = 0.2917
 
-with open("backup_reliab.json", "w") as f:
-    import json
-    json.dump(consistencies, f, indent=4,sort_keys=True)
+# with open("backup_reliab.json", "w") as f:
+#     import json
+#     json.dump(consistencies, f, indent=4,sort_keys=True)
+
+# with open("backup_kl.json", "w") as f:
+#     import json
+#     json.dump(kls, f, indent=4,sort_keys=True)
 
 write_metrics_csv(
     "evaluation_stats_text.csv",
@@ -380,26 +413,26 @@ write_metrics_csv(
 )
 write_metrics_csv(
     "evaluation_stats_report.csv",
-    ["model", "EM", "TokP", "TokR", "TokF1", "Contain", "CharSim", "CosSim", "KL", "Perp", "BERTScore_P", "BERTScore_R", "BERTScore_F1", "Reliability", "Miscalibration"],
-    report_stats, consistencies
+    ["model", "EM", "TokP", "TokR", "TokF1", "Contain", "CharSim", "CosSim", "KL", "Perp", "BERTScore_P", "BERTScore_R", "BERTScore_F1", "Reliability", "Miscalibration", "KL_Divergence"],
+    report_stats, consistencies, kls
 )
 write_metrics_csv(
     "evaluation_stats_report_vlm.csv",
-    ["model", "EM", "TokP", "TokR", "TokF1", "Contain", "CharSim", "CosSim", "KL", "Perp", "BERTScore_P", "BERTScore_R", "BERTScore_F1", "Reliability", "Miscalibration"],
-    report_vlm_stats,consistencies
+    ["model", "EM", "TokP", "TokR", "TokF1", "Contain", "CharSim", "CosSim", "KL", "Perp", "BERTScore_P", "BERTScore_R", "BERTScore_F1", "Reliability", "Miscalibration", "KL_Divergence"],
+    report_vlm_stats,consistencies, kls
 )
 write_metrics_csv(
     "evaluation_stats_finetuned_report.csv",
-    ["model", "EM", "TokP", "TokR", "TokF1", "Contain", "CharSim", "CosSim", "KL", "Perp", "BERTScore_P", "BERTScore_R", "BERTScore_F1", "Reliability", "Miscalibration"],
-    finetuned_report_stats,consistencies
+    ["model", "EM", "TokP", "TokR", "TokF1", "Contain", "CharSim", "CosSim", "KL", "Perp", "BERTScore_P", "BERTScore_R", "BERTScore_F1", "Reliability", "Miscalibration", "KL_Divergence"],
+    finetuned_report_stats,consistencies, kls
 )
 write_metrics_csv(
     "evaluation_stats_finetuned_vlm_report.csv",
-    ["model", "EM", "TokP", "TokR", "TokF1", "Contain", "CharSim", "CosSim", "KL", "Perp", "BERTScore_P", "BERTScore_R", "BERTScore_F1", "Reliability", "Miscalibration"],
-    finetuned_vlm_report_stats,consistencies
+    ["model", "EM", "TokP", "TokR", "TokF1", "Contain", "CharSim", "CosSim", "KL", "Perp", "BERTScore_P", "BERTScore_R", "BERTScore_F1", "Reliability", "Miscalibration", "KL_Divergence"],
+    finetuned_vlm_report_stats,consistencies, kls
 )
 write_metrics_csv(
     "evaluation_stats_rl_report.csv",
-    ["model", "EM", "TokP", "TokR", "TokF1", "Contain", "CharSim", "CosSim", "KL", "Perp", "BERTScore_P", "BERTScore_R", "BERTScore_F1", "Reliability", "Miscalibration"],
-    rl_report_stats,consistencies
+    ["model", "EM", "TokP", "TokR", "TokF1", "Contain", "CharSim", "CosSim", "KL", "Perp", "BERTScore_P", "BERTScore_R", "BERTScore_F1", "Reliability", "Miscalibration", "KL_Divergence"],
+    rl_report_stats,consistencies, kls
 )

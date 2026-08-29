@@ -1,0 +1,6 @@
+model,kl_divergence
+Qwen2.5-7B-Instruct-RLVR_aligned,5.02593532428661
+Qwen2.5-7B-Instruct-RLAIF_pref3_aligned,4.825590607165769
+Qwen2.5-7B-Instruct-RLAIF_FrugalGRPO_aligned,4.870338614176126
+Qwen2.5-7B-Instruct-RLAIF_MORL_aligned,4.748219394810102
+Qwen2.5-7B-Instruct-RLAIF_RLFF_aligned,4.861274853714544

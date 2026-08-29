@@ -1,3 +1,3 @@
-python -m ReinforcementLearning.Custom.RapidExperiments
-python -m inference_only.generation.text_inference
-python ./eval.py
+python -m inference_only.generation.vlm_inference
+python -m ReinforcementLearning.Custom.RapidExperiments-VL
+python -m inference_only.generation.vlm_inference
